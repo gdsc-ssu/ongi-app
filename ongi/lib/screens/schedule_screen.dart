@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ongi/components/bottom_nav_bar/bottom_nav_bar_simple.dart';
+import 'package:ongi/widgets/bottom_nav_bar/bottom_nav_bar_simple.dart';
 
 class ScheduleScreen extends StatefulWidget {
   const ScheduleScreen({Key? key}) : super(key: key);

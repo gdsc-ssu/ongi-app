@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ongi/components/medicine/prepost_meal_medicine_adder.dart';
-import 'package:ongi/components/medicine/timed_medicine_adder.dart';
+import 'package:ongi/widgets/medicine/prepost_meal_medicine_adder.dart';
+import 'package:ongi/widgets/medicine/timed_medicine_adder.dart';
 
 class MedicineTypeSelector extends StatefulWidget {
   const MedicineTypeSelector({Key? key}) : super(key: key);

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'components/medicine/medicine_type_selector.dart';
+import 'widgets/medicine/medicine_type_selector.dart';
 
 void main() {
   runApp(const MyApp());
