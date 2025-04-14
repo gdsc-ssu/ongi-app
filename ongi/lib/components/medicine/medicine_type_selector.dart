@@ -1,41 +1,44 @@
 import 'package:flutter/material.dart';
-import 'timed_medicine_adder.dart';
-import 'prepost_meal_medicine_adder.dart';
+import 'package:ongi/components/medicine/prepost_meal_medicine_adder.dart';
+import 'package:ongi/components/medicine/timed_medicine_adder.dart';
 
 class MedicineTypeSelector extends StatefulWidget {
-  const MedicineTypeSelector({super.key});
+  const MedicineTypeSelector({Key? key}) : super(key: key);
 
   @override
   State<MedicineTypeSelector> createState() => _MedicineTypeSelectorState();
 }
 
 class _MedicineTypeSelectorState extends State<MedicineTypeSelector> {
-  final TextEditingController _medicineNameController = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
+  String? _errorText;
 
-  @override
-  void dispose() {
-    _medicineNameController.dispose();
-    super.dispose();
-  }
-
-  void _navigateToTimedMedicineAdder() {
+  void _navigateToPrePostMeal() {
+    if (_controller.text.isEmpty) {
+      setState(() {
+        _errorText = '약 이름을 입력해주세요';
+      });
+      return;
+    }
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => TimedMedicineAdder(
-          medicineName: _medicineNameController.text,
-        ),
+        builder: (context) => PrePostMealMedicineAdder(medicationName: _controller.text),
       ),
     );
   }
 
-  void _navigateToPrePostMealMedicineAdder() {
+  void _navigateToTimedMedicine() {
+    if (_controller.text.isEmpty) {
+      setState(() {
+        _errorText = '약 이름을 입력해주세요';
+      });
+      return;
+    }
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => PrePostMealMedicineAdder(
-          medicineName: _medicineNameController.text,
-        ),
+        builder: (context) => TimedMedicineAdder(medicationName: _controller.text),
       ),
     );
   }
@@ -43,83 +46,66 @@ class _MedicineTypeSelectorState extends State<MedicineTypeSelector> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF9F9F9), // 전체 배경 색 연한 회색
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        foregroundColor: Colors.black,
-      ),
+      backgroundColor: const Color(0xFFF9F9F9),
       body: Center(
-        child: Container(
-          width: MediaQuery.of(context).size.width * 0.85,
-          padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(16),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black12,
-                blurRadius: 10,
-                offset: Offset(0, 4),
-              ),
-            ],
-          ),
+        child: Padding(
+          padding: const EdgeInsets.all(24.0),
           child: Column(
-            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  '약 이름',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
-                ),
+              const Text(
+                '약 이름을 입력하세요',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 12),
               TextField(
-                controller: _medicineNameController,
+                controller: _controller,
                 decoration: InputDecoration(
-                  hintText: '약 이름을 입력해주세요.',
                   filled: true,
-                  fillColor: const Color(0xFFF2F2F2),
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                  fillColor: const Color(0xFFF0F0F0),
+                  hintText: '약 이름을 입력해주세요',
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(12),
                     borderSide: BorderSide.none,
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
-              OutlinedButton(
-                onPressed: _navigateToPrePostMealMedicineAdder,
-                style: OutlinedButton.styleFrom(
-                  minimumSize: const Size.fromHeight(50),
-                  side: const BorderSide(color: Colors.grey),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
+              if (_errorText != null)
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: Text(
+                    _errorText!,
+                    style: const TextStyle(color: Colors.deepOrange, fontSize: 14),
                   ),
                 ),
-                child: const Text(
-                  '식전/식후 복용 약',
-                  style: TextStyle(fontSize: 16, color: Colors.black),
+              const SizedBox(height: 24),
+              ElevatedButton(
+                onPressed: _navigateToPrePostMeal,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.orange.shade50,
+                  foregroundColor: Colors.deepOrange,
+                  elevation: 2,
+                  minimumSize: const Size(double.infinity, 50),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
+                child: const Text('식전/식후 복용 약', style: TextStyle(fontSize: 18)),
               ),
-              const SizedBox(height: 10),
-              OutlinedButton(
-                onPressed: _navigateToTimedMedicineAdder,
-                style: OutlinedButton.styleFrom(
-                  minimumSize: const Size.fromHeight(50),
-                  side: const BorderSide(color: Colors.grey),
+              const SizedBox(height: 12),
+              ElevatedButton(
+                onPressed: _navigateToTimedMedicine,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.orange.shade50,
+                  foregroundColor: Colors.deepOrange,
+                  elevation: 2,
+                  minimumSize: const Size(double.infinity, 50),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(12),
                   ),
                 ),
-                child: const Text(
-                  '정시 복용 약',
-                  style: TextStyle(fontSize: 16, color: Colors.black),
-                ),
+                child: const Text('정시 복용 약', style: TextStyle(fontSize: 18)),
               ),
             ],
           ),
