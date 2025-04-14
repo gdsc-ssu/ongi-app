@@ -1,40 +1,40 @@
 import 'package:flutter/material.dart';
-import 'timed_medication_adder.dart';
-import 'prepost_meal_medication_adder.dart';
+import 'timed_medicine_adder.dart';
+import 'prepost_meal_medicine_adder.dart';
 
-class MedicationTypeSelector extends StatefulWidget {
-  const MedicationTypeSelector({super.key});
+class MedicineTypeSelector extends StatefulWidget {
+  const MedicineTypeSelector({super.key});
 
   @override
-  State<MedicationTypeSelector> createState() => _MedicationTypeSelectorState();
+  State<MedicineTypeSelector> createState() => _MedicineTypeSelectorState();
 }
 
-class _MedicationTypeSelectorState extends State<MedicationTypeSelector> {
-  final TextEditingController _medicationNameController = TextEditingController();
+class _MedicineTypeSelectorState extends State<MedicineTypeSelector> {
+  final TextEditingController _medicineNameController = TextEditingController();
 
   @override
   void dispose() {
-    _medicationNameController.dispose();
+    _medicineNameController.dispose();
     super.dispose();
   }
 
-  void _navigateToTimedMedicationAdder() {
+  void _navigateToTimedMedicineAdder() {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => TimedMedicationAdder(
-          medicationName: _medicationNameController.text,
+        builder: (context) => TimedMedicineAdder(
+          medicineName: _medicineNameController.text,
         ),
       ),
     );
   }
 
-  void _navigateToPrePostMealMedicationAdder() {
+  void _navigateToPrePostMealMedicineAdder() {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => PrePostMealMedicationAdder(
-          medicationName: _medicationNameController.text,
+        builder: (context) => PrePostMealMedicineAdder(
+          medicineName: _medicineNameController.text,
         ),
       ),
     );
@@ -48,7 +48,7 @@ class _MedicationTypeSelectorState extends State<MedicationTypeSelector> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           TextField(
-            controller: _medicationNameController,
+            controller: _medicineNameController,
             decoration: const InputDecoration(
               labelText: '약 이름을 입력해주세요',
               border: OutlineInputBorder(),
@@ -56,12 +56,12 @@ class _MedicationTypeSelectorState extends State<MedicationTypeSelector> {
           ),
           const SizedBox(height: 20),
           ElevatedButton(
-            onPressed: _navigateToPrePostMealMedicationAdder,
+            onPressed: _navigateToPrePostMealMedicineAdder,
             child: const Text('식전/식후 복용 약'),
           ),
           const SizedBox(height: 10),
           ElevatedButton(
-            onPressed: _navigateToTimedMedicationAdder,
+            onPressed: _navigateToTimedMedicineAdder,
             child: const Text('정시 복용 약'),
           ),
         ],

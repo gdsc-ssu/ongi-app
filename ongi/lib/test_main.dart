@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'components/medication_type_selector.dart';
+import 'components/medicine/medicine_type_selector.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
       ),
       home: const Scaffold(
-        body: MedicationTypeSelector(),
+        body: MedicineTypeSelector(),
       ),
     );
   }

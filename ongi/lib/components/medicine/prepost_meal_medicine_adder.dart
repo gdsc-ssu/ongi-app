@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
-class TimedMedicationAdder extends StatelessWidget {
-  final String medicationName;
+class PrePostMealMedicineAdder extends StatelessWidget {
+  final String medicineName;
 
-  const TimedMedicationAdder({super.key, required this.medicationName});
+  const PrePostMealMedicineAdder({super.key, required this.medicineName});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('$medicationName - 정시 복용 추가')),
+      appBar: AppBar(title: Text('$medicineName - 식전/식후 복용 추가')),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('시간 다이얼 (TODO)'),
+            const Text('식전/식후/시간 선택 라디오 버튼 (TODO)'),
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () => Navigator.pop(context),
