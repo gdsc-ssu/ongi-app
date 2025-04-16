@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:ongi/widgets/medicine/prepost_meal_medicine_adder.dart';
-import 'package:ongi/widgets/medicine/timed_medicine_adder.dart';
+import 'prepost_meal_medicine_adder.dart';
+import 'timed_medicine_adder.dart';
+
 
 class MedicineTypeSelector extends StatefulWidget {
-  const MedicineTypeSelector({Key? key}) : super(key: key);
+  const MedicineTypeSelector({super.key});
 
   @override
   State<MedicineTypeSelector> createState() => _MedicineTypeSelectorState();
@@ -11,101 +12,103 @@ class MedicineTypeSelector extends StatefulWidget {
 
 class _MedicineTypeSelectorState extends State<MedicineTypeSelector> {
   final TextEditingController _controller = TextEditingController();
-  String? _errorText;
+  bool _showError = false;
 
-  void _navigateToPrePostMeal() {
+  void _navigateTo(Widget page) {
     if (_controller.text.isEmpty) {
-      setState(() {
-        _errorText = '약 이름을 입력해주세요';
-      });
+      setState(() => _showError = true);
       return;
     }
     Navigator.push(
       context,
-      MaterialPageRoute(
-        builder: (context) => PrePostMealMedicineAdder(medicationName: _controller.text),
-      ),
-    );
-  }
-
-  void _navigateToTimedMedicine() {
-    if (_controller.text.isEmpty) {
-      setState(() {
-        _errorText = '약 이름을 입력해주세요';
-      });
-      return;
-    }
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => TimedMedicineAdder(medicationName: _controller.text),
-      ),
+      MaterialPageRoute(builder: (context) => page),
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    final inputWidth = MediaQuery.of(context).size.width - 80;
+
     return Scaffold(
       backgroundColor: const Color(0xFFF9F9F9),
       body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
+        child: Container(
+          width: inputWidth + 40,
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            border: Border.all(color: Colors.grey.shade300),
+            borderRadius: BorderRadius.circular(20),
+          ),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
             children: [
               const Text(
-                '약 이름을 입력하세요',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                '약 이름을 입력해주세요',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 12),
               TextField(
                 controller: _controller,
                 decoration: InputDecoration(
+                  hintText: '약 이름을 입력해주세요',
                   filled: true,
                   fillColor: const Color(0xFFF0F0F0),
-                  hintText: '약 이름을 입력해주세요',
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(8),
                     borderSide: BorderSide.none,
                   ),
                 ),
               ),
-              if (_errorText != null)
-                Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
+              if (_showError)
+                const Padding(
+                  padding: EdgeInsets.only(top: 8),
                   child: Text(
-                    _errorText!,
-                    style: const TextStyle(color: Colors.deepOrange, fontSize: 14),
+                    '약 이름을 입력해주세요',
+                    style: TextStyle(color: Colors.deepOrange),
                   ),
                 ),
-              const SizedBox(height: 24),
-              ElevatedButton(
-                onPressed: _navigateToPrePostMeal,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.orange.shade50,
-                  foregroundColor: Colors.deepOrange,
-                  elevation: 2,
-                  minimumSize: const Size(double.infinity, 50),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+              const SizedBox(height: 16),
+              Column(
+                children: [
+                  SizedBox(
+                    width: inputWidth,
+                    child: OutlinedButton(
+                      onPressed: () => _navigateTo(
+                        PrePostMealMedicineAdder(
+                          medicationName: _controller.text,
+                        ),
+                      ),
+                      style: OutlinedButton.styleFrom(
+                        side: const BorderSide(color: Colors.grey),
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      child: const Text('식전/식후 복용 약', style: TextStyle(color: Colors.black)),
+                    ),
                   ),
-                ),
-                child: const Text('식전/식후 복용 약', style: TextStyle(fontSize: 18)),
-              ),
-              const SizedBox(height: 12),
-              ElevatedButton(
-                onPressed: _navigateToTimedMedicine,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.orange.shade50,
-                  foregroundColor: Colors.deepOrange,
-                  elevation: 2,
-                  minimumSize: const Size(double.infinity, 50),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+                  const SizedBox(height: 12),
+                  SizedBox(
+                    width: inputWidth,
+                    child: OutlinedButton(
+                      onPressed: () => _navigateTo(
+                        TimedMedicineAdder(
+                          medicationName: _controller.text,
+                        ),
+                      ),
+                      style: OutlinedButton.styleFrom(
+                        side: const BorderSide(color: Colors.grey),
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      child: const Text('정시 복용 약', style: TextStyle(color: Colors.black)),
+                    ),
                   ),
-                ),
-                child: const Text('정시 복용 약', style: TextStyle(fontSize: 18)),
+                ],
               ),
             ],
           ),

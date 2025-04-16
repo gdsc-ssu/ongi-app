@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'widgets/medicine/medicine_type_selector.dart';
+import 'package:ongi/widgets/medicine/medicine_type_selector.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,12 +12,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Medication App',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
       ),
-      home: const Scaffold(
-        body: MedicineTypeSelector(),
-      ),
+      home: const MedicineTypeSelector(),
     );
   }
 }
