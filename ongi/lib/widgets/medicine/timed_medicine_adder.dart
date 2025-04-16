@@ -87,7 +87,7 @@ class _TimedMedicineAdderState extends State<TimedMedicineAdder> {
       ),
       body: Center(
         child: Container(
-          width: 400,
+          width: MediaQuery.of(context).size.width * 0.85, // 가로폭 줄이기
           margin: const EdgeInsets.all(20),
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
@@ -98,10 +98,7 @@ class _TimedMedicineAdderState extends State<TimedMedicineAdder> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                '약 이름',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              ),
+              const Text('약 이름', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
               const SizedBox(height: 8),
               Container(
                 width: double.infinity,
@@ -110,10 +107,7 @@ class _TimedMedicineAdderState extends State<TimedMedicineAdder> {
                   color: const Color(0xFFF0F0F0),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: Text(
-                  widget.medicationName,
-                  style: const TextStyle(color: Colors.black87),
-                ),
+                child: Text(widget.medicationName, style: const TextStyle(color: Colors.black87)),
               ),
               const SizedBox(height: 20),
               SizedBox(
@@ -125,9 +119,7 @@ class _TimedMedicineAdderState extends State<TimedMedicineAdder> {
                     foregroundColor: Colors.grey,
                     elevation: 0,
                     side: const BorderSide(color: Colors.grey),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                     padding: const EdgeInsets.symmetric(vertical: 14),
                   ),
                   child: const Text('복용시간 추가하기', style: TextStyle(fontSize: 16)),
@@ -152,53 +144,55 @@ class _TimedMedicineAdderState extends State<TimedMedicineAdder> {
                   },
                 ),
               ),
-            ],
-          ),
-        ),
-      ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
-        child: Row(
-          children: [
-            Expanded(
-              child: OutlinedButton(
-                onPressed: () => Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => const MedicineTypeSelector()),
-                  (route) => false,
+              const SizedBox(height: 12),
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey.shade300),
+                  borderRadius: BorderRadius.circular(12),
                 ),
-                style: OutlinedButton.styleFrom(
-                  side: const BorderSide(color: Colors.grey),
-                  padding: const EdgeInsets.symmetric(vertical: 14),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-                child: const Text('닫기', style: TextStyle(fontSize: 16, color: Colors.black)),
-              ),
-            ),
-            const SizedBox(width: 10),
-            Expanded(
-              child: ElevatedButton(
-                onPressed: _isValid
-                    ? () => Navigator.pushAndRemoveUntil(
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: OutlinedButton(
+                        onPressed: () => Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(builder: (context) => const MedicineTypeSelector()),
                           (route) => false,
-                        )
-                    : null,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFF8A50),
-                  disabledBackgroundColor: Colors.grey.shade300,
-                  padding: const EdgeInsets.symmetric(vertical: 14),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
+                        ),
+                        style: OutlinedButton.styleFrom(
+                          side: const BorderSide(color: Colors.grey),
+                          padding: const EdgeInsets.symmetric(vertical: 14),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                        ),
+                        child: const Text('닫기', style: TextStyle(color: Colors.black)),
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: _isValid
+                            ? () => Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => const MedicineTypeSelector()),
+                                  (route) => false,
+                                )
+                            : null,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFFFF8A50),
+                          disabledBackgroundColor: Colors.grey.shade300,
+                          padding: const EdgeInsets.symmetric(vertical: 14),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                        ),
+                        child: const Text('저장'),
+                      ),
+                    ),
+                  ],
                 ),
-                child: const Text('저장', style: TextStyle(fontSize: 16, color: Colors.white)),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
