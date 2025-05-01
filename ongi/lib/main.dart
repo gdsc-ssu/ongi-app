@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ongi/widgets/medicine/medicine_type_selector.dart';
+import 'package:ongi/routes/app_router.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,13 +10,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Medication App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
       ),
-      home: const MedicineTypeSelector(),
+      routerConfig: router,
     );
   }
 }
