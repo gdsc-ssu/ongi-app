@@ -1,7 +1,8 @@
-// File: lib/screens/SignUp/terms_agreement_screen.dart
 import 'package:flutter/material.dart';
 import '../../widgets/progress_indicator.dart';
 import '../../widgets/page_button.dart';
+import 'package:go_router/go_router.dart';
+
 
 class TermsScreen extends StatefulWidget {
   const TermsScreen({super.key});
@@ -74,7 +75,7 @@ class _TermsScreenState extends State<TermsScreen> {
               const Spacer(),
               BottomNextBackNavigation(
                 onBack: () => Navigator.pop(context),
-                onNext: () {},
+                onNext: () => context.push('/signup/signup-input'),
               )
             ],
           ),

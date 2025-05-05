@@ -7,6 +7,7 @@ import '../screens/Login/login_screen.dart';
 import '../screens/Login/find_account_screen.dart';
 import '../screens/Login/find_account_result_screen.dart';
 import '../screens/SignUp/terms_screen.dart';
+import '../screens/SignUp/signup_input_screen.dart';
 
 final GoRouter router = GoRouter(
   initialLocation: '/login',
@@ -43,6 +44,11 @@ final GoRouter router = GoRouter(
       path: '/signup/terms',
       name: 'terms',
       builder: (context, state) => const TermsScreen(),
+    ),
+    GoRoute(
+      path: '/signup/signup-input',
+      name: 'signup-input',
+      builder: (context, state) => const SignupInputScreen(),
     ),
   ],
 );
