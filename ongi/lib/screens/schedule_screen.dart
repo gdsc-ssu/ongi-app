@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:ongi/screens/home_screen.dart';
 import 'package:ongi/screens/alarm_screen.dart';
 import 'package:ongi/screens/settings_screen.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 class ScheduleScreen extends StatefulWidget {
   const ScheduleScreen({Key? key}) : super(key: key);
@@ -36,6 +37,17 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
     _Medicine('감기약', []),
   ];
 
+  // 달력 날짜별 이모티콘 상태 (알약: 💊, 밥: 🍚)
+  final Map<DateTime, List<String>> calendarIcons = {
+    DateTime(2025, 5, 1): ['💊'],
+    DateTime(2025, 5, 6): ['💊', '🍚'],
+    DateTime(2025, 5, 11): ['🍚'],
+    DateTime(2025, 5, 15): ['🍚'],
+    DateTime(2025, 5, 20): ['💊'],
+    DateTime(2025, 5, 23): ['💊', '🍚'],
+    DateTime(2025, 5, 28): ['💊'],
+  };
+
   void _addMeal() async {
     final result = await showDialog<_Meal>(
       context: context,
@@ -58,6 +70,38 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   }
 
   String _formatTime(TimeOfDay t) => t.format(context);
+
+  // 달력 셀에 이모티콘 표시용 위젯
+  Widget buildCalendarDayCell(DateTime day) {
+    final icons = calendarIcons[DateTime(day.year, day.month, day.day)] ?? [];
+    return Container(
+      margin: EdgeInsets.all(4),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text('${day.day}', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: icons.map((icon) {
+              if (icon == '💊') {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                  child: Image.asset('assets/icons/pill.png', width: 18, height: 18),
+                );
+              } else if (icon == '🍚') {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                  child: Image.asset('assets/icons/rice.png', width: 18, height: 18),
+                );
+              } else {
+                return SizedBox.shrink();
+              }
+            }).toList(),
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
