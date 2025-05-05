@@ -80,7 +80,9 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 20),
 
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.push('/signup/terms');
+                },
                 child: const Text('회원가입'),
               ),
               TextButton(
