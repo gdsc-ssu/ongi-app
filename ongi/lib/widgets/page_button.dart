@@ -1,4 +1,3 @@
-// File: lib/widgets/common/bottom_navigation.dart
 import 'package:flutter/material.dart';
 
 class BottomNextBackNavigation extends StatelessWidget {
