@@ -3,9 +3,18 @@ import 'package:go_router/go_router.dart';
 
 import '../screens/home_screen.dart';
 import '../screens/alarm_screen.dart';
+import '../screens/Login/login_screen.dart';
+import '../screens/Login/find_account_screen.dart';
+import '../screens/Login/find_account_result_screen.dart';
 
 final GoRouter router = GoRouter(
+  initialLocation: '/login',
   routes: [
+    GoRoute(
+      path: '/login',
+      name: 'login',
+      builder: (context, state) => const LoginScreen(),
+    ),
     GoRoute(
       path: '/',
       name: 'home',
@@ -18,6 +27,16 @@ final GoRouter router = GoRouter(
         final alarmId = state.pathParameters['id'];
         return AlarmScreen(alarmId: alarmId);
       },
+    ),
+    GoRoute(
+      path: '/find-account',
+      name: 'find-account',
+      builder: (context, state) => const FindAccountScreen(),
+    ),
+    GoRoute(
+      path: '/find-account-result',
+      name: 'find-account-result',
+      builder: (context, state) => const FindAccountResultScreen(),
     ),
   ],
 );
