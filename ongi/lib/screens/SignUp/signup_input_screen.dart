@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../../widgets/progress_indicator.dart';
 import '../../widgets/page_button.dart';
 
@@ -26,7 +27,7 @@ class SignupInputScreen extends StatelessWidget {
               ),
               const Text(
                 '회원가입',
-                style: TextStyle(color: Colors.gray),
+
               ),
               const SizedBox(height: 24),
 
@@ -40,7 +41,7 @@ class SignupInputScreen extends StatelessWidget {
               const Spacer(),
               BottomNextBackNavigation(
                 onBack: () => Navigator.pop(context),
-                onNext: () {},
+                onNext: () => context.push('/signup/senior-info'),
               )
             ],
           ),

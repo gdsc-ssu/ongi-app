@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../../widgets/progress_indicator.dart';
 import '../../widgets/page_button.dart';
-import 'package:go_router/go_router.dart';
 
 
 class TermsScreen extends StatefulWidget {

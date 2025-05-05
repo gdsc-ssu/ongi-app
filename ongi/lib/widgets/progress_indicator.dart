@@ -1,4 +1,3 @@
-// File: lib/widgets/common/progress_indicator.dart
 import 'package:flutter/material.dart';
 
 class ProgressStepIndicator extends StatelessWidget {
