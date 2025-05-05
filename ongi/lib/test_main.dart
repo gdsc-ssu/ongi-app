@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'widgets/medicine/medicine_type_selector.dart';
+import 'screens/home_screen.dart'; // 또는 emergency_alert_screen.dart
 
 void main() {
   runApp(const MyApp());
@@ -15,9 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
       ),
-      home: const Scaffold(
-        body: MedicineTypeSelector(),
-      ),
+      home: const HomeScreen(), // ← 여기서 원하는 화면으로 설정
     );
   }
 }
