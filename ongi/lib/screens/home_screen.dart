@@ -31,145 +31,149 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SafeArea(
         child: Stack(
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // 상단바 및 날짜/알림
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // 상단바 및 날짜/알림
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('온기, Ongi', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
-                          SizedBox(height: 6),
-                          Container(
-                            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                            decoration: BoxDecoration(
-                              color: Color(0xFFBDBDBD),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Text('2025. 01. 30', style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold)),
-                          ),
-                        ],
-                      ),
-                      Icon(Icons.notifications_none, size: 32),
-                    ],
-                  ),
-                ),
-                // 인사 및 안내
-                Padding(
-                  padding: const EdgeInsets.only(left: 24.0, top: 16.0, bottom: 4.0),
-                  child: RichText(
-                    text: TextSpan(
-                      children: [
-                        TextSpan(text: '홍길동', style: TextStyle(color: Color(0xFFFF8A4D), fontWeight: FontWeight.bold, fontSize: 22)),
-                        TextSpan(text: '님의 일정이에요.', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 22)),
-                      ],
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 24.0, bottom: 16.0),
-                  child: Text('오늘도 따뜻한 하루 보내세요.', style: TextStyle(color: Colors.grey, fontSize: 16)),
-                ),
-                // 식사 카드
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('식사', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
-                      SizedBox(height: 8),
-                      Card(
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-                        elevation: 0,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
-                          child: Column(
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              _buildMealRow('아침식사', '08:00', 0),
-                              _buildMealRow('점심식사', '08:00', 1),
-                              _buildMealRow('저녁식사', '08:00', 2),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                // 약 카드
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('약', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
-                      SizedBox(height: 8),
-                      Card(
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-                        elevation: 0,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
-                          child: Column(
-                            children: [
-                              _buildMedicineRow('감기약', '08:30', 0),
-                              _buildMedicineRow('혈압약', '10:00', 1),
-                              _buildMedicineRow('감기약', '12:30', 2),
-                              _buildMedicineRow('감기약', '17:30', 3),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Spacer(),
-              ],
-            ),
-            // 긴급 상황 알림 배너
-            AnimatedOpacity(
-              opacity: isEmergency ? 1.0 : 0.0,
-              duration: Duration(milliseconds: 300),
-              child: isEmergency
-                  ? Center(
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => EmergencyAlertScreen(),
-                            ),
-                          );
-                        },
-                        child: Container(
-                          margin: EdgeInsets.only(top: 40),
-                          padding: EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-                          decoration: BoxDecoration(
-                            color: Color(0xFFFF8A4D),
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black26,
-                                blurRadius: 10,
-                                offset: Offset(0, 4),
+                              Text('온기, Ongi', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
+                              SizedBox(height: 6),
+                              Container(
+                                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                                decoration: BoxDecoration(
+                                  color: Color(0xFFBDBDBD),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: Text('2025. 01. 30', style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold)),
                               ),
                             ],
                           ),
-                          child: Text(
-                            '긴급 상황 알림 발생',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 26,
-                            ),
-                          ),
+                          Icon(Icons.notifications_none, size: 32),
+                        ],
+                      ),
+                    ),
+                    // 인사 및 안내
+                    Padding(
+                      padding: const EdgeInsets.only(left: 24.0, top: 16.0, bottom: 4.0),
+                      child: RichText(
+                        text: TextSpan(
+                          children: [
+                            TextSpan(text: '홍길동', style: TextStyle(color: Color(0xFFFF8A4D), fontWeight: FontWeight.bold, fontSize: 22)),
+                            TextSpan(text: '님의 일정이에요.', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 22)),
+                          ],
                         ),
                       ),
-                    )
-                  : SizedBox.shrink(),
+                    ),
+                    // 긴급 상황 알림 배너를 이 위치로 이동
+                    AnimatedOpacity(
+                      opacity: isEmergency ? 1.0 : 0.0,
+                      duration: Duration(milliseconds: 300),
+                      child: isEmergency
+                          ? Center(
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => EmergencyAlertScreen(),
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                  margin: EdgeInsets.only(top: 12, bottom: 8),
+                                  padding: EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                                  decoration: BoxDecoration(
+                                    color: Color(0xFFFF8A4D),
+                                    borderRadius: BorderRadius.circular(20),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black26,
+                                        blurRadius: 10,
+                                        offset: Offset(0, 4),
+                                      ),
+                                    ],
+                                  ),
+                                  child: Text(
+                                    '긴급 상황 알림 발생',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 26,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            )
+                          : SizedBox.shrink(),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 24.0, bottom: 16.0),
+                      child: Text('오늘도 따뜻한 하루 보내세요.', style: TextStyle(color: Colors.grey, fontSize: 16)),
+                    ),
+                    // 식사 카드
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('식사', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
+                          SizedBox(height: 8),
+                          Card(
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+                            elevation: 0,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
+                              child: Column(
+                                children: [
+                                  _buildMealRow('아침식사', '08:00', 0),
+                                  _buildMealRow('점심식사', '08:00', 1),
+                                  _buildMealRow('저녁식사', '08:00', 2),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    // 약 카드
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('약', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
+                          SizedBox(height: 8),
+                          Card(
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+                            elevation: 0,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
+                              child: Column(
+                                children: [
+                                  _buildMedicineRow('감기약', '08:30', 0),
+                                  _buildMedicineRow('혈압약', '10:00', 1),
+                                  _buildMedicineRow('감기약', '12:30', 2),
+                                  _buildMedicineRow('감기약', '17:30', 3),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 24),
+                  ],
+                ),
+              ),
             ),
           ],
         ),

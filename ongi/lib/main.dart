@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ongi/widgets/medicine/medicine_type_selector.dart';
+import 'package:ongi/screens/home_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
       ),
-      home: const MedicineTypeSelector(),
+      home: const HomeScreen(),
     );
   }
 }
