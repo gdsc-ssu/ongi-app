@@ -15,6 +15,7 @@ class ElderHomeAlarm extends StatefulWidget {
 class _ElderHomeAlarmState extends State<ElderHomeAlarm> {
   int _currentIndex = 1;
   TimeOfDay alarmTime = TimeOfDay(hour: 12, minute: 0);
+  bool _snoozed = false;
 
   void _showNextReasonDialog() async {
     String? reason;
@@ -106,31 +107,48 @@ class _ElderHomeAlarmState extends State<ElderHomeAlarm> {
                       ],
                     ),
                     SizedBox(height: 16),
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: canSave
-                            ? () {
-                                reason = reasonIdx == 0
-                                    ? '배가 안 고픔'
-                                    : reasonIdx == 1
-                                        ? '지금 할 일이 있음'
-                                        : etcController.text;
-                                remind = remindIdx == 0
-                                    ? '30분'
-                                    : remindIdx == 1
-                                        ? '1시간'
-                                        : '아니오';
-                                Navigator.of(context).pop();
-                              }
-                            : null,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFFFF8A4D),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                          padding: EdgeInsets.symmetric(vertical: 14),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: OutlinedButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            style: OutlinedButton.styleFrom(
+                              side: BorderSide(color: Colors.grey),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                              padding: EdgeInsets.symmetric(vertical: 14),
+                            ),
+                            child: Text('취소', style: TextStyle(fontSize: 18, color: Colors.grey, fontWeight: FontWeight.bold)),
+                          ),
                         ),
-                        child: Text('저장', style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold)),
-                      ),
+                        SizedBox(width: 16),
+                        Expanded(
+                          child: ElevatedButton(
+                            onPressed: canSave
+                                ? () {
+                                    reason = reasonIdx == 0
+                                        ? '배가 안 고픔'
+                                        : reasonIdx == 1
+                                            ? '지금 할 일이 있음'
+                                            : etcController.text;
+                                    remind = remindIdx == 0
+                                        ? '30분'
+                                        : remindIdx == 1
+                                            ? '1시간'
+                                            : '아니오';
+                                    Navigator.of(context).pop();
+                                  }
+                                : null,
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Color(0xFFFF8A4D),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                              padding: EdgeInsets.symmetric(vertical: 14),
+                            ),
+                            child: Text('저장', style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold)),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -145,11 +163,13 @@ class _ElderHomeAlarmState extends State<ElderHomeAlarm> {
       setState(() {
         final dt = DateTime(2025, 1, 30, alarmTime.hour, alarmTime.minute).add(Duration(minutes: 30));
         alarmTime = TimeOfDay(hour: dt.hour, minute: dt.minute);
+        _snoozed = true;
       });
     } else if (remind == '1시간') {
       setState(() {
         final dt = DateTime(2025, 1, 30, alarmTime.hour, alarmTime.minute).add(Duration(hours: 1));
         alarmTime = TimeOfDay(hour: dt.hour, minute: dt.minute);
+        _snoozed = true;
       });
     } else if (remind == '아니오') {
       if (mounted) {
@@ -255,7 +275,17 @@ class _ElderHomeAlarmState extends State<ElderHomeAlarm> {
                       children: [
                         Expanded(
                           child: OutlinedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              if (_snoozed) {
+                                ElderHomeAlarm.isDefaultHome = true;
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => ElderHomeDefault()),
+                                );
+                              } else {
+                                // 기존 동작: 알람 미룸이 없으면 아무 동작 없음(혹은 필요시 여기에 추가)
+                              }
+                            },
                             style: OutlinedButton.styleFrom(
                               side: BorderSide(color: Colors.white),
                               backgroundColor: Colors.white,
