@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ongi/widgets/medicine/medicine_type_selector.dart';
 import 'package:ongi/screens/home_screen.dart';
+import 'package:ongi/screens/elder_home_alarm.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
       ),
-      home: const HomeScreen(),
+      home: const ElderHomeAlarm(),
     );
   }
 }
