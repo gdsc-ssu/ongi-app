@@ -29,12 +29,30 @@ class _AlarmScreenState extends State<AlarmScreen> {
   void initState() {
     super.initState();
     _selectedDay = _focusedDay;
-    // 한 달치 샘플 데이터 생성 (모두 체크된 상태)
-    DateTime firstDay = DateTime(_focusedDay.year, _focusedDay.month, 1);
-    DateTime lastDay = DateTime(_focusedDay.year, _focusedDay.month + 1, 0);
+    
+    // 2025년 5월의 모든 날짜에 대해 데이터 초기화
+    DateTime lastDay = DateTime(2025, 5, 31);
     for (int i = 0; i < lastDay.day; i++) {
-      DateTime d = DateTime(_focusedDay.year, _focusedDay.month, i + 1);
-      dayStatus[d] = List.filled(7, true);
+      DateTime currentDate = DateTime(2025, 5, i + 1);
+      List<bool> status = List.filled(7, true);
+      if (currentDate.day == 1) {
+        status[3] = false; // 감기약 8:30만 false
+      } else if (currentDate.day == 6) {
+        status[1] = false; // 점심식사 false
+        status[4] = false; // 혈압약 false
+      } else if (currentDate.day == 11) {
+        status[0] = false; // 아침식사 false
+      } else if (currentDate.day == 15) {
+        status[0] = false; // 아침식사 false
+      } else if (currentDate.day == 20) {
+        status[4] = false; // 혈압약 false
+      } else if (currentDate.day == 23) {
+        status[1] = false; // 점심식사 false
+        status[5] = false; // 감기약 12:30 false
+      } else if (currentDate.day == 28) {
+        status[6] = false; // 감기약 17:30 false
+      }
+      dayStatus[currentDate] = status;
     }
   }
 
@@ -106,6 +124,8 @@ class _AlarmScreenState extends State<AlarmScreen> {
                           focusedDay: _focusedDay,
                           selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
                           onDaySelected: (selectedDay, focusedDay) {
+                            print(selectedDay);
+                            print(dayStatus[selectedDay]);
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -205,8 +225,8 @@ class _AlarmScreenState extends State<AlarmScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              if (showPill) Text('💊', style: TextStyle(fontSize: 18)),
-              if (showRice) Text('🍚', style: TextStyle(fontSize: 18)),
+              if (showPill) Image.asset('assets/icons/pill.png', width: 24, height: 24),
+              if (showRice) Image.asset('assets/icons/rice.png', width: 24, height: 24),
             ],
           ),
         ],
