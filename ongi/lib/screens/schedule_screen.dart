@@ -6,6 +6,7 @@ import 'package:ongi/screens/home_screen.dart';
 import 'package:ongi/screens/alarm_screen.dart';
 import 'package:ongi/screens/settings_screen.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:flutter/cupertino.dart';
 
 class ScheduleScreen extends StatefulWidget {
   const ScheduleScreen({Key? key}) : super(key: key);
@@ -51,22 +52,31 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   void _addMeal() async {
     final result = await showDialog<_Meal>(
       context: context,
-      builder: (context) => _MealTimeDialog(),
+      builder: (context) => _MealTimeDialogV3(),
     );
     if (result != null) {
-      setState(() {
-        meals.add(result);
-      });
+      _addMealSorted(result);
     }
   }
 
   void _addMedicine() async {
-    await Navigator.push(
+    final result = await Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => MedicineTypeSelector()),
     );
-    // 실제로는 추가된 약 정보를 받아와야 함 (여기선 예시)
-    // setState(() { medicines.add(_Medicine('새 약', [TimeOfDay(hour: 8, minute: 0)])); });
+    if (result != null && result is Map) {
+      // prepost/timed 모두 지원
+      if (result['type'] == 'timed') {
+        setState(() {
+          medicines.add(_Medicine(result['name'], List<TimeOfDay>.from(result['times'])));
+        });
+      } else if (result['type'] == 'prepost') {
+        // prepost는 times를 문자열로 받으므로, 예시로 빈 리스트로 처리
+        setState(() {
+          medicines.add(_Medicine(result['name'], []));
+        });
+      }
+    }
   }
 
   String _formatTime(TimeOfDay t) => t.format(context);
@@ -282,53 +292,254 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
       child: Text(text, style: TextStyle(fontSize: 16, color: Colors.grey[700])),
     );
   }
+
+  void _addMealSorted(_Meal meal) {
+    setState(() {
+      meals.add(meal);
+      meals.sort((a, b) {
+        final aMinutes = a.time.hour * 60 + a.time.minute;
+        final bMinutes = b.time.hour * 60 + b.time.minute;
+        return aMinutes.compareTo(bMinutes);
+      });
+    });
+  }
 }
 
-class _MealTimeDialog extends StatefulWidget {
+class _MealTimeDialogV3 extends StatefulWidget {
   @override
-  State<_MealTimeDialog> createState() => _MealTimeDialogState();
+  State<_MealTimeDialogV3> createState() => _MealTimeDialogV3State();
 }
 
-class _MealTimeDialogState extends State<_MealTimeDialog> {
+class _MealTimeDialogV3State extends State<_MealTimeDialogV3> {
   String mealName = '';
   TimeOfDay? mealTime;
 
+  void _showTimerPicker() async {
+    Duration tempDuration = const Duration(hours: 0, minutes: 0);
+    await showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      isScrollControlled: true,
+      builder: (BuildContext context) {
+        return Container(
+          height: 400,
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+          ),
+          child: Column(
+            children: [
+              Expanded(
+                child: CupertinoTimerPicker(
+                  mode: CupertinoTimerPickerMode.hm,
+                  initialTimerDuration: const Duration(hours: 0, minutes: 0),
+                  onTimerDurationChanged: (Duration newDuration) {
+                    tempDuration = newDuration;
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 24.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: const Text('취소', style: TextStyle(color: Colors.grey, fontSize: 16)),
+                    ),
+                    TextButton(
+                      onPressed: () => Navigator.pop(context, tempDuration),
+                      child: const Text('확인', style: TextStyle(color: Colors.deepOrange, fontSize: 16)),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
+        );
+      },
+    ).then((picked) {
+      if (picked != null) {
+        setState(() {
+          mealTime = TimeOfDay(hour: picked.inHours, minute: picked.inMinutes.remainder(60));
+        });
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text('식사 시간 추가'),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          TextField(
-            decoration: InputDecoration(hintText: '식사 이름'),
-            onChanged: (v) => mealName = v,
-          ),
-          SizedBox(height: 12),
-          ElevatedButton(
-            onPressed: () async {
-              final picked = await showTimePicker(
-                context: context,
-                initialTime: TimeOfDay.now(),
-              );
-              if (picked != null) setState(() => mealTime = picked);
-            },
-            child: Text(mealTime == null ? '시간 선택' : mealTime!.format(context)),
-          ),
-        ],
+    return Dialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      child: Container(
+        width: 320,
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('식사 이름', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+            SizedBox(height: 8),
+            TextField(
+              decoration: InputDecoration(hintText: '식사 이름을 입력하세요'),
+              onChanged: (v) => mealName = v,
+            ),
+            SizedBox(height: 20),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: _showTimerPicker,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  foregroundColor: Colors.grey,
+                  elevation: 0,
+                  side: const BorderSide(color: Colors.grey),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                ),
+                child: Text(mealTime == null ? '시간 선택' : mealTime!.format(context), style: TextStyle(fontSize: 16)),
+              ),
+            ),
+            SizedBox(height: 20),
+            Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton(
+                    onPressed: () => Navigator.pop(context),
+                    style: OutlinedButton.styleFrom(
+                      side: const BorderSide(color: Colors.grey),
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    ),
+                    child: const Text('취소', style: TextStyle(color: Colors.black)),
+                  ),
+                ),
+                SizedBox(width: 10),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: mealName.isNotEmpty && mealTime != null
+                        ? () => Navigator.pop(context, _Meal(mealName, mealTime!))
+                        : null,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFFFF8A50),
+                      disabledBackgroundColor: Colors.grey.shade300,
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    ),
+                    child: const Text('추가'),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.pop(context),
-          child: Text('취소'),
+    );
+  }
+}
+
+class _MedicineAddDialog extends StatefulWidget {
+  @override
+  State<_MedicineAddDialog> createState() => _MedicineAddDialogState();
+}
+
+class _MedicineAddDialogState extends State<_MedicineAddDialog> {
+  String medName = '';
+  List<TimeOfDay> times = [];
+
+  void _showTimerPicker() async {
+    final picked = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+    );
+    if (picked != null) {
+      setState(() {
+        times.add(picked);
+      });
+    }
+  }
+
+  void _removeTime(TimeOfDay t) {
+    setState(() {
+      times.remove(t);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      child: Container(
+        width: 320,
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('약 이름', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+            SizedBox(height: 8),
+            TextField(
+              decoration: InputDecoration(hintText: '약 이름을 입력하세요'),
+              onChanged: (v) => medName = v,
+            ),
+            SizedBox(height: 20),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: _showTimerPicker,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  foregroundColor: Colors.grey,
+                  elevation: 0,
+                  side: const BorderSide(color: Colors.grey),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                ),
+                child: const Text('복용시간 추가하기', style: TextStyle(fontSize: 16)),
+              ),
+            ),
+            SizedBox(height: 12),
+            ...times.map((t) => ListTile(
+                  title: Text('${t.hour.toString().padLeft(2, '0')}시 ${t.minute.toString().padLeft(2, '0')}분', style: TextStyle(fontSize: 16)),
+                  trailing: IconButton(
+                    icon: Icon(Icons.delete, color: Colors.grey),
+                    onPressed: () => _removeTime(t),
+                  ),
+                )),
+            SizedBox(height: 20),
+            Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton(
+                    onPressed: () => Navigator.pop(context),
+                    style: OutlinedButton.styleFrom(
+                      side: const BorderSide(color: Colors.grey),
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    ),
+                    child: const Text('취소', style: TextStyle(color: Colors.black)),
+                  ),
+                ),
+                SizedBox(width: 10),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: medName.isNotEmpty && times.isNotEmpty
+                        ? () => Navigator.pop(context, _Medicine(medName, times))
+                        : null,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFFFF8A50),
+                      disabledBackgroundColor: Colors.grey.shade300,
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    ),
+                    child: const Text('추가'),
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
-        ElevatedButton(
-          onPressed: mealName.isNotEmpty && mealTime != null
-              ? () => Navigator.pop(context, _Meal(mealName, mealTime!))
-              : null,
-          child: Text('추가'),
-        ),
-      ],
+      ),
     );
   }
 }

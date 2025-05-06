@@ -16,15 +16,18 @@ class _MedicineTypeSelectorState extends State<MedicineTypeSelector> {
   final TextEditingController _controller = TextEditingController();
   bool _showError = false;
 
-  void _navigateTo(Widget page) {
+  void _navigateTo(Widget page) async {
     if (_controller.text.isEmpty) {
       setState(() => _showError = true);
       return;
     }
-    Navigator.push(
+    final result = await Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => page),
     );
+    if (result != null) {
+      Navigator.pop(context, result);
+    }
   }
 
   @override
@@ -33,6 +36,11 @@ class _MedicineTypeSelectorState extends State<MedicineTypeSelector> {
 
     return Scaffold(
       backgroundColor: const Color(0xFFF9F9F9),
+      appBar: AppBar(
+        leading: BackButton(color: Colors.black),
+        backgroundColor: Colors.white,
+        elevation: 0,
+      ),
       body: Center(
         child: Container(
           width: inputWidth + 40,
