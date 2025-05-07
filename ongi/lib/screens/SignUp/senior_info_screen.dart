@@ -46,7 +46,7 @@ class _SeniorInfoScreenState extends State<SeniorInfoScreen> {
               const Spacer(),
               BottomNextBackNavigation(
                 onBack: () => Navigator.pop(context),
-                onNext: () {},
+                onNext: () => context.push('/signup/meal-alert'),
               )
             ],
           ),
