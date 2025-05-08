@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screens/home_screen.dart'; // 또는 emergency_alert_screen.dart
+import 'screens/helpors/home_screen.dart'; // 또는 emergency_alert_screen.dart
 
 void main() {
   runApp(const MyApp());
