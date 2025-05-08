@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ongi/widgets/bottom_nav_bar/bottom_nav_bar_simple.dart';
-import 'package:ongi/screens/elder_home_alarm.dart';
-import 'package:ongi/screens/elder_home_default.dart';
-import 'package:ongi/screens/elder_settings_screen.dart';
+import 'package:ongi/screens/senior/senior_home_alarm.dart';
+import 'package:ongi/screens/senior/senior_home_default.dart';
+import 'package:ongi/screens/senior/senior_settings_screen.dart';
 
 class ElderScheduleScreen extends StatefulWidget {
   const ElderScheduleScreen({Key? key}) : super(key: key);

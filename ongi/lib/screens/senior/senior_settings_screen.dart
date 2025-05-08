@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ongi/widgets/bottom_nav_bar/bottom_nav_bar_simple.dart';
-import 'package:ongi/screens/elder_show_voice_screen.dart';
-import 'package:ongi/screens/elder_schedule_screen.dart';
-import 'package:ongi/screens/elder_home_alarm.dart';
-import 'package:ongi/screens/elder_home_default.dart';
+import 'package:ongi/screens/senior/senior_show_voice_screen.dart';
+import 'package:ongi/screens/senior/senior_schedule_screen.dart';
+import 'package:ongi/screens/senior/senior_home_alarm.dart';
+import 'package:ongi/screens/senior/senior_home_default.dart';
 
 class ElderSettingsScreen extends StatefulWidget {
   const ElderSettingsScreen({Key? key}) : super(key: key);

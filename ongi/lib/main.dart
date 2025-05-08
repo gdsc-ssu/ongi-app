@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ongi/widgets/medicine/medicine_type_selector.dart';
-import 'package:ongi/screens/home_screen.dart';
-import 'package:ongi/screens/elder_home_alarm.dart';
+import 'package:ongi/screens/helpors/home_screen.dart';
+import 'package:ongi/screens/senior/senior_home_alarm.dart';
 
 void main() {
   runApp(const MyApp());

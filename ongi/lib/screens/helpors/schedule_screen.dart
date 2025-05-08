@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:ongi/widgets/bottom_nav_bar/bottom_nav_bar_with_alarm.dart';
 import 'package:ongi/widgets/medicine/medicine_type_selector.dart';
 import 'package:intl/intl.dart';
-import 'package:ongi/screens/home_screen.dart';
-import 'package:ongi/screens/alarm_screen.dart';
-import 'package:ongi/screens/settings_screen.dart';
+import 'package:ongi/screens/helpors/home_screen.dart';
+import 'package:ongi/screens/helpors/alarm_screen.dart';
+import 'package:ongi/screens/helpors/settings_screen.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:flutter/cupertino.dart';
 
