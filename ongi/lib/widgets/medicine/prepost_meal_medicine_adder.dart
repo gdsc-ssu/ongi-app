@@ -168,11 +168,21 @@ class _PrePostMealMedicineAdderState extends State<PrePostMealMedicineAdder> {
                   Expanded(
                     child: ElevatedButton(
                       onPressed: (mealTiming != null && beforeAfterTime != null)
-                          ? () => Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(builder: (context) => const MedicineTypeSelector()),
-                                (route) => false,
-                              )
+                          ? () {
+                              // 약 정보 객체 생성 (예시)
+                              final medicine = {
+                                'name': widget.medicationName,
+                                'type': 'prepost',
+                                'mealTiming': mealTiming,
+                                'beforeAfterTime': beforeAfterTime,
+                                'times': [
+                                  if (isMorningSelected) '아침',
+                                  if (isAfternoonSelected) '점심',
+                                  if (isEveningSelected) '저녁',
+                                ],
+                              };
+                              Navigator.pop(context, medicine);
+                            }
                           : null,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFFFF8A50),
