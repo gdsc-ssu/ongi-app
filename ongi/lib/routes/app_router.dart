@@ -14,26 +14,31 @@ import '../screens/SignUp/medicine_schedule_screen.dart';
 import '../screens/SignUp/alert_setting_screen.dart';
 import '../screens/SignUp/voice_setting_screen.dart';
 
+// 보호자용 화면
+import '../screens/helpors/home_screen.dart';
+import '../screens/helpors/alarm_screen.dart';
+
+// 어르신용 화면
+import '../screens/senior/senior_home_alarm.dart';
+
 final GoRouter router = GoRouter(
   initialLocation: '/login',
   routes: [
+    // 보호자용 홈 화면
     GoRoute(
       path: '/login',
       name: 'login',
       builder: (context, state) => const LoginScreen(),
     ),
     GoRoute(
-      path: '/',
-      name: 'home',
+      path: '/guardian-home',
+      name: 'guardian_home',
       builder: (context, state) => const HomeScreen(),
     ),
     GoRoute(
-      path: '/alarm/:id',
-      name: 'alarm',
-      builder: (context, state) {
-        final alarmId = state.pathParameters['id'];
-        return AlarmScreen(alarmId: alarmId);
-      },
+      path: '/senior-home',
+      name: 'senior_home',
+      builder: (context, state) => const ElderHomeAlarm(),
     ),
     GoRoute(
       path: '/find-account',
@@ -80,5 +85,6 @@ final GoRouter router = GoRouter(
       name: 'voice-setting',
       builder: (context, state) => const VoiceSettingScreen(),
     ),
+
   ],
 );

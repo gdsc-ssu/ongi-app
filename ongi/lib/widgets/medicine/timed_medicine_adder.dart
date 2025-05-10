@@ -167,11 +167,14 @@ class _TimedMedicineAdderState extends State<TimedMedicineAdder> {
                   Expanded(
                     child: ElevatedButton(
                       onPressed: _isValid
-                          ? () => Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(builder: (context) => const MedicineTypeSelector()),
-                                (route) => false,
-                              )
+                          ? () {
+                              final medicine = {
+                                'name': widget.medicationName,
+                                'type': 'timed',
+                                'times': selectedTimes,
+                              };
+                              Navigator.pop(context, medicine);
+                            }
                           : null,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFFFF8A50),

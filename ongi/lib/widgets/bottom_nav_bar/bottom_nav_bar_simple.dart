@@ -25,18 +25,20 @@ class _BottomNavBarSimpleState extends State<BottomNavBarSimple> {
       unselectedItemColor: Colors.black, // 검정색
       items: const [
         BottomNavigationBarItem(
-          icon: Icon(Icons.menu),
+          icon: Icon(Icons.menu, size: 36),
           label: '스케줄',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.home),
+          icon: Icon(Icons.home, size: 36),
           label: '홈',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.settings),
+          icon: Icon(Icons.settings, size: 36),
           label: '설정',
         ),
       ],
+      selectedLabelStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      unselectedLabelStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
     );
   }
 }
