@@ -7,6 +7,7 @@ import 'package:ongi/screens/helpors/alarm_screen.dart';
 import 'package:ongi/screens/helpors/settings_screen.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:ongi/widgets/medicine/medicine_type_selector.dart';
 
 class ScheduleScreen extends StatefulWidget {
   const ScheduleScreen({Key? key}) : super(key: key);
@@ -59,25 +60,46 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
     }
   }
 
-  void _addMedicine() async {
-    final result = await Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => MedicineTypeSelector()),
-    );
-    if (result != null && result is Map) {
-      // prepost/timed 모두 지원
-      if (result['type'] == 'timed') {
-        setState(() {
-          medicines.add(_Medicine(result['name'], List<TimeOfDay>.from(result['times'])));
-        });
-      } else if (result['type'] == 'prepost') {
-        // prepost는 times를 문자열로 받으므로, 예시로 빈 리스트로 처리
-        setState(() {
-          medicines.add(_Medicine(result['name'], []));
-        });
-      }
-    }
-  }
+  void _addMedicine() {
+  showModalBottomSheet(
+    context: context,
+    isScrollControlled: true,
+    backgroundColor: Colors.transparent,
+    builder: (context) {
+      return Padding(
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom,
+          left: 16,
+          right: 16,
+          top: 32,
+        ),
+        child: Material(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: MedicineTypeSelector(
+              onMedicineAdded: (medicine) {
+                Navigator.pop(context); // 바텀시트 닫기
+                if (medicine['type'] == 'timed') {
+                  setState(() {
+                    medicines.add(_Medicine(
+                      medicine['name'],
+                      List<TimeOfDay>.from(medicine['times']),
+                    ));
+                  });
+                } else if (medicine['type'] == 'prepost') {
+                  setState(() {
+                    medicines.add(_Medicine(medicine['name'], []));
+                  });
+                }
+              },
+            ),
+          ),
+        ),
+      );
+    },
+  );
+}
 
   String _formatTime(TimeOfDay t) => t.format(context);
 

@@ -21,8 +21,14 @@ class _MedicineScheduleScreenState extends State<MedicineScheduleScreen> {
   List<Map<String, dynamic>> medicineTimes = [
     {'label': '혈압약', 'time': TimeOfDay(hour: 9, minute: 0)},
     {'label': '비타민', 'time': TimeOfDay(hour: 12, minute: 0)},
-    {'label': '비타민', 'time': TimeOfDay(hour: 18, minute: 0)},
   ];
+
+  TimeOfDay _extractFirstTime(Map<String, dynamic> medicine) {
+    if (medicine['type'] == 'timed') {
+      return (medicine['times'] as List<TimeOfDay>).first;
+    }
+    return const TimeOfDay(hour: 8, minute: 0); // 예시
+  }
 
   void _showTimePickerSheet() {
     TimeOfDay selectedTime = TimeOfDay.now();
@@ -119,18 +125,22 @@ class _MedicineScheduleScreenState extends State<MedicineScheduleScreen> {
               const Text('약 정보를 입력해주세요.', style: TextStyle(color: Colors.grey)),
               const SizedBox(height: 24),
 
-              const MedicineTypeSelector(),
+              MedicineTypeSelector(
+                onMedicineAdded: (medicine) {
+                  setState(() {
+                    medicineTimes.add({
+                      'label': medicine['name'],
+                      'time': _extractFirstTime(medicine),
+                    });
+                  });
+                },
+              ),
               const SizedBox(height: 24),
 
               ...medicineTimes.map((entry) => TimeBlock(label: entry['label'], time: entry['time'])).toList(),
 
+              
               const SizedBox(height: 16),
-              Center(
-                child: IconButton(
-                  icon: const Icon(Icons.add_circle_outline, size: 36, color: Colors.grey),
-                  onPressed: _showTimePickerSheet,
-                ),
-              ),
               const Spacer(),
               BottomNextBackNavigation(
                 onBack: () => Navigator.pop(context),
