@@ -17,6 +17,7 @@ class _SeniorInfoScreenState extends State<SeniorInfoScreen> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController ageController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
+  final TextEditingController customRelationController = TextEditingController();
 
   final List<String> relations = ['아들', '딸', '손자', '손녀', '직접입력'];
   String? selectedRelation;
@@ -41,6 +42,8 @@ class _SeniorInfoScreenState extends State<SeniorInfoScreen> {
               _buildTextField(label: '성함', hint: '성함을 입력해주세요.', controller: nameController),
               _buildTextField(label: '연령', hint: '연령을 입력해주세요.', controller: ageController),
               _buildDropdownField(),
+              if (selectedRelation == '직접입력')
+                _buildTextField(label: '관계 직접 입력', hint: '예: 이웃, 지인 등', controller: customRelationController),
               _buildTextField(label: '전화번호', hint: '전화번호를 입력해주세요.', controller: phoneController),
 
               const Spacer(),

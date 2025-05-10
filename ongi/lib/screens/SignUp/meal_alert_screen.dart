@@ -16,10 +16,14 @@ class _MealAlertScheduleScreenState extends State<MealAlertScheduleScreen> {
   final int currentStep = 4;
   final int totalSteps = 5;
 
-  List<TimeOfDay> mealTimes = [TimeOfDay(hour: 12, minute: 30)];
+  List<Map<String, dynamic>> mealTimes = [
+  {'label': '점심식사', 'time': TimeOfDay(hour: 12, minute: 30)}
+];
 
   void _showTimePickerSheet() {
     TimeOfDay selectedTime = TimeOfDay.now();
+    final TextEditingController _titleController = TextEditingController();
+
 
     showModalBottomSheet(
       context: context,
@@ -37,6 +41,7 @@ class _MealAlertScheduleScreenState extends State<MealAlertScheduleScreen> {
                   const Text('제목 설정', style: TextStyle(fontWeight: FontWeight.bold)),
                   const SizedBox(height: 12),
                   TextField(
+                    controller: _titleController,
                     decoration: InputDecoration(
                       hintText: '제목을 입력해주세요.',
                       filled: true,
@@ -70,10 +75,16 @@ class _MealAlertScheduleScreenState extends State<MealAlertScheduleScreen> {
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          setState(() {
-                            mealTimes.add(selectedTime);
-                          });
-                          Navigator.pop(context);
+                          if (_titleController.text.trim().isNotEmpty) {
+                            setState(() {
+                              mealTimes.add({
+                                'label': _titleController.text.trim(),
+                                'time': selectedTime
+                              });
+                            });
+                            Navigator.pop(context);
+                            _titleController.clear();
+                          }
                         },
                         style: ElevatedButton.styleFrom(backgroundColor: Colors.deepOrange),
                         child: const Text('확인'),
@@ -105,7 +116,10 @@ class _MealAlertScheduleScreenState extends State<MealAlertScheduleScreen> {
               const SizedBox(height: 4),
               const Text('식사시간을 입력해주세요.', style: TextStyle(color: Colors.grey)),
               const SizedBox(height: 24),
-              ...mealTimes.map((time) => TimeBlock(label: '점심식사', time: time)).toList(),
+              ...mealTimes.map((entry) => TimeBlock(
+                label: entry['label'],
+                time: entry['time'],
+              )).toList(),
               const SizedBox(height: 16),
               Center(
                 child: IconButton(

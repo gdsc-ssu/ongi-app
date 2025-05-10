@@ -18,14 +18,15 @@ class _MedicineScheduleScreenState extends State<MedicineScheduleScreen> {
   final int currentStep = 4;
   final int totalSteps = 5;
 
-  List<TimeOfDay> medicineTimes = [
-    TimeOfDay(hour: 9, minute: 0),
-    TimeOfDay(hour: 12, minute: 0),
-    TimeOfDay(hour: 18, minute: 0),
+  List<Map<String, dynamic>> medicineTimes = [
+    {'label': '혈압약', 'time': TimeOfDay(hour: 9, minute: 0)},
+    {'label': '비타민', 'time': TimeOfDay(hour: 12, minute: 0)},
+    {'label': '비타민', 'time': TimeOfDay(hour: 18, minute: 0)},
   ];
 
   void _showTimePickerSheet() {
     TimeOfDay selectedTime = TimeOfDay.now();
+    final TextEditingController _titleController = TextEditingController();
 
     showModalBottomSheet(
       context: context,
@@ -40,7 +41,20 @@ class _MedicineScheduleScreenState extends State<MedicineScheduleScreen> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Text('복용 시간 설정', style: TextStyle(fontWeight: FontWeight.bold)),
+                  const Text('약 이름 설정', style: TextStyle(fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 12),
+                  TextField(
+                    controller: _titleController,
+                    decoration: InputDecoration(
+                      hintText: '예: 비타민',
+                      filled: true,
+                      fillColor: Colors.grey.shade200,
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                    ),
+                  ),
                   const SizedBox(height: 24),
                   SizedBox(
                     height: 150,
@@ -63,10 +77,16 @@ class _MedicineScheduleScreenState extends State<MedicineScheduleScreen> {
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          setState(() {
-                            medicineTimes.add(selectedTime);
-                          });
-                          Navigator.pop(context);
+                          if (_titleController.text.trim().isNotEmpty) {
+                            setState(() {
+                              medicineTimes.add({
+                                'label': _titleController.text.trim(),
+                                'time': selectedTime
+                              });
+                            });
+                            Navigator.pop(context);
+                            _titleController.clear();
+                          }
                         },
                         style: ElevatedButton.styleFrom(backgroundColor: Colors.deepOrange),
                         child: const Text('확인'),
@@ -102,7 +122,7 @@ class _MedicineScheduleScreenState extends State<MedicineScheduleScreen> {
               const MedicineTypeSelector(),
               const SizedBox(height: 24),
 
-              ...medicineTimes.map((time) => TimeBlock(label: '비타민', time: time)).toList(),
+              ...medicineTimes.map((entry) => TimeBlock(label: entry['label'], time: entry['time'])).toList(),
 
               const SizedBox(height: 16),
               Center(
@@ -123,6 +143,7 @@ class _MedicineScheduleScreenState extends State<MedicineScheduleScreen> {
     );
   }
 }
+
 
 class TimePickerSpinner extends StatelessWidget {
   final TimeOfDay initialTime;
