@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../screens/home_screen.dart';
-import '../screens/alarm_screen.dart';
 import '../screens/Login/login_screen.dart';
 import '../screens/Login/find_account_screen.dart';
 import '../screens/Login/find_account_result_screen.dart';
