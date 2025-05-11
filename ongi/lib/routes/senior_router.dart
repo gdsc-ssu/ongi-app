@@ -49,6 +49,11 @@ final GoRouter seniorRouter = GoRouter(
           path: '/senior-settings',
           builder: (context, state) => ElderSettingsScreen(),
         ),
+        GoRoute(
+        path: '/senior-home-default',
+        builder: (context, state) => const ElderHomeDefault(),
+),
+
       ],
     ),
   ],

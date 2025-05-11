@@ -242,11 +242,10 @@ class _ElderHomeAlarmState extends State<ElderHomeAlarm> {
                         Expanded(
                           child: OutlinedButton(
                             onPressed: () {
-                              if (_snoozed) {
-                                ElderHomeAlarm.isDefaultHome = true;
-                                context.go('/senior-home-default');
-                              }
+                              ElderHomeAlarm.isDefaultHome = true;
+                              context.go('/senior-home-default');
                             },
+
                             style: OutlinedButton.styleFrom(
                               backgroundColor: Colors.white,
                               padding: EdgeInsets.symmetric(vertical: 16),
