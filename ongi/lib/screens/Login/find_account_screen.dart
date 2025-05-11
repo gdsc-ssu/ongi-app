@@ -59,7 +59,7 @@ class FindAccountScreen extends StatelessWidget {
                 children: [
                   Expanded(
                     child: OutlinedButton(
-                      onPressed: () {},
+                      onPressed: () => Navigator.pop(context),
                       child: const Text('이전'),
                     ),
                   ),

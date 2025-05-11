@@ -1,9 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../widgets/progress_indicator.dart';
-import '../../widgets/page_button.dart';
-import 'package:flutter/services.dart';
 
 class VoiceSettingScreen extends StatefulWidget {
   const VoiceSettingScreen({super.key});
@@ -15,18 +12,18 @@ class VoiceSettingScreen extends StatefulWidget {
 class _VoiceSettingScreenState extends State<VoiceSettingScreen> {
   final int currentStep = 5;
   final int totalSteps = 5;
+
   bool isRecording = false;
+  bool isRecorded = false;
   Duration recordedDuration = Duration.zero;
   late final Ticker _ticker;
 
   @override
   void initState() {
     super.initState();
-    _ticker = Ticker((Duration elapsed) {
+    _ticker = Ticker((elapsed) {
       if (isRecording) {
-        setState(() {
-          recordedDuration = elapsed;
-        });
+        setState(() => recordedDuration = elapsed);
       }
     });
   }
@@ -40,6 +37,7 @@ class _VoiceSettingScreenState extends State<VoiceSettingScreen> {
   void _startRecording() {
     setState(() {
       isRecording = true;
+      isRecorded = false;
       recordedDuration = Duration.zero;
     });
     _ticker.start();
@@ -48,6 +46,7 @@ class _VoiceSettingScreenState extends State<VoiceSettingScreen> {
   void _stopRecording() {
     setState(() {
       isRecording = false;
+      isRecorded = true;
     });
     _ticker.stop();
   }
@@ -100,42 +99,58 @@ class _VoiceSettingScreenState extends State<VoiceSettingScreen> {
                 ),
               ),
               const SizedBox(height: 24),
+
+              // 녹음 중일 때만 보이는 진행 표시 + 시간
               if (isRecording) ...[
-                LinearProgressIndicator(
-                  value: recordedDuration.inSeconds / 60,
-                  backgroundColor: Colors.grey.shade300,
-                  color: Colors.deepOrange,
-                ),
+                const LinearProgressIndicator(color: Colors.deepOrange),
                 const SizedBox(height: 8),
-                Text(
-                  _formatDuration(recordedDuration),
-                  textAlign: TextAlign.right,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
+                Text(_formatDuration(recordedDuration), textAlign: TextAlign.right),
+              ],
+
+              const Spacer(),
+
+              // 버튼 영역
+              if (isRecording) ...[
+                ElevatedButton(
+                  onPressed: _stopRecording,
+                  style: _buttonStyle(),
+                  child: const Text('녹음 중지'),
+                ),
+              ] else if (isRecorded) ...[
+                Text('총 녹음 시간: ${_formatDuration(recordedDuration)}',
+                    textAlign: TextAlign.center, style: const TextStyle(fontWeight: FontWeight.bold)),
+                const SizedBox(height: 12),
+                ElevatedButton(
+                  onPressed: () {}, // 재생 기능 추가 해야함.
+                  style: _buttonStyle(),
+                  child: const Text('다시 듣기'),
+                ),
+                const SizedBox(height: 12),
+                ElevatedButton(
+                  onPressed: () => context.push('/complete'), // 완료 시 다음 페이지
+                  style: _buttonStyle(),
+                  child: const Text('설정 완료'),
+                ),
+              ] else ...[
+                ElevatedButton(
+                  onPressed: _startRecording,
+                  style: _buttonStyle(),
+                  child: const Text('녹음 시작'),
                 ),
               ],
-              const Spacer(),
-              ElevatedButton(
-                onPressed: () {
-                  if (isRecording) {
-                    _stopRecording();
-                  } else {
-                    _startRecording();
-                  }
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.deepOrange,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                  padding: const EdgeInsets.symmetric(vertical: 14),
-                ),
-                child: Text(
-                  isRecording ? '설정 완료' : '녹음 시작',
-                  style: const TextStyle(fontSize: 16, color: Colors.white),
-                ),
-              )
             ],
           ),
         ),
       ),
+    );
+  }
+
+  ButtonStyle _buttonStyle() {
+    return ElevatedButton.styleFrom(
+      backgroundColor: Colors.deepOrange,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      padding: const EdgeInsets.symmetric(vertical: 14),
+      textStyle: const TextStyle(fontSize: 16),
     );
   }
 }
@@ -145,7 +160,6 @@ class Ticker {
   Duration _elapsed = Duration.zero;
   bool _running = false;
   late final Stopwatch _stopwatch;
-  late final TickerFuture _tickerFuture;
 
   Ticker(this.onTick) {
     _stopwatch = Stopwatch();
@@ -174,7 +188,4 @@ class Ticker {
     _running = false;
     _stopwatch.stop();
   }
-
 }
-
-class TickerFuture {}
