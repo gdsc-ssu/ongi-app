@@ -95,10 +95,7 @@ class _ElderSettingsScreenState extends State<ElderSettingsScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavBarSimple(
-        currentIndex: _currentIndex,
-        onTap: _onNavTap,
-      ),
+      
     );
   }
 

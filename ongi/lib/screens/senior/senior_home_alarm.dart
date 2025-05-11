@@ -279,10 +279,7 @@ class _ElderHomeAlarmState extends State<ElderHomeAlarm> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavBarSimple(
-        currentIndex: _currentIndex,
-        onTap: _onNavTap,
-      ),
+      
     );
   }
 }

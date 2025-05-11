@@ -138,10 +138,7 @@ class _ElderScheduleScreenState extends State<ElderScheduleScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavBarSimple(
-        currentIndex: _currentIndex,
-        onTap: _onNavTap,
-      ),
+      
     );
   }
 
