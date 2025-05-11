@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ongi/routes/app_router.dart'; // GoRouter 설정 파일
+import 'package:ongi/routes/helpers_router.dart'; // GoRouter 설정 파일
 import 'package:ongi/widgets/medicine/medicine_type_selector.dart';
 
 void main() {

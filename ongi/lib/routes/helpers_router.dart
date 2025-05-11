@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../screens/helpors/home_screen.dart';
-import '../screens/helpors/alarm_screen.dart';
-import '../screens/helpors/schedule_screen.dart';
-import '../screens/helpors/settings_screen.dart';
-import '../screens/helpors/emergency_alert_screen.dart';
+import '../screens/helpers/home_screen.dart';
+import '../screens/helpers/alarm_screen.dart';
+import '../screens/helpers/schedule_screen.dart';
+import '../screens/helpers/settings_screen.dart';
+import '../screens/helpers/emergency_alert_screen.dart';
 import '../screens/senior/senior_home_alarm.dart';
 
 
 
 
 final GoRouter router = GoRouter(
-  initialLocation: '/helpors-home',
+  initialLocation: '/helpers-home',
   routes: [
     ShellRoute(
       builder: (context, state, child) {
@@ -22,8 +22,8 @@ final GoRouter router = GoRouter(
       },
       routes: [
         GoRoute(
-          path: '/helpors-home',
-          name: 'helpors_home',
+          path: '/helpers-home',
+          name: 'helpers_home',
           builder: (context, state) => const HomeScreen(),
         ),
         GoRoute(
