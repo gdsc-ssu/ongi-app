@@ -23,7 +23,7 @@ class _BottomNavBarWithAlarmState extends State<BottomNavBarWithAlarm> {
       onTap: (index) {
         switch (index) {
           case 0:
-            context.go('/guardian-home');
+            context.go('/helpors-home');
             break;
           case 1:
             context.go('/alarm');

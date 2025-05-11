@@ -12,7 +12,7 @@ import '../screens/senior/senior_home_alarm.dart';
 
 
 final GoRouter router = GoRouter(
-  initialLocation: '/guardian-home',
+  initialLocation: '/helpors-home',
   routes: [
     ShellRoute(
       builder: (context, state, child) {
@@ -22,8 +22,8 @@ final GoRouter router = GoRouter(
       },
       routes: [
         GoRoute(
-          path: '/guardian-home',
-          name: 'guardian_home',
+          path: '/helpors-home',
+          name: 'helpors_home',
           builder: (context, state) => const HomeScreen(),
         ),
         GoRoute(
