@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:ongi/widgets/bottom_nav_bar/bottom_nav_bar_simple.dart';
-import 'package:ongi/screens/senior/senior_home_default.dart';
-import 'package:ongi/screens/senior/senior_schedule_screen.dart';
-import 'package:ongi/screens/senior/senior_settings_screen.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ongi/widgets/bottom_nav_bar/bottom_nav_bar_simple.dart';
 
 class ElderHomeAlarm extends StatefulWidget {
-  static bool isDefaultHome = false; // 앱 실행 시 false, '다음에' 누르면 true
+  static bool isDefaultHome = false;
   const ElderHomeAlarm({Key? key}) : super(key: key);
 
   @override
@@ -19,16 +16,15 @@ class _ElderHomeAlarmState extends State<ElderHomeAlarm> {
   bool _snoozed = false;
 
   void _showNextReasonDialog() async {
-    String? reason;
-    String? customReason;
     String? remind;
+    int? reasonIdx;
+    int? remindIdx;
+    TextEditingController etcController = TextEditingController();
+
     await showDialog(
       context: context,
       barrierDismissible: false,
       builder: (context) {
-        int? reasonIdx;
-        int? remindIdx;
-        TextEditingController etcController = TextEditingController();
         return StatefulBuilder(
           builder: (context, setState) {
             bool canSave = reasonIdx != null && remindIdx != null && (reasonIdx != 2 || etcController.text.isNotEmpty);
@@ -112,9 +108,7 @@ class _ElderHomeAlarmState extends State<ElderHomeAlarm> {
                       children: [
                         Expanded(
                           child: OutlinedButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
+                            onPressed: () => Navigator.of(context).pop(),
                             style: OutlinedButton.styleFrom(
                               side: BorderSide(color: Colors.grey),
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -128,11 +122,6 @@ class _ElderHomeAlarmState extends State<ElderHomeAlarm> {
                           child: ElevatedButton(
                             onPressed: canSave
                                 ? () {
-                                    reason = reasonIdx == 0
-                                        ? '배가 안 고픔'
-                                        : reasonIdx == 1
-                                            ? '지금 할 일이 있음'
-                                            : etcController.text;
                                     remind = remindIdx == 0
                                         ? '30분'
                                         : remindIdx == 1
@@ -159,58 +148,35 @@ class _ElderHomeAlarmState extends State<ElderHomeAlarm> {
         );
       },
     );
-    // 저장 후 처리
-    if (remind == '30분') {
+
+    if (remind == '30분' || remind == '1시간') {
+      final added = remind == '30분' ? 30 : 60;
+      final dt = DateTime(2025, 1, 30, alarmTime.hour, alarmTime.minute).add(Duration(minutes: added));
       setState(() {
-        final dt = DateTime(2025, 1, 30, alarmTime.hour, alarmTime.minute).add(Duration(minutes: 30));
-        alarmTime = TimeOfDay(hour: dt.hour, minute: dt.minute);
-        _snoozed = true;
-      });
-    } else if (remind == '1시간') {
-      setState(() {
-        final dt = DateTime(2025, 1, 30, alarmTime.hour, alarmTime.minute).add(Duration(hours: 1));
         alarmTime = TimeOfDay(hour: dt.hour, minute: dt.minute);
         _snoozed = true;
       });
     } else if (remind == '아니오') {
-      if (mounted) {
-        ElderHomeAlarm.isDefaultHome = true;
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => ElderHomeDefault()),
-        );
-      }
+      ElderHomeAlarm.isDefaultHome = true;
+      context.go('/senior-home-default');
     }
   }
 
   void _onNavTap(int index) {
     if (index == _currentIndex) return;
     if (index == 0) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => ElderScheduleScreen()),
-      );
+      context.go('/senior-schedule');
     } else if (index == 1) {
-      if (ElderHomeAlarm.isDefaultHome) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => ElderHomeDefault()),
-        );
-      } else {
-        // 현재 페이지가 홈이므로 아무 동작 안 함
-      }
+      if (!ElderHomeAlarm.isDefaultHome) return;
+      context.go('/senior-home-default');
     } else if (index == 2) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => ElderSettingsScreen()),
-      );
+      context.go('/senior-settings');
     }
   }
 
   @override
   void initState() {
     super.initState();
-    // 앱 재실행 시 홈 초기화
     ElderHomeAlarm.isDefaultHome = false;
   }
 
@@ -253,7 +219,6 @@ class _ElderHomeAlarmState extends State<ElderHomeAlarm> {
                   borderRadius: BorderRadius.circular(24),
                 ),
                 child: Column(
-                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Text('혈압 약', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 28)),
                     SizedBox(height: 8),
@@ -279,19 +244,14 @@ class _ElderHomeAlarmState extends State<ElderHomeAlarm> {
                             onPressed: () {
                               if (_snoozed) {
                                 ElderHomeAlarm.isDefaultHome = true;
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => ElderHomeDefault()),
-                                );
-                              } else {
-                                // 기존 동작: 알람 미룸이 없으면 아무 동작 없음(혹은 필요시 여기에 추가)
+                                context.go('/senior-home-default');
                               }
                             },
                             style: OutlinedButton.styleFrom(
-                              side: BorderSide(color: Colors.white),
                               backgroundColor: Colors.white,
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                               padding: EdgeInsets.symmetric(vertical: 16),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                              side: BorderSide(color: Colors.white),
                             ),
                             child: Text('확인', style: TextStyle(fontSize: 20, color: Color(0xFFFF8A4D), fontWeight: FontWeight.bold)),
                           ),
@@ -301,10 +261,10 @@ class _ElderHomeAlarmState extends State<ElderHomeAlarm> {
                           child: OutlinedButton(
                             onPressed: _showNextReasonDialog,
                             style: OutlinedButton.styleFrom(
-                              side: BorderSide(color: Colors.white),
                               backgroundColor: Colors.white,
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                               padding: EdgeInsets.symmetric(vertical: 16),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                              side: BorderSide(color: Colors.white),
                             ),
                             child: Text('다음에', style: TextStyle(fontSize: 20, color: Color(0xFFFF8A4D), fontWeight: FontWeight.bold)),
                           ),
