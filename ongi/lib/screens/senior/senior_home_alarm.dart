@@ -3,6 +3,7 @@ import 'package:ongi/widgets/bottom_nav_bar/bottom_nav_bar_simple.dart';
 import 'package:ongi/screens/senior/senior_home_default.dart';
 import 'package:ongi/screens/senior/senior_schedule_screen.dart';
 import 'package:ongi/screens/senior/senior_settings_screen.dart';
+import 'package:go_router/go_router.dart';
 
 class ElderHomeAlarm extends StatefulWidget {
   static bool isDefaultHome = false; // 앱 실행 시 false, '다음에' 누르면 true
