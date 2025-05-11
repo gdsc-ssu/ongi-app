@@ -197,82 +197,84 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                 ),
                 SizedBox(height: 8),
                 ...medicines.map((med) => Container(
-                  margin: EdgeInsets.only(bottom: 16),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(16),
-                    boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 4, offset: Offset(0,2))],
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(med.name, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
-                            Text('변경', style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold)),
-                          ],
-                        ),
-                        SizedBox(height: 8),
-                        if (med.times.isNotEmpty)
-                          Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.black26),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                             padding: EdgeInsets.symmetric(vertical: 2), // 세로 padding 줄이기
-                            child: Column(
-                              children: med.times.map((t) => Padding(
-        padding: const EdgeInsets.symmetric(vertical: 2), // 간격 줄이기
-        child: ListTile(
-          dense: true, // 더 얇게
-          contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
-          leading: Icon(Icons.access_time, color: Colors.black, size: 20),
-          title: Text(_formatTime(t), style: TextStyle(fontSize: 16)), // 글자 크기도 줄일 수 있음
-        ),
-      )).toList(),
-    ),
+  margin: EdgeInsets.only(bottom: 16),
+  decoration: BoxDecoration(
+    color: Colors.white,
+    borderRadius: BorderRadius.circular(16),
+    boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 4, offset: Offset(0,2))],
   ),
-                        if (med.times.isEmpty)
-  Container(
-    decoration: BoxDecoration(
-      border: Border.all(color: Colors.black26),
-      borderRadius: BorderRadius.circular(12),
-    ),
-    padding: EdgeInsets.all(16),
+  child: Padding(
+    padding: const EdgeInsets.all(20), // ✅ 박스 내부 여백 20px
     child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start, // Column 자체도 왼쪽 정렬
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Wrap(
-          alignment: WrapAlignment.start, // 왼쪽 정렬
-          spacing: 16,
-          runSpacing: 8,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            _buildMiniIconWithLabel('식후'),
-            _buildMiniIconWithLabel('30분'),
+            Text(med.name, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+            Text('변경', style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold)),
           ],
         ),
-        SizedBox(height: 12),
-        Wrap(
-          alignment: WrapAlignment.start, // 왼쪽 정렬
-          spacing: 16,
-          runSpacing: 8,
-          children: [
-            _buildMiniIconWithLabel('아침'),
-            _buildMiniIconWithLabel('점심'),
-            _buildMiniIconWithLabel('저녁'),
-          ],
-        ),
+        SizedBox(height: 8),
+        if (med.times.isNotEmpty)
+          Container(
+            width: double.infinity, // ✅ 시간 있는 약은 그대로
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.black26),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            padding: EdgeInsets.symmetric(vertical: 2),
+            child: Column(
+              children: med.times.map((t) => Padding(
+                padding: const EdgeInsets.symmetric(vertical: 2),
+                child: ListTile(
+                  dense: true,
+                  contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+                  leading: Icon(Icons.access_time, color: Colors.black, size: 20),
+                  title: Text(_formatTime(t), style: TextStyle(fontSize: 16)),
+                ),
+              )).toList(),
+            ),
+          ),
+        if (med.times.isEmpty)
+          Container(
+            width: MediaQuery.of(context).size.width - 72, // ✅ 감기약 박스 회색 테두리 너비 조정
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.black26),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            padding: EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Wrap(
+                  alignment: WrapAlignment.start,
+                  spacing: 16,
+                  runSpacing: 8,
+                  children: [
+                    _buildMiniIconWithLabel('식후'),
+                    _buildMiniIconWithLabel('30분'),
+                  ],
+                ),
+                SizedBox(height: 12),
+                Wrap(
+                  alignment: WrapAlignment.start,
+                  spacing: 16,
+                  runSpacing: 8,
+                  children: [
+                    _buildMiniIconWithLabel('아침'),
+                    _buildMiniIconWithLabel('점심'),
+                    _buildMiniIconWithLabel('저녁'),
+                  ],
+                ),
+              ],
+            ),
+          ),
       ],
     ),
   ),
+)),
 
-                      ],
-                    ),
-                  ),
-                )),
                 SizedBox(height: 32),
               ],
             ),
