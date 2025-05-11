@@ -125,7 +125,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 16),
-                Text('온기, Ongi', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+                Text('온기, Ongi', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500)),
                 SizedBox(height: 8),
                 RichText(
                   text: TextSpan(
@@ -151,15 +151,18 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                         padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                         child: Icon(Icons.add, color: Colors.white, size: 22),
                       ),
+                    
                     ),
                   ],
                 ),
                 SizedBox(height: 8),
                 ...meals.map((meal) => Container(
+                   width: 340, // 추가
+                  height: 60, // 추가
                   margin: EdgeInsets.only(bottom: 12),
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(16),
+                    borderRadius: BorderRadius.circular(5),
                     boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 4, offset: Offset(0,2))],
                   ),
                   child: ListTile(
@@ -219,32 +222,53 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                               border: Border.all(color: Colors.black26),
                               borderRadius: BorderRadius.circular(12),
                             ),
+                             padding: EdgeInsets.symmetric(vertical: 2), // 세로 padding 줄이기
                             child: Column(
-                              children: med.times.map((t) => ListTile(
-                                leading: Icon(Icons.access_time, color: Colors.black),
-                                title: Text(_formatTime(t), style: TextStyle(fontSize: 18)),
-                              )).toList(),
-                            ),
-                          ),
+                              children: med.times.map((t) => Padding(
+        padding: const EdgeInsets.symmetric(vertical: 2), // 간격 줄이기
+        child: ListTile(
+          dense: true, // 더 얇게
+          contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+          leading: Icon(Icons.access_time, color: Colors.black, size: 20),
+          title: Text(_formatTime(t), style: TextStyle(fontSize: 16)), // 글자 크기도 줄일 수 있음
+        ),
+      )).toList(),
+    ),
+  ),
                         if (med.times.isEmpty)
-                          Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.black26),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            padding: EdgeInsets.all(16),
-                            child: Wrap(
-                              spacing: 16,
-                              runSpacing: 8,
-                              children: [
-                                _buildCircle('식후'),
-                                _buildCircle('30분'),
-                                _buildCircle('아침'),
-                                _buildCircle('점심'),
-                                _buildCircle('저녁'),
-                              ],
-                            ),
-                          ),
+  Container(
+    decoration: BoxDecoration(
+      border: Border.all(color: Colors.black26),
+      borderRadius: BorderRadius.circular(12),
+    ),
+    padding: EdgeInsets.all(16),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start, // Column 자체도 왼쪽 정렬
+      children: [
+        Wrap(
+          alignment: WrapAlignment.start, // 왼쪽 정렬
+          spacing: 16,
+          runSpacing: 8,
+          children: [
+            _buildMiniIconWithLabel('식후'),
+            _buildMiniIconWithLabel('30분'),
+          ],
+        ),
+        SizedBox(height: 12),
+        Wrap(
+          alignment: WrapAlignment.start, // 왼쪽 정렬
+          spacing: 16,
+          runSpacing: 8,
+          children: [
+            _buildMiniIconWithLabel('아침'),
+            _buildMiniIconWithLabel('점심'),
+            _buildMiniIconWithLabel('저녁'),
+          ],
+        ),
+      ],
+    ),
+  ),
+
                       ],
                     ),
                   ),
@@ -292,6 +316,28 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
       child: Text(text, style: TextStyle(fontSize: 16, color: Colors.grey[700])),
     );
   }
+
+  Widget _buildMiniIconWithLabel(String label) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 4),
+    child: Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          width: 16,
+          height: 16,
+          decoration: BoxDecoration(
+            color: Colors.grey[400], // 더 진한 회색
+            shape: BoxShape.circle,
+          ),
+        ),
+        SizedBox(width: 6),
+        Text(label, style: TextStyle(fontSize: 14, color: Colors.black)), // 검정 텍스트
+      ],
+    ),
+  );
+}
+
 
   void _addMealSorted(_Meal meal) {
     setState(() {
