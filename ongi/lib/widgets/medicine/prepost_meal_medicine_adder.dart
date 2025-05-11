@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ongi/widgets/medicine/medicine_type_selector.dart';
-
 class PrePostMealMedicineAdder extends StatefulWidget {
   final String medicationName;
 
@@ -168,22 +167,22 @@ class _PrePostMealMedicineAdderState extends State<PrePostMealMedicineAdder> {
                   Expanded(
                     child: ElevatedButton(
                       onPressed: (mealTiming != null && beforeAfterTime != null)
-                          ? () {
-                              // 약 정보 객체 생성 (예시)
-                              final medicine = {
-                                'name': widget.medicationName,
-                                'type': 'prepost',
-                                'mealTiming': mealTiming,
-                                'beforeAfterTime': beforeAfterTime,
-                                'times': [
-                                  if (isMorningSelected) '아침',
-                                  if (isAfternoonSelected) '점심',
-                                  if (isEveningSelected) '저녁',
-                                ],
-                              };
-                              Navigator.pop(context, medicine);
-                            }
-                          : null,
+    ? () {
+        final medicine = {
+          'name': widget.medicationName,
+          'type': 'prepost',
+          'mealTiming': mealTiming,
+          'beforeAfterTime': beforeAfterTime,
+          'times': [
+            if (isMorningSelected) '아침',
+            if (isAfternoonSelected) '점심',
+            if (isEveningSelected) '저녁',
+          ],
+        };
+        Navigator.pop(context, medicine); // ✅ 약 정보 전달하고 이전 화면으로 pop
+      }
+    : null,
+
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFFFF8A50),
                         disabledBackgroundColor: Colors.grey.shade300,

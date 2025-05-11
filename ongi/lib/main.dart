@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:ongi/routes/app_router.dart';
+import 'package:go_router/go_router.dart';
+import 'package:ongi/routes/senior_router.dart'; // senior 라우터로 연결
 
 void main() {
-  runApp(const MyApp());
+  runApp(const MySeniorApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MySeniorApp extends StatelessWidget {
+  const MySeniorApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'Medication App',
+      routerConfig: seniorRouter,
+      title: 'Senior App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
       ),
-      routerConfig: router,
     );
   }
 }
+

@@ -167,15 +167,17 @@ class _TimedMedicineAdderState extends State<TimedMedicineAdder> {
                   Expanded(
                     child: ElevatedButton(
                       onPressed: _isValid
-                          ? () {
-                              final medicine = {
-                                'name': widget.medicationName,
-                                'type': 'timed',
-                                'times': selectedTimes,
-                              };
-                              Navigator.pop(context, medicine);
-                            }
-                          : null,
+    ? () {
+        final medicine = {
+          'name': widget.medicationName,
+          'type': 'timed',
+          'times': selectedTimes,
+        };
+        Navigator.pop(context, medicine); // ✅ 정보를 전달하며 화면 종료
+      }
+    : null,
+
+
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFFFF8A50),
                         disabledBackgroundColor: Colors.grey.shade300,
