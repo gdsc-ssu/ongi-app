@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart'; // 이거 필수!
 
 class BottomNavBarWithAlarm extends StatefulWidget {
   final int currentIndex;
@@ -19,10 +20,25 @@ class _BottomNavBarWithAlarmState extends State<BottomNavBarWithAlarm> {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       currentIndex: widget.currentIndex,
-      onTap: widget.onTap,
+      onTap: (index) {
+        switch (index) {
+          case 0:
+            context.go('/guardian-home');
+            break;
+          case 1:
+            context.go('/alarm');
+            break;
+          case 2:
+            context.go('/schedule');
+            break;
+          case 3:
+            context.go('/settings');
+            break;
+        }
+      },
       type: BottomNavigationBarType.fixed,
-      selectedItemColor: Color(0xFFFF8A4D), // 주황색
-      unselectedItemColor: Colors.black, // 검정색
+      selectedItemColor: Color(0xFFFF8A4D),
+      unselectedItemColor: Colors.black,
       items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
