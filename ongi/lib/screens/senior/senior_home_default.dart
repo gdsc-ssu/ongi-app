@@ -131,10 +131,7 @@ class _ElderHomeDefaultState extends State<ElderHomeDefault> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavBarSimple(
-        currentIndex: _currentIndex,
-        onTap: _onNavTap,
-      ),
+      
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'screens/helpers/home_screen.dart'; // 또는 emergency_alert_screen.dart
+import 'package:ongi/routes/helpers_router.dart'; // GoRouter 설정 파일
+import 'package:ongi/widgets/medicine/medicine_type_selector.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,12 +11,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: router, // GoRouter 설정 연결
       title: 'Medication App',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
       ),
-      home: const HomeScreen(), // ← 여기서 원하는 화면으로 설정
     );
   }
 }

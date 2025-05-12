@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ongi/widgets/bottom_nav_bar/bottom_nav_bar_with_alarm.dart';
-import 'package:ongi/screens/helpors/home_screen.dart';
-import 'package:ongi/screens/helpors/alarm_screen.dart';
-import 'package:ongi/screens/helpors/schedule_screen.dart';
+import 'package:ongi/screens/helpers/home_screen.dart';
+import 'package:ongi/screens/helpers/alarm_screen.dart';
+import 'package:ongi/screens/helpers/schedule_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
