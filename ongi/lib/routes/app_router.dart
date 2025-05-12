@@ -11,6 +11,9 @@ import '../screens/SignUp/meal_alert_screen.dart';
 import '../screens/SignUp/medicine_schedule_screen.dart';
 import '../screens/SignUp/alert_setting_screen.dart';
 import '../screens/SignUp/voice_setting_screen.dart';
+import '../screens/Splash/splash_screen.dart';
+import '../screens/Splash/splash_loading_screen.dart';
+import '../screens/Splash/account_select_screen.dart';
 
 // 보호자용 화면
 import '../screens/helpers/home_screen.dart';
@@ -20,7 +23,7 @@ import '../screens/helpers/alarm_screen.dart';
 import '../screens/senior/senior_home_alarm.dart';
 
 final GoRouter router = GoRouter(
-  initialLocation: '/login',
+  initialLocation: '/splash',
   routes: [
     // 보호자용 홈 화면
     GoRoute(
@@ -84,5 +87,19 @@ final GoRouter router = GoRouter(
       builder: (context, state) => const VoiceSettingScreen(),
     ),
 
+    // Splash
+    GoRoute(
+      path: '/splash',
+      name: 'splash',
+      builder: (context, state) => const SplashScreen(),
+    ),
+    GoRoute(
+      path: '/splash-loading',
+      builder: (context, state) => const SplashLoadingScreen(),
+    ),
+    GoRoute(
+      path: '/account-select',
+      builder: (context, state) => const AccountSelectScreen(),
+    ),
   ],
 );
