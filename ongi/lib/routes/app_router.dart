@@ -13,8 +13,8 @@ import '../screens/SignUp/alert_setting_screen.dart';
 import '../screens/SignUp/voice_setting_screen.dart';
 
 // 보호자용 화면
-import '../screens/helpors/home_screen.dart';
-import '../screens/helpors/alarm_screen.dart';
+import '../screens/helpers/home_screen.dart';
+import '../screens/helpers/alarm_screen.dart';
 
 // 어르신용 화면
 import '../screens/senior/senior_home_alarm.dart';

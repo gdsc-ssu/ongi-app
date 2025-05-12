@@ -1,10 +1,8 @@
-// ✅ 수정 포인트 반영을 위한 전체 파일 업데이트 시작
-// 변경 대상: medicine_type_selector.dart
-
 import 'package:flutter/material.dart';
 import 'prepost_meal_medicine_adder.dart';
 import 'timed_medicine_adder.dart';
-import 'package:ongi/widgets/medicine/timed_medicine_adder.dart';
+
+enum MedicineInputType { none, prepost, timed }
 
 class MedicineTypeSelector extends StatefulWidget {
   final void Function(Map<String, dynamic>) onMedicineAdded;
@@ -20,18 +18,24 @@ class _MedicineTypeSelectorState extends State<MedicineTypeSelector> {
   bool _showError = false;
   MedicineInputType _inputType = MedicineInputType.none;
 
-  void _navigateTo(Widget Function(String medicationName) pageBuilder) {
-    if (_controller.text.isEmpty) {
+  void _selectType(MedicineInputType type) {
+    if (_controller.text.trim().isEmpty) {
       setState(() => _showError = true);
       return;
     }
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => pageBuilder(_controller.text)),
-    );
+    setState(() {
+      _inputType = type;
+      _showError = false;
+    });
   }
-}
 
+  void _handleSaved(Map<String, dynamic> medicine) {
+    widget.onMedicineAdded(medicine);
+    setState(() {
+      _inputType = MedicineInputType.none;
+      _controller.clear();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,39 +78,48 @@ class _MedicineTypeSelectorState extends State<MedicineTypeSelector> {
               ),
             ),
           const SizedBox(height: 16),
-          Column(
-            children: [
-              SizedBox(
-                width: inputWidth,
-                child: OutlinedButton(
-                  onPressed: () => _navigateTo((name) => PrePostMealMedicineAdder(medicationName: name)),
-                  style: OutlinedButton.styleFrom(
-                    side: const BorderSide(color: Colors.grey),
-                    padding: const EdgeInsets.symmetric(vertical: 14),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  child: const Text('식전/식후 복용 약', style: TextStyle(color: Colors.black)),
+
+          if (_inputType == MedicineInputType.none) ...[
+            SizedBox(
+              width: inputWidth,
+              child: OutlinedButton(
+                onPressed: () => _selectType(MedicineInputType.prepost),
+                style: OutlinedButton.styleFrom(
+                  side: const BorderSide(color: Colors.grey),
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                 ),
+                child: const Text('식전/식후 복용 약', style: TextStyle(color: Colors.black)),
               ),
-              const SizedBox(height: 12),
-              SizedBox(
-                width: inputWidth,
-                child: OutlinedButton(
-                  onPressed: () => _navigateTo((name) => TimedMedicineAdder(medicationName: name)),
-                  style: OutlinedButton.styleFrom(
-                    side: const BorderSide(color: Colors.grey),
-                    padding: const EdgeInsets.symmetric(vertical: 14),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  child: const Text('정시 복용 약', style: TextStyle(color: Colors.black)),
+            ),
+            const SizedBox(height: 12),
+            SizedBox(
+              width: inputWidth,
+              child: OutlinedButton(
+                onPressed: () => _selectType(MedicineInputType.timed),
+                style: OutlinedButton.styleFrom(
+                  side: const BorderSide(color: Colors.grey),
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                 ),
+                child: const Text('정시 복용 약', style: TextStyle(color: Colors.black)),
               ),
-            ],
-          ),
+            ),
+          ]
+          else if (_inputType == MedicineInputType.prepost) ...[
+            const SizedBox(height: 12),
+            PrePostMealMedicineAdder(
+              medicationName: _controller.text.trim(),
+              onSaved: _handleSaved,
+            ),
+          ]
+          else if (_inputType == MedicineInputType.timed) ...[
+            const SizedBox(height: 12),
+            TimedMedicineAdder(
+              medicationName: _controller.text.trim(),
+              onSaved: _handleSaved,
+            ),
+          ],
         ],
       ),
     );
