@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import '../../widgets/progress_indicator.dart';
 import '../../widgets/page_button.dart';
 import '../../models/signup_form_model.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class SignupInputScreen extends StatelessWidget {
   const SignupInputScreen({super.key});
@@ -111,7 +113,39 @@ class _InputField extends StatelessWidget {
             if (hasButton && buttonText != null) ...[
               const SizedBox(width: 8),
               ElevatedButton(
-                onPressed: () {},
+                 onPressed: () async {
+                  final id = controller?.text.trim();
+
+                  if (label == '아이디' && id != null && id.isNotEmpty) {
+                    try {
+                      final uri = Uri.parse('http://13.124.122.198:8080/user/check-id?id=$id');
+                      final response = await http.get(uri);
+
+                      if (response.statusCode == 200) {
+                        final decoded = utf8.decode(response.bodyBytes);
+                        final json = jsonDecode(decoded);
+                        
+                        final success = json['success'];
+                        final resultMessage = json['message'];
+                        final data = json['data'];
+
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(resultMessage),
+                          ),
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('서버 오류: ${response.statusCode}')),
+                        );
+                      }
+                    } catch (e) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('에러 발생: $e')),
+                      );
+                    }
+                  }
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.grey.shade300,
                   foregroundColor: Colors.black,
