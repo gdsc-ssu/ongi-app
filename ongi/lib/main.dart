@@ -4,9 +4,16 @@ import 'package:ongi/routes/app_router.dart';
 import 'package:ongi/routes/helpers_router.dart';
 import 'package:ongi/routes/senior_router.dart';
 import 'package:ongi/state/account_type.dart';
+import 'package:provider/provider.dart';
+import 'models/signup_form_model.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => SignUpFormModel(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {

@@ -7,12 +7,10 @@ class AccountSelectScreen extends StatelessWidget {
 
   void _selectAccount(BuildContext context, String type) {
     if (!hasCompletedSignUp) {
-      // ✅ 회원가입 아직 안 한 경우 → 회원가입 화면으로 이동
-      context.go('/signup/terms'); // ← 첫 회원가입 경로로 맞춰주세요
+      context.go('/login');
       return;
     }
 
-    // ✅ 회원가입 완료한 경우 → 홈화면 이동
     selectedAccountType = type;
     restartApp?.call(); // main.dart의 라우터를 교체해서 홈화면으로 진입
   }

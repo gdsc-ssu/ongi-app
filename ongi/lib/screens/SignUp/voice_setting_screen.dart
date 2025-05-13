@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../widgets/progress_indicator.dart';
-import 'package:ongi/state/account_type.dart';
+// import 'package:ongi/state/account_type.dart';
+import 'package:provider/provider.dart';
+import 'package:ongi/models/signup_form_model.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
 
 class VoiceSettingScreen extends StatefulWidget {
   const VoiceSettingScreen({super.key});
@@ -128,9 +133,9 @@ class _VoiceSettingScreenState extends State<VoiceSettingScreen> {
                 ),
                 const SizedBox(height: 12),
                 ElevatedButton(
-                  onPressed: () {
-                  hasCompletedSignUp = true; // ✅ 회원가입 완료 표시
-                  context.go('/account-select'); // ✅ 계정 선택 화면으로 이동
+                  onPressed: () async {
+                  await _submitSignupWithMeds(context);
+                  context.go('/login');      
                 },
   style: _buttonStyle(),
   child: const Text('설정 완료'),
@@ -194,3 +199,71 @@ class Ticker {
   }
 }
 
+Future<void> _submitSignupWithMeds(BuildContext context) async {
+  // 회원가입 요청
+  final base = 'http://13.124.122.198:8080';
+  final form = context.read<SignUpFormModel>();
+
+  // 1. 회원가입
+  final response = await http.post(
+    Uri.parse('$base/user/signup'),
+    headers: {'Content-Type': 'application/json'},
+    body: jsonEncode(form.toJson()),
+  );
+
+  if (response.statusCode == 200) {
+    print('회원가입 성공: ${response.body}');
+  } else {
+    print('회원가입 실패: ${response.statusCode}, ${response.body}');
+  }
+
+  // 2. 보호자 약관 동의
+  final response2 = await http.post(Uri.parse('$base/user/guardian-agreement'));
+  if (response.statusCode == 200) {
+  print('회원가입 성공: ${response2.body}');
+} else {
+  print('회원가입 실패: ${response2.statusCode}, ${response2.body}');
+}
+
+  // 식사 등록
+  for (final meal in form.meals) {
+    await http.post(
+      Uri.parse('http://13.124.122.198:8080/meals/new-meal'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode(meal),
+    );
+  }
+
+  // 3. 약 등록
+  for (final med in form.medications) {
+    http.Response? response3;
+    if (med['type'] == 'timed') {
+      response3 = await http.post(
+        Uri.parse('$base/medications/fixed-time'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'title': med['name'],
+          'timeList': med['times'],
+        }),
+      );
+    } else if (med['type'] == 'prepost') {
+      response3 = await http.post(
+        Uri.parse('$base/medications/meal-based'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'title': med['name'],
+          'intakeTiming': med['intakeTiming'],
+          'mealTypes': med['mealTypes'],
+          'remindAfterMinutes': med['remindAfterMinutes'],
+        }),
+      );
+    }
+
+    if (response3 != null) {
+      print('약 등록 응답 (${med['name']}): ${response3.statusCode}, ${response3.body}');
+    } else {
+      print('⚠️ ${med['name']} 은(는) 처리되지 않은 타입입니다: ${med['type']}');
+    }
+  }
+  
+}
