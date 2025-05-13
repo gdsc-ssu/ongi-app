@@ -204,6 +204,8 @@ Future<void> _submitSignupWithMeds(BuildContext context) async {
   final base = 'http://13.124.122.198:8080';
   final form = context.read<SignUpFormModel>();
 
+  print('회원가입 요청 Body: ${jsonEncode(form.toJson())}');
+
   // 1. 회원가입
   final response = await http.post(
     Uri.parse('$base/user/signup'),
@@ -243,7 +245,9 @@ Future<void> _submitSignupWithMeds(BuildContext context) async {
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
           'title': med['name'],
-          'timeList': med['times'],
+          'timeList': med['times']
+              .map((t) => '${t.hour.toString().padLeft(2, '0')}:${t.minute.toString().padLeft(2, '0')}')
+              .toList(),
         }),
       );
     } else if (med['type'] == 'prepost') {

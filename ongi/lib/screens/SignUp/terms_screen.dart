@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../widgets/progress_indicator.dart';
 import '../../widgets/page_button.dart';
+import 'package:provider/provider.dart';
+import 'package:ongi/models/signup_form_model.dart';
 
 
 class TermsScreen extends StatefulWidget {
@@ -77,6 +79,11 @@ class _TermsScreenState extends State<TermsScreen> {
                 onBack: () => Navigator.pop(context),
                 onNext: () {
                   if (agreements.every((v) => v)) {
+                    final form = context.read<SignUpFormModel>();
+                    form.pushAgreement = agreements[0];
+                    form.voiceAgreement = agreements[1];
+                    form.backgroundAgreement = agreements[2];
+
                     context.push('/signup/signup-input');
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
