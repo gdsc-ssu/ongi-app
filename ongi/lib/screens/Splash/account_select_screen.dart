@@ -43,7 +43,7 @@ class AccountSelectScreen extends StatelessWidget {
                           const CircleAvatar(radius: 40, child: Icon(Icons.person, size: 40)),
                           const SizedBox(height: 8),
                           ElevatedButton(
-                            onPressed: () => _selectAccount(context, 'CareGiver'),
+                            onPressed: () => _selectAccount(context, 'helper'), // ✅ 보호자 화면 선택 분기점이니까 절대 건들지 말자
                             child: const Text('Caregiver Account'),
                           ),
                         ],
@@ -55,7 +55,7 @@ class AccountSelectScreen extends StatelessWidget {
                           const CircleAvatar(radius: 40, child: Icon(Icons.elderly, size: 40)),
                           const SizedBox(height: 8),
                           ElevatedButton(
-                            onPressed: () => _selectAccount(context, 'Senior'),
+                            onPressed: () => _selectAccount(context, 'senior'), // ✅ 어르신 화면 선택 분기점이니까 절대 건들지 말자
                             child: const Text('Senior Account'),
                           ),
                         ],
