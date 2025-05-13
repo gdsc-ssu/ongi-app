@@ -17,7 +17,7 @@ class EmergencyAlertScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // 상단 바
+              // bar
               Padding(
                 padding: const EdgeInsets.only(left: 8, top: 8, bottom: 8),
                 child: Row(
@@ -30,17 +30,17 @@ class EmergencyAlertScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 8),
-              const Text('긴급 알림 관리', style: TextStyle(color: Color(0xFFFF8A4D), fontWeight: FontWeight.bold, fontSize: 32)),
+              const Text('Emergency Alert Management', style: TextStyle(color: Color(0xFFFF8A4D), fontWeight: FontWeight.bold, fontSize: 32)),
               const SizedBox(height: 4),
               const Text('2025. 01. 30', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28)),
               const SizedBox(height: 32),
 
-              // 식사
+              // Meal
               const Align(
                 alignment: Alignment.centerLeft,
                 child: Padding(
                   padding: EdgeInsets.only(left: 24.0, bottom: 8.0),
-                  child: Text('식사', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
+                  child: Text('Meal', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
                 ),
               ),
               Padding(
@@ -57,7 +57,7 @@ class EmergencyAlertScreen extends StatelessWidget {
                       const Icon(Icons.check_box_outline_blank, color: Colors.white, size: 32),
                       const SizedBox(width: 8),
                       const Expanded(
-                        child: Text('점심식사', style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.w500)),
+                        child: Text('Lunch', style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.w500)),
                       ),
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
@@ -72,12 +72,12 @@ class EmergencyAlertScreen extends StatelessWidget {
                 ),
               ),
 
-              // 약
+              // pill
               const Align(
                 alignment: Alignment.centerLeft,
                 child: Padding(
                   padding: EdgeInsets.only(left: 24.0, bottom: 8.0),
-                  child: Text('약', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
+                  child: Text('Medication', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
                 ),
               ),
               Padding(
@@ -96,7 +96,7 @@ class EmergencyAlertScreen extends StatelessWidget {
                           const Icon(Icons.check_box_outline_blank, color: Colors.white, size: 32),
                           const SizedBox(width: 8),
                           const Expanded(
-                            child: Text('감기약', style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.w500)),
+                            child: Text('Cold Medicine', style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.w500)),
                           ),
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
@@ -114,7 +114,7 @@ class EmergencyAlertScreen extends StatelessWidget {
                           const Icon(Icons.check_box_outline_blank, color: Colors.white, size: 32),
                           const SizedBox(width: 8),
                           const Expanded(
-                            child: Text('감기약', style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.w500)),
+                            child: Text('Cold Medicine', style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.w500)),
                           ),
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
@@ -131,19 +131,19 @@ class EmergencyAlertScreen extends StatelessWidget {
                 ),
               ),
 
-              // 응답 누락 횟수
+              // no answer number
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
                 decoration: BoxDecoration(
                   color: Colors.black,
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: const Text('응답 누락 횟수 3회', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+                child: const Text('3 Missed Responses', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
               ),
               const SizedBox(height: 40),
 
-              // 어르신과 연락하기
-              const Text('어르신과 연락하기', style: TextStyle(color: Color(0xFFFF8A4D), fontWeight: FontWeight.bold, fontSize: 26)),
+              // contact with senior
+              const Text('Contact the senior', style: TextStyle(color: Color(0xFFFF8A4D), fontWeight: FontWeight.bold, fontSize: 26)),
               const SizedBox(height: 16),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

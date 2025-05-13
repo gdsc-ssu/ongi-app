@@ -25,17 +25,17 @@ class _LoginScreenState extends State<LoginScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const SizedBox(height: 40),
-              const Text('온기, Ongi',
+              const Text('Ongi',
                   style: TextStyle(fontSize: 20), textAlign: TextAlign.center),
               const SizedBox(height: 8),
-              const Text('로그인',
+              const Text('Log In',
                   style: TextStyle(
                       fontSize: 24, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center),
               const SizedBox(height: 40),
 
               // 아이디 입력
-              const Text('아이디'),
+              const Text('Username'),
               const SizedBox(height: 8),
               TextField(
                 controller: _idController,
@@ -46,7 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 20),
 
               // 비밀번호 입력
-              const Text('비밀번호'),
+              const Text('Password'),
               const SizedBox(height: 8),
               TextField(
                 controller: _pwController,
@@ -54,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 decoration: InputDecoration(
                   border: const OutlineInputBorder(),
                   errorText:
-                      _showError ? '잘못된 비밀번호입니다.' : null,
+                      _showError ? 'ncorrect password.' : null,
                   suffixIcon: IconButton(
                     icon: Icon(
                         _obscureText ? Icons.visibility_off : Icons.visibility),
@@ -75,7 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     _showError = _pwController.text != '123456';
                   });
                 },
-                child: const Text('로그인'),
+                child: const Text('Log In'),
               ),
               const SizedBox(height: 20),
 
@@ -83,11 +83,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 onPressed: () {
                   context.push('/signup/terms');
                 },
-                child: const Text('회원가입'),
+                child: const Text('Sign Up'),
               ),
               TextButton(
                 onPressed: () => context.push('/find-account'),
-                child: const Text('아이디/비밀번호 찾기'),
+                child: const Text('Find ID/Password'),
               ),
             ],
           ),

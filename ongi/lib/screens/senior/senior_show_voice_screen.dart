@@ -28,7 +28,7 @@ class _ElderShowVoiceScreenState extends State<ElderShowVoiceScreen> {
                     children: [
                       Icon(Icons.arrow_back_ios, size: 20, color: Colors.black),
                       SizedBox(width: 2),
-                      Text('이전', style: TextStyle(fontSize: 18, color: Colors.black)),
+                      Text('Back', style: TextStyle(fontSize: 18, color: Colors.black)),
                     ],
                   ),
                 ),
@@ -36,7 +36,7 @@ class _ElderShowVoiceScreenState extends State<ElderShowVoiceScreen> {
             ),
             SizedBox(height: 32),
             Center(
-              child: Text('알림 음성 변경', style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
+              child: Text('Change Notification Voice', style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
             ),
             SizedBox(height: 48),
             Padding(
@@ -55,7 +55,7 @@ class _ElderShowVoiceScreenState extends State<ElderShowVoiceScreen> {
                       ),
                       child: Center(
                         child: Text(
-                          '아나운서',
+                          'Announcer',
                           style: TextStyle(
                             color: selected == 0 ? Color(0xFFFF8A4D) : Colors.white,
                             fontSize: 22,
@@ -78,7 +78,7 @@ class _ElderShowVoiceScreenState extends State<ElderShowVoiceScreen> {
                       ),
                       child: Center(
                         child: Text(
-                          '보호자',
+                          'Caregiver',
                           style: TextStyle(
                             color: selected == 1 ? Colors.white : Color(0xFFFF8A4D),
                             fontSize: 22,

@@ -81,27 +81,27 @@ class _PrePostMealMedicineAdderState extends State<PrePostMealMedicineAdder> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 16),
-        const Text('식전/식후 (택 1)', style: TextStyle(fontWeight: FontWeight.bold)),
+        const Text('Before/After Meal (choose one)', style: TextStyle(fontWeight: FontWeight.bold)),
         const SizedBox(height: 8),
         Row(
-          children: _buildRadioRow(['식전', '식후'], mealTiming, (val) => setState(() => mealTiming = val)),
+          children: _buildRadioRow(['Before meal', 'After meal'], mealTiming, (val) => setState(() => mealTiming = val)),
         ),
         const SizedBox(height: 16),
-        const Text('복용 시간 (중복 선택 가능)', style: TextStyle(fontWeight: FontWeight.bold)),
+        const Text('Medication Time (Multiple selection allowed)', style: TextStyle(fontWeight: FontWeight.bold)),
         const SizedBox(height: 12),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            _buildToggle("아침", isMorningSelected, () => setState(() => isMorningSelected = !isMorningSelected)),
-            _buildToggle("점심", isAfternoonSelected, () => setState(() => isAfternoonSelected = !isAfternoonSelected)),
-            _buildToggle("저녁", isEveningSelected, () => setState(() => isEveningSelected = !isEveningSelected)),
+            _buildToggle("Morning", isMorningSelected, () => setState(() => isMorningSelected = !isMorningSelected)),
+            _buildToggle("Afternoon ", isAfternoonSelected, () => setState(() => isAfternoonSelected = !isAfternoonSelected)),
+            _buildToggle("Evening", isEveningSelected, () => setState(() => isEveningSelected = !isEveningSelected)),
           ],
         ),
         const SizedBox(height: 16),
-        const Text('알림 시간 (택 1)', style: TextStyle(fontWeight: FontWeight.bold)),
+        const Text('Reminder Time (choose one)', style: TextStyle(fontWeight: FontWeight.bold)),
         const SizedBox(height: 8),
         Row(
-          children: _buildRadioRow(['30분', '1시간'], beforeAfterTime, (val) => setState(() => beforeAfterTime = val)),
+          children: _buildRadioRow(['30 minutes', '1 hour'], beforeAfterTime, (val) => setState(() => beforeAfterTime = val)),
         ),
         const SizedBox(height: 24),
         SizedBox(
@@ -115,9 +115,9 @@ class _PrePostMealMedicineAdderState extends State<PrePostMealMedicineAdder> {
                       'mealTiming': mealTiming,
                       'beforeAfterTime': beforeAfterTime,
                       'times': [
-                        if (isMorningSelected) '아침',
-                        if (isAfternoonSelected) '점심',
-                        if (isEveningSelected) '저녁',
+                        if (isMorningSelected) 'Morning',
+                        if (isAfternoonSelected) 'Afternoon ',
+                        if (isEveningSelected) 'Evening',
                       ],
                     };
                     widget.onSaved(medicine);
@@ -129,7 +129,7 @@ class _PrePostMealMedicineAdderState extends State<PrePostMealMedicineAdder> {
               padding: const EdgeInsets.symmetric(vertical: 14),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             ),
-            child: const Text('저장'),
+            child: const Text('Save'),
           ),
         )
       ],

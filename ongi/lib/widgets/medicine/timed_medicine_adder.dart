@@ -50,11 +50,11 @@ class _TimedMedicineAdderState extends State<TimedMedicineAdder> {
                   children: [
                     TextButton(
                       onPressed: () => Navigator.pop(context),
-                      child: const Text('취소', style: TextStyle(color: Colors.grey, fontSize: 16)),
+                      child: const Text('Cancel', style: TextStyle(color: Colors.grey, fontSize: 16)),
                     ),
                     TextButton(
                       onPressed: () => Navigator.pop(context, tempDuration),
-                      child: const Text('확인', style: TextStyle(color: Colors.deepOrange, fontSize: 16)),
+                      child: const Text('Confirm', style: TextStyle(color: Colors.deepOrange, fontSize: 16)),
                     ),
                   ],
                 ),
@@ -86,7 +86,7 @@ class _TimedMedicineAdderState extends State<TimedMedicineAdder> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 16),
-        const Text('복용 시간', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+        const Text('Medication Time', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
         const SizedBox(height: 12),
         SizedBox(
           width: double.infinity,
@@ -100,14 +100,14 @@ class _TimedMedicineAdderState extends State<TimedMedicineAdder> {
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
               padding: const EdgeInsets.symmetric(vertical: 14),
             ),
-            child: const Text('복용시간 추가하기', style: TextStyle(fontSize: 16)),
+            child: const Text('Add Medication Time', style: TextStyle(fontSize: 16)),
           ),
         ),
         const SizedBox(height: 12),
         ...selectedTimes.map((time) => ListTile(
               leading: const Icon(Icons.access_time),
               title: Text(
-                '${time.hour.toString().padLeft(2, '0')}시 ${time.minute.toString().padLeft(2, '0')}분',
+                '${time.hour.toString().padLeft(2, '0')}Hour ${time.minute.toString().padLeft(2, '0')}Minute',
                 style: const TextStyle(fontSize: 16),
               ),
               trailing: IconButton(
@@ -135,7 +135,7 @@ class _TimedMedicineAdderState extends State<TimedMedicineAdder> {
               padding: const EdgeInsets.symmetric(vertical: 14),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             ),
-            child: const Text('저장'),
+            child: const Text('Save'),
           ),
         )
       ],

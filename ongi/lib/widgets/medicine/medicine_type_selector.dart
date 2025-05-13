@@ -53,14 +53,14 @@ class _MedicineTypeSelectorState extends State<MedicineTypeSelector> {
         mainAxisSize: MainAxisSize.min,
         children: [
           const Text(
-            '약 이름을 입력해주세요',
+            'Input medication name.',
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 12),
           TextField(
             controller: _controller,
             decoration: InputDecoration(
-              hintText: '약 이름을 입력해주세요',
+              hintText: 'Input medication name.',
               filled: true,
               fillColor: const Color(0xFFF0F0F0),
               border: OutlineInputBorder(
@@ -73,7 +73,7 @@ class _MedicineTypeSelectorState extends State<MedicineTypeSelector> {
             const Padding(
               padding: EdgeInsets.only(top: 8),
               child: Text(
-                '약 이름을 입력해주세요',
+                'Please enter the medication name.',
                 style: TextStyle(color: Colors.deepOrange),
               ),
             ),
@@ -89,7 +89,7 @@ class _MedicineTypeSelectorState extends State<MedicineTypeSelector> {
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                 ),
-                child: const Text('식전/식후 복용 약', style: TextStyle(color: Colors.black)),
+                child: const Text('	Before/After Meal Medication', style: TextStyle(color: Colors.black)),
               ),
             ),
             const SizedBox(height: 12),
@@ -102,7 +102,7 @@ class _MedicineTypeSelectorState extends State<MedicineTypeSelector> {
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                 ),
-                child: const Text('정시 복용 약', style: TextStyle(color: Colors.black)),
+                child: const Text('Scheduled Time Medication', style: TextStyle(color: Colors.black)),
               ),
             ),
           ]

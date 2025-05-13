@@ -22,21 +22,21 @@ class SignupInputScreen extends StatelessWidget {
               ProgressStepIndicator(currentStep: currentStep, totalSteps: totalSteps),
               const SizedBox(height: 24),
               const Text(
-                '회원가입',
+                'Sign Up',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               const Text(
-                '회원가입',
+                'Sign Up',
 
               ),
               const SizedBox(height: 24),
 
-              const _InputField(label: '아이디', hint: '아이디를 입력해주세요.', hasButton: true, buttonText: '중복확인'),
-              const _InputField(label: '비밀번호', hint: '비밀번호를 입력해주세요.', obscureText: true),
-              const _InputField(label: '비밀번호 확인', hint: '비밀번호를 다시 한 번 입력해주세요.', obscureText: true),
-              const _InputField(label: '전화번호', hint: '전화번호를 입력해주세요.', hasButton: true, buttonText: '인증번호 받기'),
-              const _InputField(label: '인증번호', hint: '인증번호를 입력해주세요.', hasButton: true, buttonText: '확인'),
-              const _InputField(label: '성함', hint: '성함을 입력해주세요.'),
+              const _InputField(label: 'Username', hint: 'Please enter your username.', hasButton: true, buttonText: '중복확인'),
+              const _InputField(label: 'Password', hint: 'Please enter your password.', obscureText: true),
+              const _InputField(label: 'Confirm Password', hint: 'Please re-enter your password.', obscureText: true),
+              const _InputField(label: 'Phone Number', hint: 'Please enter your phone number.', hasButton: true, buttonText: '인증번호 받기'),
+              const _InputField(label: 'Verification Code', hint: 'Please enter the verification code.', hasButton: true, buttonText: '확인'),
+              const _InputField(label: 'Full Name', hint: 'Please enter the full name.'),
 
               const Spacer(),
               BottomNextBackNavigation(

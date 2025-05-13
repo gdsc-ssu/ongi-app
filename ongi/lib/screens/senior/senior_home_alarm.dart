@@ -36,7 +36,7 @@ class _ElderHomeAlarmState extends State<ElderHomeAlarm> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text('다음에 누른 이유', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                    Text('Reason for Choosing "Later"', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
                     SizedBox(height: 12),
                     Container(
                       decoration: BoxDecoration(
@@ -49,19 +49,19 @@ class _ElderHomeAlarmState extends State<ElderHomeAlarm> {
                             value: 0,
                             groupValue: reasonIdx,
                             onChanged: (v) => setState(() => reasonIdx = v),
-                            title: Text('배가 안 고픔'),
+                            title: Text('Not hungry'),
                           ),
                           RadioListTile<int>(
                             value: 1,
                             groupValue: reasonIdx,
                             onChanged: (v) => setState(() => reasonIdx = v),
-                            title: Text('지금 할 일이 있음'),
+                            title: Text('Busy with something else'),
                           ),
                           RadioListTile<int>(
                             value: 2,
                             groupValue: reasonIdx,
                             onChanged: (v) => setState(() => reasonIdx = v),
-                            title: Text('기타'),
+                            title: Text('Other'),
                           ),
                           if (reasonIdx == 2)
                             Padding(
@@ -70,7 +70,7 @@ class _ElderHomeAlarmState extends State<ElderHomeAlarm> {
                                 controller: etcController,
                                 onChanged: (_) => setState(() {}),
                                 decoration: InputDecoration(
-                                  hintText: '이유를 입력하세요',
+                                  hintText: 'Please enter your reason.',
                                   border: OutlineInputBorder(),
                                   isDense: true,
                                 ),
@@ -80,26 +80,26 @@ class _ElderHomeAlarmState extends State<ElderHomeAlarm> {
                       ),
                     ),
                     SizedBox(height: 24),
-                    Text('다시 알림을 드릴까요?', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                    Text('Would you like to be reminded again?', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
                     Column(
                       children: [
                         RadioListTile<int>(
                           value: 0,
                           groupValue: remindIdx,
                           onChanged: (v) => setState(() => remindIdx = v),
-                          title: Text('30분 뒤'),
+                          title: Text('In 30 minutes'),
                         ),
                         RadioListTile<int>(
                           value: 1,
                           groupValue: remindIdx,
                           onChanged: (v) => setState(() => remindIdx = v),
-                          title: Text('1시간 뒤'),
+                          title: Text('In 1 hour'),
                         ),
                         RadioListTile<int>(
                           value: 2,
                           groupValue: remindIdx,
                           onChanged: (v) => setState(() => remindIdx = v),
-                          title: Text('아니오.'),
+                          title: Text('No'),
                         ),
                       ],
                     ),
@@ -114,7 +114,7 @@ class _ElderHomeAlarmState extends State<ElderHomeAlarm> {
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                               padding: EdgeInsets.symmetric(vertical: 14),
                             ),
-                            child: Text('취소', style: TextStyle(fontSize: 18, color: Colors.grey, fontWeight: FontWeight.bold)),
+                            child: Text('Cancel', style: TextStyle(fontSize: 18, color: Colors.grey, fontWeight: FontWeight.bold)),
                           ),
                         ),
                         SizedBox(width: 16),
@@ -123,10 +123,10 @@ class _ElderHomeAlarmState extends State<ElderHomeAlarm> {
                             onPressed: canSave
                                 ? () {
                                     remind = remindIdx == 0
-                                        ? '30분'
+                                        ? '30 minutes'
                                         : remindIdx == 1
-                                            ? '1시간'
-                                            : '아니오';
+                                            ? '1 hour'
+                                            : 'No';
                                     Navigator.of(context).pop();
                                   }
                                 : null,
@@ -135,7 +135,7 @@ class _ElderHomeAlarmState extends State<ElderHomeAlarm> {
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                               padding: EdgeInsets.symmetric(vertical: 14),
                             ),
-                            child: Text('저장', style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold)),
+                            child: Text('Save', style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold)),
                           ),
                         ),
                       ],
@@ -149,14 +149,14 @@ class _ElderHomeAlarmState extends State<ElderHomeAlarm> {
       },
     );
 
-    if (remind == '30분' || remind == '1시간') {
-      final added = remind == '30분' ? 30 : 60;
+    if (remind == '30 minutes' || remind == '1 hour') {
+      final added = remind == '30 minutes' ? 30 : 60;
       final dt = DateTime(2025, 1, 30, alarmTime.hour, alarmTime.minute).add(Duration(minutes: added));
       setState(() {
         alarmTime = TimeOfDay(hour: dt.hour, minute: dt.minute);
         _snoozed = true;
       });
-    } else if (remind == '아니오') {
+    } else if (remind == 'No') {
       ElderHomeAlarm.isDefaultHome = true;
       context.go('/senior-home-default');
     }
@@ -198,7 +198,7 @@ class _ElderHomeAlarmState extends State<ElderHomeAlarm> {
               child: RichText(
                 text: TextSpan(
                   children: [
-                    TextSpan(text: '홍길동', style: TextStyle(color: Color(0xFFFF8A4D), fontWeight: FontWeight.bold, fontSize: 20)),
+                    TextSpan(text: 'John Doe', style: TextStyle(color: Color(0xFFFF8A4D), fontWeight: FontWeight.bold, fontSize: 20)),
                     TextSpan(text: '님의 스케줄이에요.', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20)),
                   ],
                 ),
@@ -206,7 +206,7 @@ class _ElderHomeAlarmState extends State<ElderHomeAlarm> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24.0),
-              child: Text('오늘도 따뜻한 하루 보내세요.', style: TextStyle(color: Colors.grey, fontSize: 15)),
+              child: Text('Wishing you a warm and pleasant day.', style: TextStyle(color: Colors.grey, fontSize: 15)),
             ),
             SizedBox(height: 32),
             Center(
@@ -220,9 +220,9 @@ class _ElderHomeAlarmState extends State<ElderHomeAlarm> {
                 ),
                 child: Column(
                   children: [
-                    Text('혈압 약', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 28)),
+                    Text('Blood Pressure Medication', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 28)),
                     SizedBox(height: 8),
-                    Text('드실 시간이에요', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 24)),
+                    Text('It’s time to take your medicine.', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 24)),
                     SizedBox(height: 24),
                     Container(
                       padding: EdgeInsets.symmetric(vertical: 16, horizontal: 32),
@@ -252,7 +252,7 @@ class _ElderHomeAlarmState extends State<ElderHomeAlarm> {
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                               side: BorderSide(color: Colors.white),
                             ),
-                            child: Text('확인', style: TextStyle(fontSize: 20, color: Color(0xFFFF8A4D), fontWeight: FontWeight.bold)),
+                            child: Text('Confirm', style: TextStyle(fontSize: 20, color: Color(0xFFFF8A4D), fontWeight: FontWeight.bold)),
                           ),
                         ),
                         SizedBox(width: 16),
@@ -265,7 +265,7 @@ class _ElderHomeAlarmState extends State<ElderHomeAlarm> {
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                               side: BorderSide(color: Colors.white),
                             ),
-                            child: Text('다음에', style: TextStyle(fontSize: 20, color: Color(0xFFFF8A4D), fontWeight: FontWeight.bold)),
+                            child: Text('Next Time', style: TextStyle(fontSize: 20, color: Color(0xFFFF8A4D), fontWeight: FontWeight.bold)),
                           ),
                         ),
                       ],

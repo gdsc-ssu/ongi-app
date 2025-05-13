@@ -39,24 +39,24 @@ class _HomeScreenState extends State<HomeScreen> {
               _buildGreeting(),
               const SizedBox(height: 4), // 인삿말 아래 간격 줄이기
               const Text(
-                '오늘도 따뜻한 하루 보내세요.',
+                'Wishing you a warm and pleasant day.',
                 style: TextStyle(color: Colors.grey, fontSize: 16),
               ),
               if (isEmergency) _buildEmergencyBanner(), // 바로 아래에 배치
               const SizedBox(height: 16),
-              _buildSectionTitle('  식사'),
+              _buildSectionTitle(' Meal'),
               _buildCard([
-                _buildCheckRow('아침식사', '08:00', 0, mealChecked, (val) => setState(() => mealChecked[0] = val)),
-                _buildCheckRow('점심식사', '08:00', 1, mealChecked, (val) => setState(() => mealChecked[1] = val)),
-                _buildCheckRow('저녁식사', '08:00', 2, mealChecked, (val) => setState(() => mealChecked[2] = val)),
+                _buildCheckRow('Breakfast', '08:00', 0, mealChecked, (val) => setState(() => mealChecked[0] = val)),
+                _buildCheckRow('Lunch', '08:00', 1, mealChecked, (val) => setState(() => mealChecked[1] = val)),
+                _buildCheckRow('Dinner', '08:00', 2, mealChecked, (val) => setState(() => mealChecked[2] = val)),
               ]),
               const SizedBox(height: 16),
-              _buildSectionTitle('  약'),
+              _buildSectionTitle('  Medication'),
               _buildCard([
-                _buildCheckRow('감기약', '08:30', 0, medicineChecked, (val) => setState(() => medicineChecked[0] = val)),
-                _buildCheckRow('혈압약', '10:00', 1, medicineChecked, (val) => setState(() => medicineChecked[1] = val)),
-                _buildCheckRow('감기약', '12:30', 2, medicineChecked, (val) => setState(() => medicineChecked[2] = val)),
-                _buildCheckRow('감기약', '17:30', 3, medicineChecked, (val) => setState(() => medicineChecked[3] = val)),
+                _buildCheckRow('Cold Medicine', '08:30', 0, medicineChecked, (val) => setState(() => medicineChecked[0] = val)),
+                _buildCheckRow('Blood Pressure Medication', '10:00', 1, medicineChecked, (val) => setState(() => medicineChecked[1] = val)),
+                _buildCheckRow('Cold Medicine', '12:30', 2, medicineChecked, (val) => setState(() => medicineChecked[2] = val)),
+                _buildCheckRow('Cold Medicine', '17:30', 3, medicineChecked, (val) => setState(() => medicineChecked[3] = val)),
               ]),
               const SizedBox(height: 24),
             ],
@@ -91,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Text(
-              '온기, Ongi   ',
+              'Ongi  ',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
             ),
             const SizedBox(width: 12),
@@ -119,8 +119,8 @@ class _HomeScreenState extends State<HomeScreen> {
       child: RichText(
         text: const TextSpan(
           children: [
-            TextSpan(text: '홍길동', style: TextStyle(color: Color(0xFFFF8A4D), fontWeight: FontWeight.bold, fontSize: 22)),
-            TextSpan(text: '님의 일정이에요.', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 22)),
+            TextSpan(text: 'John Doe', style: TextStyle(color: Color(0xFFFF8A4D), fontWeight: FontWeight.bold, fontSize: 22)),
+            TextSpan(text: 'Notification history', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 22)),
           ],
         ),
       ),
@@ -140,7 +140,7 @@ class _HomeScreenState extends State<HomeScreen> {
         onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const EmergencyAlertScreen())),
         child: const Center(
           child: Text(
-            '긴급 상황 알림 발생',
+            'Emergency Alert Triggered ',
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 24),
           ),
         ),

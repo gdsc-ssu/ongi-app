@@ -17,7 +17,7 @@ class _MealAlertScheduleScreenState extends State<MealAlertScheduleScreen> {
   final int totalSteps = 5;
 
   List<Map<String, dynamic>> mealTimes = [
-  {'label': '점심식사', 'time': TimeOfDay(hour: 12, minute: 30)}
+  {'label': 'Lunch', 'time': TimeOfDay(hour: 12, minute: 30)}
 ];
 
   void _showTimePickerSheet() {
@@ -38,12 +38,12 @@ class _MealAlertScheduleScreenState extends State<MealAlertScheduleScreen> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Text('제목 설정', style: TextStyle(fontWeight: FontWeight.bold)),
+                  const Text('Set Title', style: TextStyle(fontWeight: FontWeight.bold)),
                   const SizedBox(height: 12),
                   TextField(
                     controller: _titleController,
                     decoration: InputDecoration(
-                      hintText: '제목을 입력해주세요.',
+                      hintText: 'Please enter a title.',
                       filled: true,
                       fillColor: Colors.grey.shade200,
                       border: OutlineInputBorder(
@@ -71,7 +71,7 @@ class _MealAlertScheduleScreenState extends State<MealAlertScheduleScreen> {
                     children: [
                       OutlinedButton(
                         onPressed: () => Navigator.pop(context),
-                        child: const Text('닫기'),
+                        child: const Text('Close'),
                       ),
                       ElevatedButton(
                         onPressed: () {
@@ -87,7 +87,7 @@ class _MealAlertScheduleScreenState extends State<MealAlertScheduleScreen> {
                           }
                         },
                         style: ElevatedButton.styleFrom(backgroundColor: Colors.deepOrange),
-                        child: const Text('확인'),
+                        child: const Text('Confirm'),
                       ),
                     ],
                   )
@@ -112,9 +112,9 @@ class _MealAlertScheduleScreenState extends State<MealAlertScheduleScreen> {
             children: [
               ProgressStepIndicator(currentStep: currentStep, totalSteps: totalSteps),
               const SizedBox(height: 24),
-              const Text('식사 알림 스케줄', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              const Text('Meal Reminder Schedule', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
               const SizedBox(height: 4),
-              const Text('식사시간을 입력해주세요.', style: TextStyle(color: Colors.grey)),
+              const Text('Please enter the meal time.', style: TextStyle(color: Colors.grey)),
               const SizedBox(height: 24),
               ...mealTimes.map((entry) => TimeBlock(
                 label: entry['label'],

@@ -15,17 +15,17 @@ import '../screens/Splash/splash_screen.dart';
 import '../screens/Splash/splash_loading_screen.dart';
 import '../screens/Splash/account_select_screen.dart';
 
-// 보호자용 화면
+// helpers screen
 import '../screens/helpers/home_screen.dart';
 import '../screens/helpers/alarm_screen.dart';
 
-// 어르신용 화면
+// senior screen
 import '../screens/senior/senior_home_alarm.dart';
 
 final GoRouter appRouter = GoRouter(
   initialLocation: '/splash',
   routes: [
-    // 보호자용 홈 화면
+    // helpers screen
     GoRoute(
       path: '/login',
       name: 'login',

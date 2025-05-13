@@ -28,9 +28,9 @@ class AccountSelectScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const SizedBox(height: 40),
-              const Text('온기, Ongi', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+              const Text('Ongi', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
               const SizedBox(height: 12),
-              const Text('사용자 계정을 선택해주세요.', style: TextStyle(fontSize: 16)),
+              const Text('Please select your account type.', style: TextStyle(fontSize: 16)),
               const SizedBox(height: 12),
               Expanded(
                 child: Center(
@@ -43,8 +43,8 @@ class AccountSelectScreen extends StatelessWidget {
                           const CircleAvatar(radius: 40, child: Icon(Icons.person, size: 40)),
                           const SizedBox(height: 8),
                           ElevatedButton(
-                            onPressed: () => _selectAccount(context, 'helper'),
-                            child: const Text('보호자 계정'),
+                            onPressed: () => _selectAccount(context, 'CareGiver'),
+                            child: const Text('Caregiver Account'),
                           ),
                         ],
                       ),
@@ -55,8 +55,8 @@ class AccountSelectScreen extends StatelessWidget {
                           const CircleAvatar(radius: 40, child: Icon(Icons.elderly, size: 40)),
                           const SizedBox(height: 8),
                           ElevatedButton(
-                            onPressed: () => _selectAccount(context, 'senior'),
-                            child: const Text('어르신 계정'),
+                            onPressed: () => _selectAccount(context, 'Senior'),
+                            child: const Text('Senior Account'),
                           ),
                         ],
                       ),

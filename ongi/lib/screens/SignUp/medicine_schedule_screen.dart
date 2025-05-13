@@ -19,8 +19,8 @@ class _MedicineScheduleScreenState extends State<MedicineScheduleScreen> {
   final int totalSteps = 5;
 
   List<Map<String, dynamic>> medicineTimes = [
-    {'label': '혈압약', 'time': TimeOfDay(hour: 9, minute: 0)},
-    {'label': '비타민', 'time': TimeOfDay(hour: 12, minute: 0)},
+    {'label': 'Blood Pressure Medication', 'time': TimeOfDay(hour: 9, minute: 0)},
+    {'label': '	Vitamin', 'time': TimeOfDay(hour: 12, minute: 0)},
   ];
 
   TimeOfDay _extractFirstTime(Map<String, dynamic> medicine) {
@@ -47,12 +47,12 @@ class _MedicineScheduleScreenState extends State<MedicineScheduleScreen> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Text('약 이름 설정', style: TextStyle(fontWeight: FontWeight.bold)),
+                  const Text('Set Medication Name', style: TextStyle(fontWeight: FontWeight.bold)),
                   const SizedBox(height: 12),
                   TextField(
                     controller: _titleController,
                     decoration: InputDecoration(
-                      hintText: '예: 비타민',
+                      hintText: 'e.x., Vitamin',
                       filled: true,
                       fillColor: Colors.grey.shade200,
                       border: OutlineInputBorder(
@@ -79,7 +79,7 @@ class _MedicineScheduleScreenState extends State<MedicineScheduleScreen> {
                     children: [
                       OutlinedButton(
                         onPressed: () => Navigator.pop(context),
-                        child: const Text('닫기'),
+                        child: const Text('Close'),
                       ),
                       ElevatedButton(
                         onPressed: () {
@@ -95,7 +95,7 @@ class _MedicineScheduleScreenState extends State<MedicineScheduleScreen> {
                           }
                         },
                         style: ElevatedButton.styleFrom(backgroundColor: Colors.deepOrange),
-                        child: const Text('확인'),
+                        child: const Text('Confirm'),
                       ),
                     ],
                   )
@@ -120,9 +120,9 @@ class _MedicineScheduleScreenState extends State<MedicineScheduleScreen> {
             children: [
               ProgressStepIndicator(currentStep: currentStep, totalSteps: totalSteps),
               const SizedBox(height: 24),
-              const Text('약 복용 알림 스케줄', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              const Text('Medication Reminder Schedule', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
               const SizedBox(height: 4),
-              const Text('약 정보를 입력해주세요.', style: TextStyle(color: Colors.grey)),
+              const Text('Please enter the medication information.', style: TextStyle(color: Colors.grey)),
               const SizedBox(height: 24),
 
               MedicineTypeSelector(

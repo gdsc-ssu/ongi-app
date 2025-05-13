@@ -31,12 +31,12 @@ class _Medicine {
 class _ScheduleScreenState extends State<ScheduleScreen> {
   int _currentIndex = 2;
   List<_Meal> meals = [
-    _Meal('점심식사', TimeOfDay(hour: 12, minute: 30)),
-    _Meal('저녁식사', TimeOfDay(hour: 18, minute: 30)),
+    _Meal('Lunch', TimeOfDay(hour: 12, minute: 30)),
+    _Meal('Dinner', TimeOfDay(hour: 18, minute: 30)),
   ];
   List<_Medicine> medicines = [
-    _Medicine('혈압약', [TimeOfDay(hour: 9, minute: 0), TimeOfDay(hour: 21, minute: 0)]),
-    _Medicine('감기약', []),
+    _Medicine('Blood Pressure Medication', [TimeOfDay(hour: 9, minute: 0), TimeOfDay(hour: 21, minute: 0)]),
+    _Medicine('Cold Medicine', []),
   ];
 
   // 달력 날짜별 이모티콘 상태 (알약: 💊, 밥: 🍚)
@@ -79,7 +79,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
             padding: const EdgeInsets.all(16),
             child: MedicineTypeSelector(
               onMedicineAdded: (medicine) {
-                Navigator.pop(context); // 바텀시트 닫기
+                Navigator.pop(context);
                 if (medicine['type'] == 'timed') {
                   setState(() {
                     medicines.add(_Medicine(
@@ -103,7 +103,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
 
   String _formatTime(TimeOfDay t) => t.format(context);
 
-  // 달력 셀에 이모티콘 표시용 위젯
+  // Calendar
   Widget buildCalendarDayCell(DateTime day) {
     final icons = calendarIcons[DateTime(day.year, day.month, day.day)] ?? [];
     return Container(
@@ -147,21 +147,21 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 16),
-                Text('온기, Ongi', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500)),
+                Text('Ongi', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500)),
                 SizedBox(height: 8),
                 RichText(
                   text: TextSpan(
                     children: [
-                      TextSpan(text: '홍길동', style: TextStyle(color: Color(0xFFFF8A4D), fontWeight: FontWeight.bold, fontSize: 22)),
-                      TextSpan(text: '님의 스케줄이에요.', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 22)),
+                      TextSpan(text: 'John Doe', style: TextStyle(color: Color(0xFFFF8A4D), fontWeight: FontWeight.bold, fontSize: 22)),
+                      TextSpan(text: 'Schedule', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 22)),
                     ],
                   ),
                 ),
-                Text('지난 알림을 확인해보세요.', style: TextStyle(color: Colors.grey, fontSize: 16)),
+                Text('Check past notifications.', style: TextStyle(color: Colors.grey, fontSize: 16)),
                 SizedBox(height: 24),
                 Row(
                   children: [
-                    Text('식사', style: TextStyle(color: Color(0xFFFF8A4D), fontWeight: FontWeight.bold, fontSize: 22)),
+                    Text('Meal', style: TextStyle(color: Color(0xFFFF8A4D), fontWeight: FontWeight.bold, fontSize: 22)),
                     SizedBox(width: 8),
                     GestureDetector(
                       onTap: _addMeal,
@@ -179,8 +179,8 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                 ),
                 SizedBox(height: 8),
                 ...meals.map((meal) => Container(
-                   width: 340, // 추가
-                  height: 60, // 추가
+                   width: 340,
+                  height: 60,
                   margin: EdgeInsets.only(bottom: 12),
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -196,13 +196,13 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                         ],
                       ),
                     ),
-                    trailing: Text('변경', style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold)),
+                    trailing: Text('Change', style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold)),
                   ),
                 )),
                 SizedBox(height: 24),
                 Row(
                   children: [
-                    Text('약', style: TextStyle(color: Color(0xFFFF8A4D), fontWeight: FontWeight.bold, fontSize: 22)),
+                    Text('Medication', style: TextStyle(color: Color(0xFFFF8A4D), fontWeight: FontWeight.bold, fontSize: 22)),
                     SizedBox(width: 8),
                     GestureDetector(
                       onTap: _addMedicine,
@@ -234,7 +234,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(med.name, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
-            Text('변경', style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold)),
+            Text('Change', style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold)),
           ],
         ),
         SizedBox(height: 8),
@@ -260,7 +260,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
           ),
         if (med.times.isEmpty)
           Container(
-            width: MediaQuery.of(context).size.width - 72, // ✅ 감기약 박스 회색 테두리 너비 조정
+            width: MediaQuery.of(context).size.width - 72,
             decoration: BoxDecoration(
               border: Border.all(color: Colors.black26),
               borderRadius: BorderRadius.circular(12),
@@ -274,8 +274,8 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                   spacing: 16,
                   runSpacing: 8,
                   children: [
-                    _buildMiniIconWithLabel('식후'),
-                    _buildMiniIconWithLabel('30분'),
+                    _buildMiniIconWithLabel('After meal'),
+                    _buildMiniIconWithLabel('30 minutes'),
                   ],
                 ),
                 SizedBox(height: 12),
@@ -284,9 +284,9 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                   spacing: 16,
                   runSpacing: 8,
                   children: [
-                    _buildMiniIconWithLabel('아침'),
-                    _buildMiniIconWithLabel('점심'),
-                    _buildMiniIconWithLabel('저녁'),
+                    _buildMiniIconWithLabel('Breakfast'),
+                    _buildMiniIconWithLabel('Lunch'),
+                    _buildMiniIconWithLabel('Dinner'),
                   ],
                 ),
               ],
@@ -318,7 +318,6 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
               MaterialPageRoute(builder: (context) => AlarmScreen()),
             );
           } else if (index == 2) {
-            // 이미 스케줄
           } else if (index == 3) {
             Navigator.pushReplacement(
               context,
@@ -415,11 +414,11 @@ class _MealTimeDialogV3State extends State<_MealTimeDialogV3> {
                   children: [
                     TextButton(
                       onPressed: () => Navigator.pop(context),
-                      child: const Text('취소', style: TextStyle(color: Colors.grey, fontSize: 16)),
+                      child: const Text('Cancel', style: TextStyle(color: Colors.grey, fontSize: 16)),
                     ),
                     TextButton(
                       onPressed: () => Navigator.pop(context, tempDuration),
-                      child: const Text('확인', style: TextStyle(color: Colors.deepOrange, fontSize: 16)),
+                      child: const Text('Confirm', style: TextStyle(color: Colors.deepOrange, fontSize: 16)),
                     ),
                   ],
                 ),
@@ -448,10 +447,10 @@ class _MealTimeDialogV3State extends State<_MealTimeDialogV3> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('식사 이름', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+            Text('Meal name', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
             SizedBox(height: 8),
             TextField(
-              decoration: InputDecoration(hintText: '식사 이름을 입력하세요'),
+              decoration: InputDecoration(hintText: 'Input meal name'),
               onChanged: (v) => mealName = v,
             ),
             SizedBox(height: 20),
@@ -467,7 +466,7 @@ class _MealTimeDialogV3State extends State<_MealTimeDialogV3> {
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                   padding: const EdgeInsets.symmetric(vertical: 14),
                 ),
-                child: Text(mealTime == null ? '시간 선택' : mealTime!.format(context), style: TextStyle(fontSize: 16)),
+                child: Text(mealTime == null ? 'Select Time' : mealTime!.format(context), style: TextStyle(fontSize: 16)),
               ),
             ),
             SizedBox(height: 20),
@@ -481,7 +480,7 @@ class _MealTimeDialogV3State extends State<_MealTimeDialogV3> {
                       padding: const EdgeInsets.symmetric(vertical: 14),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                     ),
-                    child: const Text('취소', style: TextStyle(color: Colors.black)),
+                    child: const Text('Cancel', style: TextStyle(color: Colors.black)),
                   ),
                 ),
                 SizedBox(width: 10),
@@ -496,7 +495,7 @@ class _MealTimeDialogV3State extends State<_MealTimeDialogV3> {
                       padding: const EdgeInsets.symmetric(vertical: 14),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                     ),
-                    child: const Text('저장'),
+                    child: const Text('Save'),
                   ),
                 ),
               ],
@@ -546,10 +545,10 @@ class _MedicineAddDialogState extends State<_MedicineAddDialog> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('약 이름', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+            Text('Medication name', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
             SizedBox(height: 8),
             TextField(
-              decoration: InputDecoration(hintText: '약 이름을 입력하세요'),
+              decoration: InputDecoration(hintText: 'Input medication name'),
               onChanged: (v) => medName = v,
             ),
             SizedBox(height: 20),
@@ -565,12 +564,12 @@ class _MedicineAddDialogState extends State<_MedicineAddDialog> {
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                   padding: const EdgeInsets.symmetric(vertical: 14),
                 ),
-                child: const Text('복용시간 추가하기', style: TextStyle(fontSize: 16)),
+                child: const Text('Add Medication Time', style: TextStyle(fontSize: 16)),
               ),
             ),
             SizedBox(height: 12),
             ...times.map((t) => ListTile(
-                  title: Text('${t.hour.toString().padLeft(2, '0')}시 ${t.minute.toString().padLeft(2, '0')}분', style: TextStyle(fontSize: 16)),
+                  title: Text('${t.hour.toString().padLeft(2, '0')}Hour ${t.minute.toString().padLeft(2, '0')}Minute', style: TextStyle(fontSize: 16)),
                   trailing: IconButton(
                     icon: Icon(Icons.delete, color: Colors.grey),
                     onPressed: () => _removeTime(t),
@@ -587,7 +586,7 @@ class _MedicineAddDialogState extends State<_MedicineAddDialog> {
                       padding: const EdgeInsets.symmetric(vertical: 14),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                     ),
-                    child: const Text('취소', style: TextStyle(color: Colors.black)),
+                    child: const Text('Cancel', style: TextStyle(color: Colors.black)),
                   ),
                 ),
                 SizedBox(width: 10),
@@ -602,7 +601,7 @@ class _MedicineAddDialogState extends State<_MedicineAddDialog> {
                       padding: const EdgeInsets.symmetric(vertical: 14),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                     ),
-                    child: const Text('저장'),
+                    child: const Text('Save'),
                   ),
                 ),
               ],

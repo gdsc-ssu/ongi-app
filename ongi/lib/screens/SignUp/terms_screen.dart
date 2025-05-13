@@ -44,30 +44,30 @@ class _TermsScreenState extends State<TermsScreen> {
             children: [
               ProgressStepIndicator(currentStep: currentStep, totalSteps: totalSteps),
               const SizedBox(height: 24),
-              const Text('서비스 이용 동의', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              const Text('Terms of Service Agreement', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
               const SizedBox(height: 4),
-              const Text('서비스 이용을 위해 약관에 동의해주세요.', style: TextStyle(color: Colors.grey)),
+              const Text('Please agree to the terms to use the service.', style: TextStyle(color: Colors.grey)),
               const SizedBox(height: 24),
 
               AgreementItem(
-                title: '전체동의',
-                subtitle: '서비스 이용을 위해 아래 약관에 모두 동의합니다.',
+                title: 'Agree to All',
+                subtitle: 'By selecting this, you agree to all of the terms below.',
                 isChecked: agreeAll,
                 onChanged: toggleAll,
               ),
               const Divider(),
               AgreementItem(
-                title: '푸시 알림 제공 동의 (필수)',
+                title: 'Consent to Receive Push Notifications (Required)',
                 isChecked: agreements[0],
                 onChanged: (val) => toggleItem(0, val),
               ),
               AgreementItem(
-                title: '보이스 알림 제공 동의 (필수)',
+                title: 'Consent to Voice Notification Service (Required)',
                 isChecked: agreements[1],
                 onChanged: (val) => toggleItem(1, val),
               ),
               AgreementItem(
-                title: '백그라운드 작동 동의 (필수)',
+                title: 'Consent to Background Operation (Required)',
                 isChecked: agreements[2],
                 onChanged: (val) => toggleItem(2, val),
               ),
@@ -114,7 +114,7 @@ class AgreementItem extends StatelessWidget {
       subtitle: subtitle != null
           ? Text(subtitle!, style: const TextStyle(fontSize: 12, color: Colors.grey))
           : null,
-      trailing: const Text('보기', style: TextStyle(color: Colors.grey)),
+      trailing: const Text('See Details', style: TextStyle(color: Colors.grey)),
       contentPadding: EdgeInsets.zero,
       onTap: () => onChanged(!isChecked),
     );

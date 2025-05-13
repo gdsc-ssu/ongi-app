@@ -14,12 +14,12 @@ class FindAccountResultScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const Text('아이디/비밀번호 찾기',
+              const Text('Find ID/Password',
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center),
               const SizedBox(height: 40),
 
-              const Text('아이디'),
+              const Text('Username'),
               const SizedBox(height: 8),
               TextField(
                 readOnly: true,
@@ -27,7 +27,7 @@ class FindAccountResultScreen extends StatelessWidget {
               ),
               const SizedBox(height: 20),
 
-              const Text('비밀번호'),
+              const Text('Password'),
               const SizedBox(height: 8),
               TextField(
                 readOnly: true,
@@ -43,7 +43,7 @@ class FindAccountResultScreen extends StatelessWidget {
                   backgroundColor: const Color(0xFFEFAE87),
                   padding: const EdgeInsets.symmetric(vertical: 14),
                 ),
-                child: const Text('로그인하러 가기'),
+                child: const Text('Go to Login / Back to Login'),
               )
             ],
           ),

@@ -56,7 +56,7 @@ class _AlarmScreenState extends State<AlarmScreen> {
               const SizedBox(height: 16),
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24.0),
-                child: Text('온기, Ongi', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
+                child: Text('Ongi', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
               ),
               const SizedBox(height: 8),
               const Padding(
@@ -64,15 +64,15 @@ class _AlarmScreenState extends State<AlarmScreen> {
                 child: Text.rich(
                   TextSpan(
                     children: [
-                      TextSpan(text: '홍길동', style: TextStyle(color: Color(0xFFFF8A4D), fontWeight: FontWeight.bold, fontSize: 22)),
-                      TextSpan(text: '님의 알림 내역이에요.', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 22)),
+                      TextSpan(text: 'John Doe', style: TextStyle(color: Color(0xFFFF8A4D), fontWeight: FontWeight.bold, fontSize: 22)),
+                      TextSpan(text: 'Notification history', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 22)),
                     ],
                   ),
                 ),
               ),
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 4.0),
-                child: Text('지난 알림을 확인해보세요.', style: TextStyle(color: Colors.grey, fontSize: 16)),
+                child: Text('Check past notifications.', style: TextStyle(color: Colors.grey, fontSize: 16)),
               ),
               const SizedBox(height: 16),
               Center(

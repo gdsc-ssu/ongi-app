@@ -19,7 +19,7 @@ class _SeniorInfoScreenState extends State<SeniorInfoScreen> {
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController customRelationController = TextEditingController();
 
-  final List<String> relations = ['아들', '딸', '손자', '손녀', '직접입력'];
+  final List<String> relations = ['Son', 'Daughter', 'Grandson', 'Granddaughter', 'Enter Manually'];
   String? selectedRelation;
 
   @override
@@ -34,17 +34,17 @@ class _SeniorInfoScreenState extends State<SeniorInfoScreen> {
             children: [
               ProgressStepIndicator(currentStep: currentStep, totalSteps: totalSteps),
               const SizedBox(height: 24),
-              const Text('어르신 개인 정보 입력', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              const Text('Enter Elder’s Personal Information', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
               const SizedBox(height: 4),
-              const Text('어르신의 개인정보를 입력해주세요.', style: TextStyle(color: Colors.grey)),
+              const Text('Please enter the elder’s personal information.', style: TextStyle(color: Colors.grey)),
               const SizedBox(height: 24),
 
-              _buildTextField(label: '성함', hint: '성함을 입력해주세요.', controller: nameController),
-              _buildTextField(label: '연령', hint: '연령을 입력해주세요.', controller: ageController),
+              _buildTextField(label: '성함	Full Name', hint: 'Please enter the full name.', controller: nameController),
+              _buildTextField(label: 'Age', hint: 'Please enter the age.', controller: ageController),
               _buildDropdownField(),
-              if (selectedRelation == '직접입력')
-                _buildTextField(label: '관계 직접 입력', hint: '예: 이웃, 지인 등', controller: customRelationController),
-              _buildTextField(label: '전화번호', hint: '전화번호를 입력해주세요.', controller: phoneController),
+              if (selectedRelation == 'Enter Manually')
+                _buildTextField(label: 'Enter Relationship Manually', hint: 'e.x., neighbor, acquaintance', controller: customRelationController),
+              _buildTextField(label: 'Phone Number', hint: 'Please enter your phone number.', controller: phoneController),
 
               const Spacer(),
               BottomNextBackNavigation(
@@ -90,7 +90,7 @@ class _SeniorInfoScreenState extends State<SeniorInfoScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('보호자와 어르신의 관계', style: TextStyle(fontWeight: FontWeight.bold)),
+          const Text('Relationship to the Elder', style: TextStyle(fontWeight: FontWeight.bold)),
           const SizedBox(height: 8),
           DropdownButtonFormField<String>(
             value: selectedRelation,
@@ -102,7 +102,7 @@ class _SeniorInfoScreenState extends State<SeniorInfoScreen> {
                 .toList(),
             onChanged: (value) => setState(() => selectedRelation = value),
             decoration: InputDecoration(
-              hintText: '관계를 선택해주세요.',
+              hintText: 'Please select a relationship.',
               filled: true,
               fillColor: Colors.grey.shade200,
               border: OutlineInputBorder(

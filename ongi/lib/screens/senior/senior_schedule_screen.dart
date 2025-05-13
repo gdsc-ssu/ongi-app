@@ -60,20 +60,20 @@ class _ElderScheduleScreenState extends State<ElderScheduleScreen> {
               ),
               const SizedBox(height: 32),
 
-              _buildSectionTitle('식사'),
+              _buildSectionTitle('Meal'),
               _buildCard([
-                _buildCheckRow('아침식사', '08:00', 0, mealChecked, (val) => setState(() => mealChecked[0] = val)),
-                _buildCheckRow('점심식사', '12:00', 1, mealChecked, (val) => setState(() => mealChecked[1] = val)),
-                _buildCheckRow('저녁식사', '18:00', 2, mealChecked, (val) => setState(() => mealChecked[2] = val)),
+                _buildCheckRow('Breakfast', '08:00', 0, mealChecked, (val) => setState(() => mealChecked[0] = val)),
+                _buildCheckRow('Lunch', '12:00', 1, mealChecked, (val) => setState(() => mealChecked[1] = val)),
+                _buildCheckRow('Dinner', '18:00', 2, mealChecked, (val) => setState(() => mealChecked[2] = val)),
               ]),
 
               const SizedBox(height: 24),
-              _buildSectionTitle('약'),
+              _buildSectionTitle('Medication'),
               _buildCard([
-                _buildCheckRow('감기약', '08:30', 0, medicineChecked, (val) => setState(() => medicineChecked[0] = val)),
-                _buildCheckRow('혈압약', '10:00', 1, medicineChecked, (val) => setState(() => medicineChecked[1] = val)),
-                _buildCheckRow('감기약', '12:30', 2, medicineChecked, (val) => setState(() => medicineChecked[2] = val)),
-                _buildCheckRow('감기약', '17:30', 3, medicineChecked, (val) => setState(() => medicineChecked[3] = val)),
+                _buildCheckRow('Cold Medicine', '08:30', 0, medicineChecked, (val) => setState(() => medicineChecked[0] = val)),
+                _buildCheckRow('Blood Pressure Medication', '10:00', 1, medicineChecked, (val) => setState(() => medicineChecked[1] = val)),
+                _buildCheckRow('Cold Medicine', '12:30', 2, medicineChecked, (val) => setState(() => medicineChecked[2] = val)),
+                _buildCheckRow('Cold Medicine', '17:30', 3, medicineChecked, (val) => setState(() => medicineChecked[3] = val)),
               ]),
 
               const SizedBox(height: 32),

@@ -42,19 +42,19 @@ class _BottomNavBarWithAlarmState extends State<BottomNavBarWithAlarm> {
       items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
-          label: '홈',
+          label: 'Home',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.notifications),
-          label: '알림',
+          label: 'Notifications',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.menu),
-          label: '스케줄',
+          label: 'Schedule',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.settings),
-          label: '설정',
+          label: 'Settings',
         ),
       ],
     );

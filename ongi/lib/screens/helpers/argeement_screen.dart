@@ -39,16 +39,16 @@ class _AgreementScreenState extends State<AgreementScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: 48),
-              Text('서비스 이용 동의', style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
+              Text('Terms of Service Agreement', style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
               SizedBox(height: 12),
-              Text('서비스 이용을 위해 약관에 동의해 주세요.', style: TextStyle(fontSize: 18, color: Colors.grey)),
+              Text('Please agree to the terms to use the service.', style: TextStyle(fontSize: 18, color: Colors.grey)),
               SizedBox(height: 36),
               CheckboxListTile(
                 value: allChecked,
                 onChanged: onAllCheckedChanged,
                 activeColor: Color(0xFFFF8A4D),
-                title: Text('전체동의', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
-                subtitle: Text('서비스 이용을 위해 아래 약관에 모두 동의합니다.', style: TextStyle(color: Colors.grey)),
+                title: Text('Agree to All', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+                subtitle: Text('By selecting this, you agree to all of the terms below.', style: TextStyle(color: Colors.grey)),
                 controlAffinity: ListTileControlAffinity.leading,
                 contentPadding: EdgeInsets.zero,
               ),
@@ -59,9 +59,9 @@ class _AgreementScreenState extends State<AgreementScreen> {
                 activeColor: Color(0xFFFF8A4D),
                 title: Row(
                   children: [
-                    Text('개인정보 이용 동의 (필수)', style: TextStyle(fontSize: 18)),
+                    Text('Consent to Personal Information Use (Required)', style: TextStyle(fontSize: 18)),
                     Spacer(),
-                    Text('보기', style: TextStyle(color: Colors.grey)),
+                    Text('See Details', style: TextStyle(color: Colors.grey)),
                   ],
                 ),
                 controlAffinity: ListTileControlAffinity.leading,
@@ -73,9 +73,9 @@ class _AgreementScreenState extends State<AgreementScreen> {
                 activeColor: Color(0xFFFF8A4D),
                 title: Row(
                   children: [
-                    Text('보이스 알림 제공 동의 (필수)', style: TextStyle(fontSize: 18)),
+                    Text('Consent to Voice Notification Service (Required)', style: TextStyle(fontSize: 18)),
                     Spacer(),
-                    Text('보기', style: TextStyle(color: Colors.grey)),
+                    Text('See Details', style: TextStyle(color: Colors.grey)),
                   ],
                 ),
                 controlAffinity: ListTileControlAffinity.leading,
@@ -87,9 +87,9 @@ class _AgreementScreenState extends State<AgreementScreen> {
                 activeColor: Color(0xFFFF8A4D),
                 title: Row(
                   children: [
-                    Text('백그라운드 작동 동의 (필수)', style: TextStyle(fontSize: 18)),
+                    Text('Consent to Background Operation (Required)', style: TextStyle(fontSize: 18)),
                     Spacer(),
-                    Text('보기', style: TextStyle(color: Colors.grey)),
+                    Text('See Details', style: TextStyle(color: Colors.grey)),
                   ],
                 ),
                 controlAffinity: ListTileControlAffinity.leading,
@@ -99,7 +99,7 @@ class _AgreementScreenState extends State<AgreementScreen> {
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0, left: 4.0),
                   child: Text(
-                    '(필수) 표시가 된 모든 항목에 동의가 필요합니다.',
+                    'You must agree to all required terms marked as “Required”.',
                     style: TextStyle(color: Colors.red, fontSize: 15, fontWeight: FontWeight.w500),
                   ),
                 ),
@@ -114,7 +114,7 @@ class _AgreementScreenState extends State<AgreementScreen> {
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
                         padding: EdgeInsets.symmetric(vertical: 18),
                       ),
-                      child: Text('이전', style: TextStyle(fontSize: 20, color: Colors.grey[700], fontWeight: FontWeight.bold)),
+                      child: Text('Back', style: TextStyle(fontSize: 20, color: Colors.grey[700], fontWeight: FontWeight.bold)),
                     ),
                   ),
                   SizedBox(width: 16),
@@ -127,7 +127,7 @@ class _AgreementScreenState extends State<AgreementScreen> {
                         padding: EdgeInsets.symmetric(vertical: 18),
                         elevation: 0,
                       ),
-                      child: Text('다음', style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold)),
+                      child: Text('Next', style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold)),
                     ),
                   ),
                 ],

@@ -13,7 +13,7 @@ final GoRouter seniorRouter = GoRouter(
   routes: [
     ShellRoute(
       builder: (context, state, child) {
-  final location = state.uri.toString(); // 👈 이 방식으로 경로를 얻는다.
+  final location = state.uri.toString();
   int currentIndex = _getIndexByLocation(location);
   return Scaffold(
     body: child,

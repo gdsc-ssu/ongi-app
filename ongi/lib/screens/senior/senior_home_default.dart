@@ -56,15 +56,15 @@ class _ElderHomeDefaultState extends State<ElderHomeDefault> {
               child: RichText(
                 text: TextSpan(
                   children: [
-                    TextSpan(text: '홍길동', style: TextStyle(color: Color(0xFFFF8A4D), fontWeight: FontWeight.bold, fontSize: 20)),
-                    TextSpan(text: '님의 스케줄이에요.', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20)),
+                    TextSpan(text: 'John Doe', style: TextStyle(color: Color(0xFFFF8A4D), fontWeight: FontWeight.bold, fontSize: 20)),
+                    TextSpan(text: 'Schedule', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20)),
                   ],
                 ),
               ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24.0),
-              child: Text('오늘도 따뜻한 하루 보내세요.', style: TextStyle(color: Colors.grey, fontSize: 15)),
+              child: Text('Wishing you a warm and pleasant day.', style: TextStyle(color: Colors.grey, fontSize: 15)),
             ),
             SizedBox(height: 32),
             Center(
@@ -80,7 +80,7 @@ class _ElderHomeDefaultState extends State<ElderHomeDefault> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text('식사 알림이\n울릴 예정이에요',
+                    Text('Your meal reminder\nis about to ring.',
                         textAlign: TextAlign.center,
                         style: TextStyle(color: Colors.black54, fontWeight: FontWeight.bold, fontSize: 26)),
                     SizedBox(height: 16),
@@ -105,7 +105,7 @@ class _ElderHomeDefaultState extends State<ElderHomeDefault> {
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                               padding: EdgeInsets.symmetric(vertical: 16),
                             ),
-                            child: Text('확인', style: TextStyle(fontSize: 20, color: Colors.black38, fontWeight: FontWeight.bold)),
+                            child: Text('Confirm', style: TextStyle(fontSize: 20, color: Colors.black38, fontWeight: FontWeight.bold)),
                           ),
                         ),
                         SizedBox(width: 16),
@@ -118,7 +118,7 @@ class _ElderHomeDefaultState extends State<ElderHomeDefault> {
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                               padding: EdgeInsets.symmetric(vertical: 16),
                             ),
-                            child: Text('다음에', style: TextStyle(fontSize: 20, color: Colors.black38, fontWeight: FontWeight.bold)),
+                            child: Text('Next Time', style: TextStyle(fontSize: 20, color: Colors.black38, fontWeight: FontWeight.bold)),
                           ),
                         ),
                       ],

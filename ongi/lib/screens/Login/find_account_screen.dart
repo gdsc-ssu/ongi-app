@@ -17,19 +17,19 @@ class FindAccountScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const Text('아이디/비밀번호 찾기',
+              const Text('Find ID/Password',
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center),
               const SizedBox(height: 40),
 
-              const Text('전화번호'),
+              const Text('Phone Number'),
               Row(
                 children: [
                   Expanded(
                     child: TextField(
                       controller: phoneController,
                       decoration: const InputDecoration(
-                        hintText: '전화번호를 입력해주세요.',
+                        hintText: 'Please enter your phone number.',
                       ),
                     ),
                   ),
@@ -40,17 +40,17 @@ class FindAccountScreen extends StatelessWidget {
                       backgroundColor: Colors.grey.shade300,
                       foregroundColor: Colors.black,
                     ),
-                    child: const Text('인증번호 받기'),
+                    child: const Text('Get Verification Code'),
                   )
                 ],
               ),
               const SizedBox(height: 20),
 
-              const Text('인증번호 입력'),
+              const Text('	Enter Verification Code	'),
               TextField(
                 controller: codeController,
                 decoration: const InputDecoration(
-                  hintText: '인증번호를 입력해주세요.',
+                  hintText: 'Please enter the verification code.',
                 ),
               ),
               const Spacer(),
@@ -60,7 +60,7 @@ class FindAccountScreen extends StatelessWidget {
                   Expanded(
                     child: OutlinedButton(
                       onPressed: () => Navigator.pop(context),
-                      child: const Text('이전'),
+                      child: const Text('Back'),
                     ),
                   ),
                   const SizedBox(width: 12),
@@ -72,7 +72,7 @@ class FindAccountScreen extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFFEFAE87),
                       ),
-                      child: const Text('다음'),
+                      child: const Text('Next'),
                     ),
                   ),
                 ],

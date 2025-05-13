@@ -26,15 +26,15 @@ class _BottomNavBarSimpleState extends State<BottomNavBarSimple> {
       items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.menu, size: 36),
-          label: '스케줄',
+          label: 'Schedule',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.home, size: 36),
-          label: '홈',
+          label: 'Home',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.settings, size: 36),
-          label: '설정',
+          label: '	Settings',
         ),
       ],
       selectedLabelStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),

@@ -70,20 +70,20 @@ class _VoiceSettingScreenState extends State<VoiceSettingScreen> {
             children: [
               ProgressStepIndicator(currentStep: currentStep, totalSteps: totalSteps),
               const SizedBox(height: 24),
-              const Text('알림 방식 설정', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              const Text('Notification Method Settings', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
               const SizedBox(height: 8),
               const Text(
-                '보호자의 목소리로 노약자분들에게\n다정한 알림을 전송해주세요.',
+                'Send warm notifications to the elder\nusing the caregiver’s voice..',
                 style: TextStyle(color: Colors.grey),
               ),
               const SizedBox(height: 24),
               const Text(
-                '목소리 녹음 시작하기',
+                'Start Voice Recording',
                 style: TextStyle(color: Colors.deepOrange, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
               const Text(
-                '녹음 버튼을 누르고 다음 문장을 읽어주세요\n녹음이 끝나면 녹음 중지를 눌러주세요',
+                'Press the record button and read the sentences below.\nWhen finished, tap stop.',
                 style: TextStyle(color: Colors.grey),
               ),
               const SizedBox(height: 16),
@@ -95,7 +95,7 @@ class _VoiceSettingScreenState extends State<VoiceSettingScreen> {
                   border: Border.all(color: Colors.grey.shade300),
                 ),
                 child: const Text(
-                  '엄마 아빠 약 먹었어?\n할머니 할아버지 약 드셨어요?\n약 먹는거 깜빡하셨죠?\n약 드셨어요? 좋은 하루 보내세요',
+                  'Mom, Dad — did you take your medicine?\nGrandma, Grandpa — did you remember to take your medicine?\nDon’t forget to take it.\nHave a great day!',
                   style: TextStyle(height: 1.5),
                 ),
               ),
@@ -115,16 +115,16 @@ class _VoiceSettingScreenState extends State<VoiceSettingScreen> {
                 ElevatedButton(
                   onPressed: _stopRecording,
                   style: _buttonStyle(),
-                  child: const Text('녹음 중지'),
+                  child: const Text('Stop Recording'),
                 ),
               ] else if (isRecorded) ...[
-                Text('총 녹음 시간: ${_formatDuration(recordedDuration)}',
+                Text('Total Recording Time: ${_formatDuration(recordedDuration)}',
                     textAlign: TextAlign.center, style: const TextStyle(fontWeight: FontWeight.bold)),
                 const SizedBox(height: 12),
                 ElevatedButton(
                   onPressed: () {}, // 재생 기능 추가 해야함.
                   style: _buttonStyle(),
-                  child: const Text('다시 듣기'),
+                  child: const Text('Play Back'),
                 ),
                 const SizedBox(height: 12),
                 ElevatedButton(
@@ -133,13 +133,13 @@ class _VoiceSettingScreenState extends State<VoiceSettingScreen> {
                   context.go('/account-select'); // ✅ 계정 선택 화면으로 이동
                 },
   style: _buttonStyle(),
-  child: const Text('설정 완료'),
+  child: const Text('Save Settings'),
 ),
               ] else ...[
                 ElevatedButton(
                   onPressed: _startRecording,
                   style: _buttonStyle(),
-                  child: const Text('녹음 시작'),
+                  child: const Text('Start Recording'),
                 ),
               ],
             ],

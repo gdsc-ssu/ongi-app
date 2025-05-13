@@ -54,7 +54,7 @@ class _ElderSettingsScreenState extends State<ElderSettingsScreen> {
                 children: [
                   _buildProfileIcon(),
                   SizedBox(width: 16),
-                  Text('어르신', style: TextStyle(fontSize: 22)),
+                  Text('Senior', style: TextStyle(fontSize: 22)),
                 ],
               ),
               SizedBox(height: 24),
@@ -65,18 +65,18 @@ class _ElderSettingsScreenState extends State<ElderSettingsScreen> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('보호자', style: TextStyle(fontSize: 22)),
-                      Text('관계', style: TextStyle(fontSize: 16, color: Colors.grey)),
+                      Text('Caregiver', style: TextStyle(fontSize: 22)),
+                      Text('Relationship', style: TextStyle(fontSize: 16, color: Colors.grey)),
                     ],
                   ),
                 ],
               ),
               SizedBox(height: 32),
-              _buildMenuItem('서비스이용약관', hasArrow: true),
-              _buildMenuItem('개인정보처리방침', hasArrow: true),
-              _buildMenuItem('로그아웃'),
-              _buildMenuItem('회원탈퇴'),
-              _buildMenuItem('알림 음성 변경', onTap: () {
+              _buildMenuItem('Terms of Service', hasArrow: true),
+              _buildMenuItem('Privacy Policy', hasArrow: true),
+              _buildMenuItem('Log Out'),
+              _buildMenuItem('Delete Account'),
+              _buildMenuItem('Change Notification Voice', onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => ElderShowVoiceScreen()),
@@ -86,7 +86,7 @@ class _ElderSettingsScreenState extends State<ElderSettingsScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('버전', style: TextStyle(fontSize: 16)),
+                  Text('Version', style: TextStyle(fontSize: 16)),
                   Text('1.0.0', style: TextStyle(fontSize: 16)),
                 ],
               ),
