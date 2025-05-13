@@ -34,7 +34,7 @@ class BottomNextBackNavigation extends StatelessWidget {
               foregroundColor: Colors.white,
               padding: const EdgeInsets.symmetric(vertical: 14),
             ),
-            child: const Text('다음'),
+            child: const Text('Next'),
           ),
         ),
       ],
