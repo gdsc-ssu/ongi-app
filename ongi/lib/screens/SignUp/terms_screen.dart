@@ -75,7 +75,15 @@ class _TermsScreenState extends State<TermsScreen> {
               const Spacer(),
               BottomNextBackNavigation(
                 onBack: () => Navigator.pop(context),
-                onNext: () => context.push('/signup/signup-input'),
+                onNext: () {
+                  if (agreements.every((v) => v)) {
+                    context.push('/signup/signup-input');
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('모든 약관에 동의해주세요.')),
+                    );
+                  }
+                },
               )
             ],
           ),
