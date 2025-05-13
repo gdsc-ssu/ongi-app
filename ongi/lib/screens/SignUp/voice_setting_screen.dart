@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../widgets/progress_indicator.dart';
+import 'package:ongi/state/account_type.dart';
 
 class VoiceSettingScreen extends StatefulWidget {
   const VoiceSettingScreen({super.key});
@@ -127,10 +128,13 @@ class _VoiceSettingScreenState extends State<VoiceSettingScreen> {
                 ),
                 const SizedBox(height: 12),
                 ElevatedButton(
-                  onPressed: () => context.push('/complete'), // 완료 시 다음 페이지
-                  style: _buttonStyle(),
-                  child: const Text('설정 완료'),
-                ),
+                  onPressed: () {
+                  hasCompletedSignUp = true; // ✅ 회원가입 완료 표시
+                  context.go('/account-select'); // ✅ 계정 선택 화면으로 이동
+                },
+  style: _buttonStyle(),
+  child: const Text('설정 완료'),
+),
               ] else ...[
                 ElevatedButton(
                   onPressed: _startRecording,
@@ -189,3 +193,4 @@ class Ticker {
     _stopwatch.stop();
   }
 }
+

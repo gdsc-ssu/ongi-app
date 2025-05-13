@@ -11,7 +11,7 @@ import '../screens/senior/senior_home_alarm.dart';
 
 
 
-final GoRouter router = GoRouter(
+final GoRouter helpersRouter = GoRouter(
   initialLocation: '/helpers-home',
   routes: [
     ShellRoute(
