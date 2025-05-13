@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      routerConfig: router, // GoRouter 설정 연결
+      routerConfig: helpersRouter, // GoRouter 설정 연결
       title: 'Medication App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

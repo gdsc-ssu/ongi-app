@@ -22,7 +22,7 @@ import '../screens/helpers/alarm_screen.dart';
 // 어르신용 화면
 import '../screens/senior/senior_home_alarm.dart';
 
-final GoRouter router = GoRouter(
+final GoRouter appRouter = GoRouter(
   initialLocation: '/splash',
   routes: [
     // 보호자용 홈 화면
