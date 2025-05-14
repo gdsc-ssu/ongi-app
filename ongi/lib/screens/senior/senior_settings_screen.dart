@@ -74,9 +74,9 @@ class _ElderSettingsScreenState extends State<ElderSettingsScreen> {
               SizedBox(height: 32),
               _buildMenuItem('Terms of Service', hasArrow: true),
               _buildMenuItem('Privacy Policy', hasArrow: true),
-              _buildMenuItem('Log Out'),
-              _buildMenuItem('Delete Account'),
-              _buildMenuItem('Change Notification Voice', onTap: () {
+              _buildMenuItem('Log Out', hasArrow: true),
+              _buildMenuItem('Delete Account', hasArrow: true),
+              _buildMenuItem('Change Notification Voice', hasArrow: true, onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => ElderShowVoiceScreen()),
@@ -118,15 +118,6 @@ class _ElderSettingsScreenState extends State<ElderSettingsScreen> {
         padding: const EdgeInsets.symmetric(vertical: 8.0),
         child: Row(
           children: [
-            Container(
-              width: 28,
-              height: 28,
-              decoration: BoxDecoration(
-                color: Color(0xFF888888),
-                borderRadius: BorderRadius.circular(6),
-              ),
-            ),
-            SizedBox(width: 16),
             Expanded(child: Text(title, style: TextStyle(fontSize: 18))),
             if (hasArrow)
               Icon(Icons.chevron_right, color: Colors.black, size: 22),
