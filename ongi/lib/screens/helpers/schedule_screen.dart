@@ -443,6 +443,7 @@ class _MealTimeDialogV3State extends State<_MealTimeDialogV3> {
       child: Container(
         width: 320,
         padding: const EdgeInsets.all(24),
+        color: Colors.white,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,

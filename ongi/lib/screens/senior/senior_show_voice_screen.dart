@@ -8,7 +8,7 @@ class ElderShowVoiceScreen extends StatefulWidget {
 }
 
 class _ElderShowVoiceScreenState extends State<ElderShowVoiceScreen> {
-  int selected = 0; // 0: 아나운서, 1: 보호자
+  int selected = 0; // 0: Announcer, 1: Caregiver
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class _ElderShowVoiceScreenState extends State<ElderShowVoiceScreen> {
             ),
             SizedBox(height: 32),
             Center(
-              child: Text('Change Notification Voice', style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
+              child: Text('Change Notification Voice', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
             ),
             SizedBox(height: 48),
             Padding(
@@ -49,7 +49,7 @@ class _ElderShowVoiceScreenState extends State<ElderShowVoiceScreen> {
                       width: double.infinity,
                       padding: EdgeInsets.symmetric(vertical: 18),
                       decoration: BoxDecoration(
-                        color: selected == 0 ? Colors.white : Color(0xFFFF8A4D),
+                        color: selected == 0 ? Color(0xFFFF8A4D) : Colors.white, // ✅ 수정
                         border: Border.all(color: Color(0xFFFF8A4D), width: 2),
                         borderRadius: BorderRadius.circular(14),
                       ),
@@ -57,7 +57,7 @@ class _ElderShowVoiceScreenState extends State<ElderShowVoiceScreen> {
                         child: Text(
                           'Announcer',
                           style: TextStyle(
-                            color: selected == 0 ? Color(0xFFFF8A4D) : Colors.white,
+                            color: selected == 0 ? Colors.white : Color(0xFFFF8A4D), // ✅ 수정
                             fontSize: 22,
                             fontWeight: FontWeight.bold,
                           ),
@@ -72,7 +72,7 @@ class _ElderShowVoiceScreenState extends State<ElderShowVoiceScreen> {
                       width: double.infinity,
                       padding: EdgeInsets.symmetric(vertical: 18),
                       decoration: BoxDecoration(
-                        color: selected == 1 ? Color(0xFFFF8A4D) : Colors.white,
+                        color: selected == 1 ? Color(0xFFFF8A4D) : Colors.white, // ✅ 수정
                         border: Border.all(color: Color(0xFFFF8A4D), width: 2),
                         borderRadius: BorderRadius.circular(14),
                       ),
@@ -80,7 +80,7 @@ class _ElderShowVoiceScreenState extends State<ElderShowVoiceScreen> {
                         child: Text(
                           'Caregiver',
                           style: TextStyle(
-                            color: selected == 1 ? Colors.white : Color(0xFFFF8A4D),
+                            color: selected == 1 ? Colors.white : Color(0xFFFF8A4D), // ✅ 수정
                             fontSize: 22,
                             fontWeight: FontWeight.bold,
                           ),

@@ -30,10 +30,10 @@ class EmergencyAlertScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 8),
-              const Text('Emergency Alert Management', style: TextStyle(color: Color(0xFFFF8A4D), fontWeight: FontWeight.bold, fontSize: 32)),
+              const Text('Emergency Alert Management', style: TextStyle(color: Color(0xFFFF8A4D), fontWeight: FontWeight.bold, fontSize: 22)),
               const SizedBox(height: 4),
-              const Text('2025. 01. 30', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28)),
-              const SizedBox(height: 32),
+              const Text('2025. 05. 16', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+              const SizedBox(height: 20),
 
               // Meal
               const Align(
@@ -57,7 +57,7 @@ class EmergencyAlertScreen extends StatelessWidget {
                       const Icon(Icons.check_box_outline_blank, color: Colors.white, size: 32),
                       const SizedBox(width: 8),
                       const Expanded(
-                        child: Text('Lunch', style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.w500)),
+                        child: Text('Lunch', style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w500)),
                       ),
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
@@ -96,7 +96,7 @@ class EmergencyAlertScreen extends StatelessWidget {
                           const Icon(Icons.check_box_outline_blank, color: Colors.white, size: 32),
                           const SizedBox(width: 8),
                           const Expanded(
-                            child: Text('Cold Medicine', style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.w500)),
+                            child: Text('Cold Medicine', style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w500)),
                           ),
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
@@ -114,7 +114,7 @@ class EmergencyAlertScreen extends StatelessWidget {
                           const Icon(Icons.check_box_outline_blank, color: Colors.white, size: 32),
                           const SizedBox(width: 8),
                           const Expanded(
-                            child: Text('Cold Medicine', style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.w500)),
+                            child: Text('Cold Medicine', style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w500)),
                           ),
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
@@ -140,7 +140,7 @@ class EmergencyAlertScreen extends StatelessWidget {
                 ),
                 child: const Text('3 Missed Responses', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
               ),
-              const SizedBox(height: 40),
+              const SizedBox(height: 30),
 
               // contact with senior
               const Text('Contact the senior', style: TextStyle(color: Color(0xFFFF8A4D), fontWeight: FontWeight.bold, fontSize: 26)),

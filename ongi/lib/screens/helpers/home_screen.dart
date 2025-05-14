@@ -102,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 borderRadius: BorderRadius.circular(12),
               ),
               child: const Text(
-                '2025. 01. 30',
+                '2025. 05. 16',
                 style: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold),
               ),
             ),
@@ -141,7 +141,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: const Center(
           child: Text(
             'Emergency Alert Triggered ',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 24),
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
           ),
         ),
       ),

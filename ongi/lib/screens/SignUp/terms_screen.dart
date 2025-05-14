@@ -3,7 +3,6 @@ import 'package:go_router/go_router.dart';
 import '../../widgets/progress_indicator.dart';
 import '../../widgets/page_button.dart';
 
-
 class TermsScreen extends StatefulWidget {
   const TermsScreen({super.key});
 
@@ -73,10 +72,12 @@ class _TermsScreenState extends State<TermsScreen> {
               ),
 
               const Spacer(),
+
+              // ✅ 여기 수정됨
               BottomNextBackNavigation(
-                onBack: () => Navigator.pop(context),
+                onBack: () => context.go('/account-select'),
                 onNext: () => context.push('/signup/signup-input'),
-              )
+              ),
             ],
           ),
         ),
@@ -84,7 +85,6 @@ class _TermsScreenState extends State<TermsScreen> {
     );
   }
 }
-
 
 class AgreementItem extends StatelessWidget {
   final String title;

@@ -96,7 +96,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   Widget _buildVoiceScreen() {
-    return Padding(
+    return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -121,10 +121,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
             child: Text('Change Notification Voice', style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
           ),
           SizedBox(height: 32),
-          _buildVoiceMenuItem('Re-record Guardian’s Voice', hasArrow: true),
-          _buildVoiceMenuItem('Add Guardian’s Voice', hasArrow: true),
-          _buildVoiceMenuItem('Delete Guardian’s Voice'),
-          _buildVoiceMenuItem('Add Custom Voice Alert Message'),
+          _buildVoiceMenuItem('Re-record Caregiver’s Voice', hasArrow: true),
+          _buildVoiceMenuItem('Add Caregiver’s Voice', hasArrow: true),
+          _buildVoiceMenuItem('Delete Caregiver’s Voice', hasArrow: true),
+          _buildVoiceMenuItem('Add Custom Voice Alert Message', hasArrow: true),
         ],
       ),
     );

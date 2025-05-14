@@ -30,6 +30,7 @@ class _ElderHomeAlarmState extends State<ElderHomeAlarm> {
             bool canSave = reasonIdx != null && remindIdx != null && (reasonIdx != 2 || etcController.text.isNotEmpty);
             return AlertDialog(
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+              backgroundColor: Colors.white, // ✅ 흰색 배경
               contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 24),
               content: SingleChildScrollView(
                 child: Column(
@@ -40,7 +41,7 @@ class _ElderHomeAlarmState extends State<ElderHomeAlarm> {
                     SizedBox(height: 12),
                     Container(
                       decoration: BoxDecoration(
-                        color: Color(0xFFF7F7F7),
+                        color: Color(0xFFE0E0E0), // ✅ 기존 하얀 박스를 회색으로
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Column(
@@ -50,18 +51,21 @@ class _ElderHomeAlarmState extends State<ElderHomeAlarm> {
                             groupValue: reasonIdx,
                             onChanged: (v) => setState(() => reasonIdx = v),
                             title: Text('Not hungry'),
+                            visualDensity: VisualDensity(vertical: -2), // ✅ 간격 줄임
                           ),
                           RadioListTile<int>(
                             value: 1,
                             groupValue: reasonIdx,
                             onChanged: (v) => setState(() => reasonIdx = v),
                             title: Text('Busy with something else'),
+                            visualDensity: VisualDensity(vertical: -2),
                           ),
                           RadioListTile<int>(
                             value: 2,
                             groupValue: reasonIdx,
                             onChanged: (v) => setState(() => reasonIdx = v),
                             title: Text('Other'),
+                            visualDensity: VisualDensity(vertical: -2),
                           ),
                           if (reasonIdx == 2)
                             Padding(
@@ -88,18 +92,21 @@ class _ElderHomeAlarmState extends State<ElderHomeAlarm> {
                           groupValue: remindIdx,
                           onChanged: (v) => setState(() => remindIdx = v),
                           title: Text('In 30 minutes'),
+                          visualDensity: VisualDensity(vertical: -2),
                         ),
                         RadioListTile<int>(
                           value: 1,
                           groupValue: remindIdx,
                           onChanged: (v) => setState(() => remindIdx = v),
                           title: Text('In 1 hour'),
+                          visualDensity: VisualDensity(vertical: -2),
                         ),
                         RadioListTile<int>(
                           value: 2,
                           groupValue: remindIdx,
                           onChanged: (v) => setState(() => remindIdx = v),
                           title: Text('No'),
+                          visualDensity: VisualDensity(vertical: -2),
                         ),
                       ],
                     ),
@@ -191,7 +198,7 @@ class _ElderHomeAlarmState extends State<ElderHomeAlarm> {
             SizedBox(height: 32),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24.0),
-              child: Text('2025. 01. 30', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+              child: Text('2025. 05. 16', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 4.0),
@@ -199,7 +206,7 @@ class _ElderHomeAlarmState extends State<ElderHomeAlarm> {
                 text: TextSpan(
                   children: [
                     TextSpan(text: 'John Doe', style: TextStyle(color: Color(0xFFFF8A4D), fontWeight: FontWeight.bold, fontSize: 20)),
-                    TextSpan(text: '님의 스케줄이에요.', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20)),
+                    TextSpan(text: '  Schedule.', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20)),
                   ],
                 ),
               ),
@@ -220,9 +227,13 @@ class _ElderHomeAlarmState extends State<ElderHomeAlarm> {
                 ),
                 child: Column(
                   children: [
-                    Text('Blood Pressure Medication', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 28)),
+                    Text('Blood Pressure Medication',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 26)),
                     SizedBox(height: 8),
-                    Text('It’s time to take your medicine.', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 24)),
+                    Text('It’s time to take your medicine.',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.white, fontSize: 18)),
                     SizedBox(height: 24),
                     Container(
                       padding: EdgeInsets.symmetric(vertical: 16, horizontal: 32),
@@ -232,7 +243,7 @@ class _ElderHomeAlarmState extends State<ElderHomeAlarm> {
                       ),
                       child: Text(
                         alarmTime.format(context),
-                        style: TextStyle(color: Color(0xFFFF8A4D), fontWeight: FontWeight.bold, fontSize: 40),
+                        style: TextStyle(color: Color(0xFFFF8A4D), fontWeight: FontWeight.bold, fontSize: 36),
                       ),
                     ),
                     SizedBox(height: 24),
@@ -245,7 +256,6 @@ class _ElderHomeAlarmState extends State<ElderHomeAlarm> {
                               ElderHomeAlarm.isDefaultHome = true;
                               context.go('/senior-home-default');
                             },
-
                             style: OutlinedButton.styleFrom(
                               backgroundColor: Colors.white,
                               padding: EdgeInsets.symmetric(vertical: 16),
@@ -278,7 +288,6 @@ class _ElderHomeAlarmState extends State<ElderHomeAlarm> {
           ],
         ),
       ),
-      
     );
   }
 }

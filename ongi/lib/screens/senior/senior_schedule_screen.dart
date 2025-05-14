@@ -13,7 +13,7 @@ class ElderScheduleScreen extends StatefulWidget {
 
 class _ElderScheduleScreenState extends State<ElderScheduleScreen> {
   int _currentIndex = 0;
-  DateTime selectedDate = DateTime(2025, 1, 6);
+  DateTime selectedDate = DateTime(2025, 5, 16);
   List<bool> mealChecked = [true, true, true];
   List<bool> medicineChecked = [true, true, true, true];
 

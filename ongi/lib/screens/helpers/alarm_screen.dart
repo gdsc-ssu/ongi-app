@@ -104,7 +104,7 @@ class _AlarmScreenState extends State<AlarmScreen> {
                               });
                             },
                           ),
-                          Text('${_focusedDay.year} .${_focusedDay.month}', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                          Text('${_focusedDay.year}.0${_focusedDay.month}', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                           IconButton(
                             icon: const Icon(Icons.chevron_right, color: Color(0xFFFF8A4D), size: 32),
                             onPressed: () {

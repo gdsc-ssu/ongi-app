@@ -49,7 +49,7 @@ class _ElderHomeDefaultState extends State<ElderHomeDefault> {
             SizedBox(height: 32),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24.0),
-              child: Text('2025. 01. 30', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+              child: Text('2025. 05. 16', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 4.0),
@@ -57,7 +57,7 @@ class _ElderHomeDefaultState extends State<ElderHomeDefault> {
                 text: TextSpan(
                   children: [
                     TextSpan(text: 'John Doe', style: TextStyle(color: Color(0xFFFF8A4D), fontWeight: FontWeight.bold, fontSize: 20)),
-                    TextSpan(text: 'Schedule', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20)),
+                    TextSpan(text: '  Schedule', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20)),
                   ],
                 ),
               ),
