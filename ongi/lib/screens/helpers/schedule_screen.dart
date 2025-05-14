@@ -454,15 +454,21 @@ class _MealTimeDialogV3State extends State<_MealTimeDialogV3> {
   decoration: InputDecoration(
     hintText: 'Input meal name',
     filled: true,
-    fillColor: Colors.white, // ✅ 배경을 흰색으로 명시
-    border: OutlineInputBorder(
+    fillColor: Color(0xFFE0E0E0), // 회색 배경 명시적으로 설정
+    enabledBorder: OutlineInputBorder(
       borderSide: BorderSide.none,
-      borderRadius: BorderRadius.circular(6),
+      borderRadius: BorderRadius.circular(15), // 굴곡 15
     ),
-    contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+    focusedBorder: OutlineInputBorder(
+      borderSide: BorderSide.none,
+      borderRadius: BorderRadius.circular(15), // 굴곡 15
+    ),
+    contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
   ),
   onChanged: (v) => mealName = v,
 ),
+
+
 
             SizedBox(height: 20),
             SizedBox(
