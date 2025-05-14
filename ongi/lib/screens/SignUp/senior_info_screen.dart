@@ -99,7 +99,7 @@ class _SeniorInfoScreenState extends State<SeniorInfoScreen> {
 
                   form.seniorName = name;
                   form.seniorAge = int.parse(age);
-                  form.seniorPhone = phone;
+                  form.seniorPhone = phoneController.text.replaceAll(RegExp(r'[^0-9]'), '');
                   form.relation = selectedRelation == '직접입력'
     ? customRelation
     : relationMap[selectedRelation] ?? selectedRelation;

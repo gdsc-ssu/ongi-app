@@ -80,7 +80,7 @@ class SignupInputScreen extends StatelessWidget {
                   final form = context.read<SignUpFormModel>();
                   form.loginId = _idController.text.trim();
                   form.password = _pwController.text.trim();
-                  form.guardianPhoneNumber = _phoneController.text.trim();
+                  form.guardianPhone = _phoneController.text.replaceAll(RegExp(r'[^0-9]'), '');
                   form.guardianName = _nameController.text.trim();
 
                   context.push('/signup/senior-info');
@@ -225,19 +225,25 @@ class _InputFieldState extends State<_InputField> {
         }),
       );
 
+      final decoded = utf8.decode(response.bodyBytes);
+      print('📨 인증 응답 원문: $decoded'); // ✅ 여기 추가
+
       if (response.statusCode == 200) {
-        final decoded = utf8.decode(response.bodyBytes);
         final json = jsonDecode(decoded);
 
         final success = json['success'];
         final message = json['message'];
+        final data = json['data'];
+
+        print('✅ success: $success, data: $data, message: $message'); 
 
         setState(() {
-          _feedbackMessage = success ? "" : "인증번호가 틀렸습니다.";
-          _feedbackColor = success ? Colors.blue : Colors.red;
-          _borderColor = success ? Colors.blue : Colors.red;
+          _feedbackMessage = data == true ? "인증에 성공했습니다." : "인증번호가 틀렸습니다.";
+          _feedbackColor = data == true ? Colors.blue : Colors.red;
+          _borderColor = data == true ? Colors.blue : Colors.red;
         });
       } else {
+        print('❌ 서버 오류 ${response.statusCode}');
         setState(() {
           _feedbackMessage = '서버 오류: ${response.statusCode}';
           _feedbackColor = Colors.red;
@@ -245,6 +251,7 @@ class _InputFieldState extends State<_InputField> {
         });
       }
     } catch (e) {
+      print('❌ 예외 발생: $e');
       setState(() {
         _feedbackMessage = '에러 발생: $e';
         _feedbackColor = Colors.red;

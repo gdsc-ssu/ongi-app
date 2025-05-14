@@ -4,7 +4,7 @@ class SignUpFormModel extends ChangeNotifier {
   String? loginId;
   String? password;
   String? guardianName;
-  String? guardianPhoneNumber;
+  String? guardianPhone;
   String? seniorName;
   int? seniorAge;
   String? seniorPhone;
@@ -19,7 +19,7 @@ class SignUpFormModel extends ChangeNotifier {
         "loginId": loginId,
         "password": password,
         "guardianName": guardianName,
-        "guardianPhoneNumber": guardianPhoneNumber,
+        "guardianPhone": guardianPhone,
         "seniorName": seniorName,
         "seniorAge": seniorAge,
         "seniorPhone": seniorPhone,
