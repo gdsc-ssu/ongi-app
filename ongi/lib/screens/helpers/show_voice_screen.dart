@@ -35,13 +35,16 @@ class ShowVoiceScreen extends StatelessWidget {
               ),
               SizedBox(height: 24),
               Center(
-                child: Text('Change Notification Voice', style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
+                child: Text(
+                  'Change Notification Voice',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
               ),
               SizedBox(height: 32),
-              _buildVoiceMenuItem('Re-record Guardian’s Voice', hasArrow: true),
-              _buildVoiceMenuItem('Add Guardian’s Voice', hasArrow: true),
-              _buildVoiceMenuItem('Delete Guardian’s Voice'),
-              _buildVoiceMenuItem('Add Custom Voice Alert Message'),
+              _buildVoiceMenuItem('Re-record Caregiver’s Voice', hasArrow: true),
+              _buildVoiceMenuItem('Add Caregiver’s Voice', hasArrow: true),
+              _buildVoiceMenuItem('Delete Caregiver’s Voice', hasArrow: true),
+              _buildVoiceMenuItem('Add Custom Voice Alert Message', hasArrow: true),
             ],
           ),
         ),
@@ -80,15 +83,6 @@ class ShowVoiceScreen extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 16.0),
       child: Row(
         children: [
-          Container(
-            width: 32,
-            height: 32,
-            decoration: BoxDecoration(
-              color: Color(0xFF888888),
-              borderRadius: BorderRadius.circular(6),
-            ),
-          ),
-          SizedBox(width: 16),
           Expanded(child: Text(title, style: TextStyle(fontSize: 18))),
           if (hasArrow)
             Icon(Icons.chevron_right, color: Colors.black, size: 22),
@@ -96,4 +90,4 @@ class ShowVoiceScreen extends StatelessWidget {
       ),
     );
   }
-} 
+}

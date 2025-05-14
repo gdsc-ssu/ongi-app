@@ -26,7 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
             children: [
               const SizedBox(height: 40),
               const Text('Ongi',
-                  style: TextStyle(fontSize: 20), textAlign: TextAlign.center),
+                  style: TextStyle(fontSize: 18), textAlign: TextAlign.center),
               const SizedBox(height: 8),
               const Text('Log In',
                   style: TextStyle(

@@ -39,11 +39,11 @@ class _SeniorInfoScreenState extends State<SeniorInfoScreen> {
               const Text('Please enter the elder’s personal information.', style: TextStyle(color: Colors.grey)),
               const SizedBox(height: 24),
 
-              _buildTextField(label: '성함	Full Name', hint: 'Please enter the full name.', controller: nameController),
+              _buildTextField(label: 'Full Name', hint: 'Please enter the full name.', controller: nameController),
               _buildTextField(label: 'Age', hint: 'Please enter the age.', controller: ageController),
               _buildDropdownField(),
               if (selectedRelation == 'Enter Manually')
-                _buildTextField(label: 'Enter Relationship Manually', hint: 'e.x., neighbor, acquaintance', controller: customRelationController),
+                _buildTextField(label: 'Enter Relationship Manually', hint: 'e.x. neighbor, acquaintance', controller: customRelationController),
               _buildTextField(label: 'Phone Number', hint: 'Please enter your phone number.', controller: phoneController),
 
               const Spacer(),
@@ -70,6 +70,7 @@ class _SeniorInfoScreenState extends State<SeniorInfoScreen> {
             controller: controller,
             decoration: InputDecoration(
               hintText: hint,
+              hintStyle: const TextStyle(fontSize: 14), // ✅ 힌트 폰트 크기 14px
               filled: true,
               fillColor: Colors.grey.shade200,
               border: OutlineInputBorder(
@@ -103,6 +104,7 @@ class _SeniorInfoScreenState extends State<SeniorInfoScreen> {
             onChanged: (value) => setState(() => selectedRelation = value),
             decoration: InputDecoration(
               hintText: 'Please select a relationship.',
+              hintStyle: const TextStyle(fontSize: 14), // ✅ 힌트 폰트 크기 14px
               filled: true,
               fillColor: Colors.grey.shade200,
               border: OutlineInputBorder(

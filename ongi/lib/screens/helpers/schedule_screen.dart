@@ -31,8 +31,8 @@ class _Medicine {
 class _ScheduleScreenState extends State<ScheduleScreen> {
   int _currentIndex = 2;
   List<_Meal> meals = [
-    _Meal('Lunch', TimeOfDay(hour: 12, minute: 30)),
-    _Meal('Dinner', TimeOfDay(hour: 18, minute: 30)),
+    _Meal('Lunch  ', TimeOfDay(hour: 12, minute: 30)),
+    _Meal('Dinner  ', TimeOfDay(hour: 18, minute: 30)),
   ];
   List<_Medicine> medicines = [
     _Medicine('Blood Pressure Medication', [TimeOfDay(hour: 9, minute: 0), TimeOfDay(hour: 21, minute: 0)]),
@@ -147,13 +147,13 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 16),
-                Text('Ongi', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500)),
+                Text('Ongi', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
                 SizedBox(height: 8),
                 RichText(
                   text: TextSpan(
                     children: [
-                      TextSpan(text: 'John Doe', style: TextStyle(color: Color(0xFFFF8A4D), fontWeight: FontWeight.bold, fontSize: 22)),
-                      TextSpan(text: 'Schedule', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 22)),
+                      TextSpan(text: 'John Doe', style: TextStyle(color: Color(0xFFFF8A4D), fontWeight: FontWeight.bold, fontSize: 20)),
+                      TextSpan(text: '  Schedule', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20)),
                     ],
                   ),
                 ),
@@ -233,7 +233,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(med.name, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+            Text(med.name, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
             Text('Change', style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold)),
           ],
         ),
@@ -245,10 +245,10 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
               border: Border.all(color: Colors.black26),
               borderRadius: BorderRadius.circular(12),
             ),
-            padding: EdgeInsets.symmetric(vertical: 2),
+            padding: EdgeInsets.fromLTRB(10, 2, 2, 2),
             child: Column(
               children: med.times.map((t) => Padding(
-                padding: const EdgeInsets.symmetric(vertical: 2),
+                padding: const EdgeInsets.symmetric(vertical: 1),
                 child: ListTile(
                   dense: true,
                   contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
@@ -450,9 +450,19 @@ class _MealTimeDialogV3State extends State<_MealTimeDialogV3> {
             Text('Meal name', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
             SizedBox(height: 8),
             TextField(
-              decoration: InputDecoration(hintText: 'Input meal name'),
-              onChanged: (v) => mealName = v,
-            ),
+  decoration: InputDecoration(
+    hintText: 'Input meal name',
+    filled: true,
+    fillColor: Colors.white, // ✅ 배경을 흰색으로 명시
+    border: OutlineInputBorder(
+      borderSide: BorderSide.none,
+      borderRadius: BorderRadius.circular(6),
+    ),
+    contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+  ),
+  onChanged: (v) => mealName = v,
+),
+
             SizedBox(height: 20),
             SizedBox(
               width: double.infinity,
@@ -491,6 +501,7 @@ class _MealTimeDialogV3State extends State<_MealTimeDialogV3> {
                         : null,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFFFF8A50),
+                      foregroundColor: Colors.white,
                       disabledBackgroundColor: Colors.grey.shade300,
                       padding: const EdgeInsets.symmetric(vertical: 14),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),

@@ -22,7 +22,7 @@ class BottomNextBackNavigation extends StatelessWidget {
               foregroundColor: Colors.black,
               padding: const EdgeInsets.symmetric(vertical: 14),
             ),
-            child: const Text('이전'),
+            child: const Text('Back'),
           ),
         ),
         const SizedBox(width: 12),
@@ -30,7 +30,7 @@ class BottomNextBackNavigation extends StatelessWidget {
           child: ElevatedButton(
             onPressed: onNext,
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFFEFAE87),
+              backgroundColor: const Color(0xFFFF752B),
               foregroundColor: Colors.white,
               padding: const EdgeInsets.symmetric(vertical: 14),
             ),

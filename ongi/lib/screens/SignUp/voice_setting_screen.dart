@@ -150,13 +150,14 @@ class _VoiceSettingScreenState extends State<VoiceSettingScreen> {
   }
 
   ButtonStyle _buttonStyle() {
-    return ElevatedButton.styleFrom(
-      backgroundColor: Colors.deepOrange,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-      padding: const EdgeInsets.symmetric(vertical: 14),
-      textStyle: const TextStyle(fontSize: 16),
-    );
-  }
+  return ElevatedButton.styleFrom(
+    backgroundColor: const Color(0xFFFF752B), // ✅ 버튼 배경색 변경
+    foregroundColor: Colors.white,            // ✅ 텍스트 색상 변경
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+    padding: const EdgeInsets.symmetric(vertical: 14),
+    textStyle: const TextStyle(fontSize: 16),
+  );
+}
 }
 
 class Ticker {

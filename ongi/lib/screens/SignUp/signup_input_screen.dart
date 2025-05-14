@@ -31,11 +31,11 @@ class SignupInputScreen extends StatelessWidget {
               ),
               const SizedBox(height: 24),
 
-              const _InputField(label: 'Username', hint: 'Please enter your username.', hasButton: true, buttonText: '중복확인'),
+              const _InputField(label: 'Username', hint: 'Please enter your username.', hasButton: true, buttonText: 'Check Availability'),
               const _InputField(label: 'Password', hint: 'Please enter your password.', obscureText: true),
               const _InputField(label: 'Confirm Password', hint: 'Please re-enter your password.', obscureText: true),
-              const _InputField(label: 'Phone Number', hint: 'Please enter your phone number.', hasButton: true, buttonText: '인증번호 받기'),
-              const _InputField(label: 'Verification Code', hint: 'Please enter the verification code.', hasButton: true, buttonText: '확인'),
+              const _InputField(label: 'Phone Number', hint: 'Please enter your phone number.', hasButton: true, buttonText: 'Get Verification Code'),
+              const _InputField(label: 'Verification Code', hint: 'Please enter the verification code.', hasButton: true, buttonText: 'Confirm'),
               const _InputField(label: 'Full Name', hint: 'Please enter the full name.'),
 
               const Spacer(),
@@ -81,6 +81,7 @@ class _InputField extends StatelessWidget {
                 obscureText: obscureText,
                 decoration: InputDecoration(
                   hintText: hint,
+                  hintStyle: const TextStyle(fontSize: 14), // ✅ hint 크기 2px 줄임
                   filled: true,
                   fillColor: Colors.grey.shade200,
                   border: OutlineInputBorder(
@@ -101,7 +102,11 @@ class _InputField extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
                   minimumSize: const Size(0, 48),
                 ),
-                child: Text(buttonText!),
+                child: Text(
+  buttonText!,
+  style: const TextStyle(fontWeight: FontWeight.normal), // ✅ Bold 제거
+),
+
               ),
             ]
           ],

@@ -64,8 +64,8 @@ class _AlarmScreenState extends State<AlarmScreen> {
                 child: Text.rich(
                   TextSpan(
                     children: [
-                      TextSpan(text: 'John Doe', style: TextStyle(color: Color(0xFFFF8A4D), fontWeight: FontWeight.bold, fontSize: 22)),
-                      TextSpan(text: 'Notification history', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 22)),
+                      TextSpan(text: 'John Doe', style: TextStyle(color: Color(0xFFFF8A4D), fontWeight: FontWeight.bold, fontSize: 20)),
+                      TextSpan(text: '  Notification history', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20)),
                     ],
                   ),
                 ),
@@ -78,7 +78,7 @@ class _AlarmScreenState extends State<AlarmScreen> {
               Center(
                 child: Container(
                   width: 357,
-                  height: 519,
+                  height: 400,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(24),
@@ -104,7 +104,7 @@ class _AlarmScreenState extends State<AlarmScreen> {
                               });
                             },
                           ),
-                          Text('${_focusedDay.month}월 ${_focusedDay.year}', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                          Text('${_focusedDay.year} .${_focusedDay.month}', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                           IconButton(
                             icon: const Icon(Icons.chevron_right, color: Color(0xFFFF8A4D), size: 32),
                             onPressed: () {

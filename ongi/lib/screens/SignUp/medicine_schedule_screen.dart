@@ -52,7 +52,7 @@ class _MedicineScheduleScreenState extends State<MedicineScheduleScreen> {
                   TextField(
                     controller: _titleController,
                     decoration: InputDecoration(
-                      hintText: 'e.x., Vitamin',
+                      hintText: 'e.x. Vitamin',
                       filled: true,
                       fillColor: Colors.grey.shade200,
                       border: OutlineInputBorder(

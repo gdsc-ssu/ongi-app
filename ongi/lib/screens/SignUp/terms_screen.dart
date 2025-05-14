@@ -110,7 +110,7 @@ class AgreementItem extends StatelessWidget {
         ),
         onPressed: () => onChanged(!isChecked),
       ),
-      title: Text(title, style: const TextStyle(fontSize: 16)),
+      title: Text(title, style: const TextStyle(fontSize: 14)),
       subtitle: subtitle != null
           ? Text(subtitle!, style: const TextStyle(fontSize: 12, color: Colors.grey))
           : null,

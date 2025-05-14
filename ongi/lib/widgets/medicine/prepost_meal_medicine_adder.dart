@@ -87,7 +87,7 @@ class _PrePostMealMedicineAdderState extends State<PrePostMealMedicineAdder> {
           children: _buildRadioRow(['Before meal', 'After meal'], mealTiming, (val) => setState(() => mealTiming = val)),
         ),
         const SizedBox(height: 16),
-        const Text('Medication Time (Multiple selection allowed)', style: TextStyle(fontWeight: FontWeight.bold)),
+        const Text('Medication Time\n(Multiple selection allowed)', style: TextStyle(fontWeight: FontWeight.bold)),
         const SizedBox(height: 12),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -99,7 +99,7 @@ class _PrePostMealMedicineAdderState extends State<PrePostMealMedicineAdder> {
         ),
         const SizedBox(height: 16),
         const Text('Reminder Time (choose one)', style: TextStyle(fontWeight: FontWeight.bold)),
-        const SizedBox(height: 8),
+        const SizedBox(height: 12),
         Row(
           children: _buildRadioRow(['30 minutes', '1 hour'], beforeAfterTime, (val) => setState(() => beforeAfterTime = val)),
         ),
@@ -125,6 +125,7 @@ class _PrePostMealMedicineAdderState extends State<PrePostMealMedicineAdder> {
                 : null,
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFFFF8A50),
+              foregroundColor: Colors.white,
               disabledBackgroundColor: Colors.grey.shade300,
               padding: const EdgeInsets.symmetric(vertical: 14),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),

@@ -65,7 +65,7 @@ class _AlertSettingScreenState extends State<AlertSettingScreen> {
                 controller: _countController,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
-                  hintText: '	e.x., 3',
+                  hintText: '	e.x. 3',
                   filled: true,
                   fillColor: Colors.white,
                   border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),

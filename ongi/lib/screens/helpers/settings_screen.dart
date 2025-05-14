@@ -41,8 +41,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
               context,
               MaterialPageRoute(builder: (context) => ScheduleScreen()),
             );
-          } else if (index == 3) {
-            // 이미 설정
           }
         },
       ),
@@ -151,15 +149,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
         padding: const EdgeInsets.symmetric(vertical: 8.0),
         child: Row(
           children: [
-            Container(
-              width: 28,
-              height: 28,
-              decoration: BoxDecoration(
-                color: Color(0xFF888888),
-                borderRadius: BorderRadius.circular(6),
-              ),
-            ),
-            SizedBox(width: 16),
             Expanded(child: Text(title, style: TextStyle(fontSize: 18))),
             if (hasArrow)
               Icon(Icons.chevron_right, color: Colors.black, size: 22),
@@ -174,15 +163,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
       padding: const EdgeInsets.symmetric(vertical: 16.0),
       child: Row(
         children: [
-          Container(
-            width: 32,
-            height: 32,
-            decoration: BoxDecoration(
-              color: Color(0xFF888888),
-              borderRadius: BorderRadius.circular(6),
-            ),
-          ),
-          SizedBox(width: 16),
           Expanded(child: Text(title, style: TextStyle(fontSize: 18))),
           if (hasArrow)
             Icon(Icons.chevron_right, color: Colors.black, size: 22),
