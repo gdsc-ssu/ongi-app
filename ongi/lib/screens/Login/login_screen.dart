@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:ongi/state/account_type.dart';
+
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -13,6 +17,53 @@ class _LoginScreenState extends State<LoginScreen> {
   final _pwController = TextEditingController();
   bool _obscureText = true;
   bool _showError = false;
+
+  Future<void> _login() async {
+    final baseUrl = 'http://13.124.122.198:8080';
+    final id = _idController.text.trim();
+    final password = _pwController.text.trim();
+
+    try {
+      final response = await http.post(
+        Uri.parse('$baseUrl/user/login'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'id': id,
+          'password': password,
+          'mode': selectedAccountType == AccountType.guardian ? 'GUARDIAN' : 'SENIOR',
+        }),
+      );
+
+      final decoded = utf8.decode(response.bodyBytes);
+      final json = jsonDecode(decoded);
+
+      if (response.statusCode == 200 && json['success'] == true) {
+        final accessToken = json['data']['accessToken'];
+        final refreshToken = json['data']['refreshToken'];
+
+        print('로그인 성공');
+        print('accessToken: $accessToken');
+        print('refreshToken: $refreshToken');
+
+
+        // 라우터 리빌드
+        restartApp?.call();
+
+        // 계정 타입에 따라 홈 화면 이동
+        if (selectedAccountType == AccountType.guardian) {
+          context.go('/guardian-home');
+        } else {
+          context.go('/senior-home');
+        }
+      } else {
+        setState(() => _showError = true);
+        print('로그인 실패: ${json['message']}');
+      }
+    } catch (e) {
+      print('네트워크 에러: $e');
+      setState(() => _showError = true);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,11 +121,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   backgroundColor: const Color(0xFFEFAE87),
                   padding: const EdgeInsets.symmetric(vertical: 14),
                 ),
-                onPressed: () {
-                  setState(() {
-                    _showError = _pwController.text != '123456';
-                  });
-                },
+                onPressed: _login,
                 child: const Text('로그인'),
               ),
               const SizedBox(height: 20),

@@ -135,7 +135,7 @@ class _VoiceSettingScreenState extends State<VoiceSettingScreen> {
                 ElevatedButton(
                   onPressed: () async {
                   await _submitSignupWithMeds(context);
-                  context.go('/login');      
+                  context.go('/account-select');      
                 },
   style: _buttonStyle(),
   child: const Text('설정 완료'),
