@@ -4,9 +4,17 @@ import 'package:ongi/routes/app_router.dart';
 import 'package:ongi/routes/helpers_router.dart';
 import 'package:ongi/routes/senior_router.dart';
 import 'package:ongi/state/account_type.dart';
+import 'package:provider/provider.dart';
+import 'models/signup_form_model.dart';
+import 'package:ongi/state/account_type.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => SignUpFormModel(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {
@@ -30,8 +38,8 @@ class _MyAppState extends State<MyApp> {
 
   GoRouter _createRouter() {
     return switch (selectedAccountType) {
-      'helper' => helpersRouter,
-      'senior' => seniorRouter,
+      AccountType.guardian => helpersRouter,
+      AccountType.senior => seniorRouter,
       _ => appRouter,
     };
   }

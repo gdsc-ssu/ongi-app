@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../widgets/progress_indicator.dart';
 import '../../widgets/page_button.dart';
+import 'package:provider/provider.dart';
+import 'package:ongi/models/signup_form_model.dart';
 
 class AlertSettingScreen extends StatefulWidget {
   const AlertSettingScreen({super.key});
@@ -83,7 +85,12 @@ class _AlertSettingScreenState extends State<AlertSettingScreen> {
               const Spacer(),
               BottomNextBackNavigation(
                 onBack: () => Navigator.pop(context),
-                onNext: () => context.push('/signup/voice-setting'),
+                onNext: () {
+                  final form = context.read<SignUpFormModel>();
+                  form.ignoreCnt = int.tryParse(_countController.text) ?? 3;
+                  form.alertMax = selectedInterval == 30 ? "MINUTES_30" : "MINUTES_60";
+                  context.push('/signup/voice-setting');
+                },
               ),
             ],
           ),

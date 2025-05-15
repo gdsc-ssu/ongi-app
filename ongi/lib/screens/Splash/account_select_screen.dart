@@ -1,20 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:ongi/state/account_type.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ongi/state/account_type.dart';
 
 class AccountSelectScreen extends StatelessWidget {
   const AccountSelectScreen({super.key});
 
-  void _selectAccount(BuildContext context, String type) {
-    if (!hasCompletedSignUp) {
-      // ✅ 회원가입 아직 안 한 경우 → 회원가입 화면으로 이동
-      context.go('/signup/terms'); // ← 첫 회원가입 경로로 맞춰주세요
-      return;
-    }
-
-    // ✅ 회원가입 완료한 경우 → 홈화면 이동
+  void _selectAccount(BuildContext context, AccountType type) {
     selectedAccountType = type;
-    restartApp?.call(); // main.dart의 라우터를 교체해서 홈화면으로 진입
+    context.go('/login');
   }
 
   @override
@@ -43,7 +36,7 @@ class AccountSelectScreen extends StatelessWidget {
                           const CircleAvatar(radius: 40, child: Icon(Icons.person, size: 40)),
                           const SizedBox(height: 8),
                           ElevatedButton(
-                            onPressed: () => _selectAccount(context, 'helper'),
+                            onPressed: () => _selectAccount(context, AccountType.guardian),
                             child: const Text('보호자 계정'),
                           ),
                         ],
@@ -55,7 +48,7 @@ class AccountSelectScreen extends StatelessWidget {
                           const CircleAvatar(radius: 40, child: Icon(Icons.elderly, size: 40)),
                           const SizedBox(height: 8),
                           ElevatedButton(
-                            onPressed: () => _selectAccount(context, 'senior'),
+                            onPressed: () => _selectAccount(context, AccountType.senior),
                             child: const Text('어르신 계정'),
                           ),
                         ],

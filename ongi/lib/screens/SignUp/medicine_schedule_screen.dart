@@ -5,7 +5,8 @@ import '../../widgets/page_button.dart';
 import '../../widgets/time_block.dart';
 import 'package:ongi/widgets/medicine/medicine_type_selector.dart';
 import 'package:flutter/cupertino.dart';
-
+import 'package:provider/provider.dart';
+import 'package:ongi/models/signup_form_model.dart';
 
 class MedicineScheduleScreen extends StatefulWidget {
   const MedicineScheduleScreen({super.key});
@@ -132,6 +133,9 @@ class _MedicineScheduleScreenState extends State<MedicineScheduleScreen> {
                       'label': medicine['name'],
                       'time': _extractFirstTime(medicine),
                     });
+
+                    final form = context.read<SignUpFormModel>();
+                    form.addMedication(medicine);
                   });
                 },
               ),
@@ -145,7 +149,7 @@ class _MedicineScheduleScreenState extends State<MedicineScheduleScreen> {
               BottomNextBackNavigation(
                 onBack: () => Navigator.pop(context),
                 onNext: () => context.push('/signup/alert-setting'),
-              )
+              ),
             ],
           ),
         ),

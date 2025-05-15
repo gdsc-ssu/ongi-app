@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import '../../widgets/progress_indicator.dart';
 import '../../widgets/page_button.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter/services.dart';
+import '../../models/signup_form_model.dart';
+import 'package:provider/provider.dart';
+
 
 class SeniorInfoScreen extends StatefulWidget {
   const SeniorInfoScreen({super.key});
@@ -49,7 +53,59 @@ class _SeniorInfoScreenState extends State<SeniorInfoScreen> {
               const Spacer(),
               BottomNextBackNavigation(
                 onBack: () => Navigator.pop(context),
-                onNext: () => context.push('/signup/meal-alert'),
+                onNext: () {
+                  final name = nameController.text.trim();
+                  final age = ageController.text.trim();
+                  final phone = phoneController.text.trim();
+                  final relation = selectedRelation;
+                  final customRelation = customRelationController.text.trim();
+
+                  final isPhoneValid = RegExp(r'^010-\d{4}-\d{4}$').hasMatch(phone);
+                  final isAgeValid = RegExp(r'^\d+$').hasMatch(age);
+
+                  if (name.isEmpty ||
+                      age.isEmpty ||
+                      phone.isEmpty ||
+                      relation == null ||
+                      (relation == '직접입력' && customRelation.isEmpty)) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('모든 항목을 입력해주세요.')),
+                    );
+                    return;
+                  }
+
+                  if (!isAgeValid) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('연령은 숫자만 입력해주세요.')),
+                    );
+                    return;
+                  }
+
+                  if (!isPhoneValid) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('전화번호 형식이 올바르지 않습니다.')),
+                    );
+                    return;
+                  }
+
+                  final form = context.read<SignUpFormModel>();
+
+                  const relationMap = {
+                    '아들': 'SON',
+                    '딸': 'DAUGHTER',
+                    '손자': 'GRANDSON',
+                    '손녀': 'GRANDDAUGHTER',
+                  };
+
+                  form.seniorName = name;
+                  form.seniorAge = int.parse(age);
+                  form.seniorPhone = phoneController.text.replaceAll(RegExp(r'[^0-9]'), '');
+                  form.relation = selectedRelation == '직접입력'
+    ? customRelation
+    : relationMap[selectedRelation] ?? selectedRelation;
+                  context.push('/signup/meal-alert');
+                },
+
               )
             ],
           ),
@@ -68,6 +124,11 @@ class _SeniorInfoScreenState extends State<SeniorInfoScreen> {
           const SizedBox(height: 8),
           TextField(
             controller: controller,
+            inputFormatters: label == '연령'
+              ? [FilteringTextInputFormatter.digitsOnly]
+              : label == '전화번호'
+                  ? [PhoneNumberFormatter()]
+                  : [],
             decoration: InputDecoration(
               hintText: hint,
               filled: true,
@@ -114,6 +175,26 @@ class _SeniorInfoScreenState extends State<SeniorInfoScreen> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class PhoneNumberFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
+    final digits = newValue.text.replaceAll(RegExp(r'[^0-9]'), '');
+    final buffer = StringBuffer();
+
+    for (int i = 0; i < digits.length; i++) {
+      buffer.write(digits[i]);
+      if (i == 2 || i == 6) {
+        if (i != digits.length - 1) buffer.write('-');
+      }
+    }
+
+    return TextEditingValue(
+      text: buffer.toString(),
+      selection: TextSelection.collapsed(offset: buffer.length),
     );
   }
 }
